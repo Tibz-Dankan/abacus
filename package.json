@@ -1,0 +1,33 @@
+{
+  "name": "abacusfinanceugltd.github.io",
+  "version": "1.0.0",
+  "description": "Abacusfinanceugltd web app to allow clients apply for loans",
+  "main": "app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "server": "nodemon src/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AbacusFinanceUgLtd/AbacusFinanceUgLtd.github.io.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
+    "ejs": "^3.1.8",
+    "express": "^4.18.1",
+    "jsonwebtoken": "^8.5.1",
+    "pg": "^8.7.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.16"
+  },
+  "bugs": {
+    "url": "https://github.com/AbacusFinanceUgLtd/AbacusFinanceUgLtd.github.io/issues"
+  },
+  "homepage": "https://github.com/AbacusFinanceUgLtd/AbacusFinanceUgLtd.github.io#readme"
+}
