@@ -23,10 +23,10 @@ if (isProduction) {
 }
 
 const db = new pg.Client(credentialObject);
-db.connect((err) => {
-  if (err) {
-    console.log("Error:Failed to connect to the database");
-    console.log(err.message);
+db.connect((error) => {
+  if (error) {
+    console.log("Failed to connect to the database!");
+    console.log("error: " + error.message);
   } else {
     console.log("Database successfully connected!");
   }
