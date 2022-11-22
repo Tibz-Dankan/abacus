@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>Register</title>
+    <title>SignUp</title>
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="manifest" href="site.webmanifest" />
@@ -133,7 +133,7 @@
               <!-- Logo -->
               <div class="col-xl-2 col-lg-2 col-md-1">
                 <div class="logo">
-                  <a href="home.html"
+                  <a href="home"
                     ><img
                       src="assets/img/logo/logo.jpeg"
                       width="180"
@@ -150,8 +150,8 @@
                   <div class="main-menu f-right d-none d-lg-block">
                     <nav>
                       <ul id="navigation">
-                        <li class="active"><a href="home.html">Home</a></li>
-                        <li><a href="signin.html">LogIn</a></li>
+                        <li><a href="home">Home</a></li>
+                        <li><a href="signin">SignIn</a></li>
                       </ul>
                     </nav>
                   </div>
@@ -178,6 +178,9 @@
                 <form action="http://localhost:8000/signup" method="POST">
                   <div class="col">
                     <div class="col-lg-6">
+                      <span><%= message %></span>
+                    </div>
+                    <div class="col-lg-6">
                       <p>SIGN UP FOR AN ACCOUNT</p>
                     </div>
                     <div class="col-lg-6">
@@ -198,7 +201,6 @@
                           type="email"
                           name="email"
                           placeholder="Enter your email address"
-                          required
                         />
                       </div>
                     </div>
@@ -220,7 +222,6 @@
                           type="password"
                           name="confirmpassword"
                           placeholder="Enter your password"
-                          required
                         />
                       </div>
                     </div>

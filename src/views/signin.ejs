@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="no-js" lang="zxx">
+<html class="no-js" lang="eng">
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
@@ -133,7 +133,7 @@
               <!-- Logo -->
               <div class="col-xl-2 col-lg-2 col-md-1">
                 <div class="logo">
-                  <a href="home.html"
+                  <a href="home"
                     ><img
                       src="assets/img/logo/logo.jpeg"
                       width="180"
@@ -150,8 +150,8 @@
                   <div class="main-menu f-right d-none d-lg-block">
                     <nav>
                       <ul id="navigation">
-                        <li class="active"><a href="home.html">Home</a></li>
-                        <li><a href="signup.html">SignUp</a></li>
+                        <li><a href="home">Home</a></li>
+                        <li><a href="signup">SignUp</a></li>
                       </ul>
                     </nav>
                   </div>
@@ -178,8 +178,11 @@
             <div class="col-lg-8">
               <div class="apply-wrapper">
                 <!-- Form -->
-                <form action="#">
+                <form action="signin" method="POST">
                   <div class="col">
+                    <div class="col-lg-6">
+                      <span><%= message %></span>
+                    </div>
                     <div class="col-lg-6">
                       <p>LOG INTO YOUR ACCOUNT</p>
                     </div>
@@ -190,6 +193,7 @@
                           type="text"
                           name="email"
                           placeholder="Enter your email address"
+                          required
                         />
                       </div>
                     </div>
@@ -197,14 +201,17 @@
                       <div class="single-form">
                         <label>* PASSWORD </label>
                         <input
-                          type="text"
+                          type="password"
                           name="password"
                           placeholder="Enter your password"
+                          required
                         />
                       </div>
                     </div>
                     <div class="col-lg-6">
-                      <a href="#" class="btn hero-btn mt-30">SIGN IN</a>
+                      <button type="submit" class="btn hero-btn mt-30">
+                        SIGN IN
+                      </button>
                     </div>
                   </div>
                 </form>

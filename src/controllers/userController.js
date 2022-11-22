@@ -1,66 +1,134 @@
 const User = require("../models/user");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const crypto = require("crypto");
 require("dotenv").config();
 
 const assignToken = (userId) => {
-  return jwt.sign({ userId }, process.env.JWT_SECRETE_TOKEN);
-};
-
-const createSendToken = (user, statusCode, res) => {
-  const token = assignToken(user.userId);
-
-  res.status(statusCode).json({
-    status: "success",
-    token,
-    user,
+  return jwt.sign({ userId }, process.env.JWT_SECRETE_TOKEN, {
+    expiresIn: "15m",
   });
 };
 
-const createUserSendResponse = async (res, name, email, password) => {
-  const user = await User.getUserByEmail(email);
-  if (user.rows[0]) return res.json({ errorMessage: "Email already exists" });
-  await User.createUser(name, email, password);
-  res.status(201).json({ status: "success" });
+const assignCookieRedirectUser = (res, userObj) => {
+  const token = assignToken(userObj.userId);
+  res.cookie("token", token, {
+    httpOnly: true,
+    // signed: true,
+  });
+  return res.redirect("/apply");
+};
+
+const noEmptyFieldMessage = (res, userObject) => {
+  return res.render("signup", {
+    message: "Please fill out all fields",
+    user: userObject,
+  });
+};
+
+const validEmailMessage = (res, userObject) => {
+  return res.render("signup", {
+    message: "Invalid email",
+    user: userObject,
+  });
+};
+
+const passwordMatchMessage = (res, userObject) => {
+  return res.render("signup", {
+    message: "Passwords don't match",
+    user: userObject,
+  });
+};
+
+const passwordLengthMessage = (res, userObject) => {
+  return res.render("signup", {
+    message: "password must have at least 6 characters",
+    user: userObject,
+  });
+};
+
+const registeredEmailMessage = (res, userObject) => {
+  return res.render("signup", {
+    message: "Email already registered",
+    user: userObject,
+  });
+};
+
+const noEmailMessage = (res, userObject) => {
+  return res.render("signin", {
+    message: "Email does not exist",
+    user: userObject,
+  });
+};
+
+const inCorrectPasswordMessage = (res, userObject) => {
+  return res.render("signin", {
+    message: "Incorrect password",
+    user: userObject,
+  });
 };
 
 const signup = async (req, res) => {
   try {
-    console.log("REQUEST BODY RESPONSE");
-    console.log(req.body);
-    // Response message to be embedded in the html tags with help of ejs
-    return res.json({ status: "signup successful" });
+    const userName = req.body.username;
+    const email = req.body.email;
+    const password = req.body.password;
+    const confirmPassword = req.body.confirmpassword;
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
+
+    const user = await User.getUserByEmail(email);
+    const userObject = {};
+
+    userObject.username = userName;
+    userObject.email = email;
+    userObject.password = password;
+    userObject.confirmpassword = confirmPassword;
+
+    if (!userName || !email || !password || !confirmPassword) {
+      return noEmptyFieldMessage(res, userObject);
+    }
+    if (user.rows[0]) return registeredEmailMessage(res, userObject);
+    if (!email.includes("@")) return validEmailMessage(res, userObject);
+    if (password.length <= 5) return passwordLengthMessage(res, userObject);
+    if (password !== confirmPassword) {
+      return passwordMatchMessage(res, userObject);
+    }
+
+    const newUser = await User.createUser(userName, email, hashedPassword);
+
+    userObject.userId = newUser.rows[0].user_id;
+    assignCookieRedirectUser(res, userObject);
   } catch (error) {
     console.log("error ", error.message);
   }
 };
 
-const login = async (req, res) => {
+const signin = async (req, res) => {
   try {
     const email = req.body.email;
     const password = req.body.password;
     const user = await User.getUserByEmail(email);
-    if (!user.rows[0])
-      return res.json({ errorMessage: "Email does not exist" });
+
+    const userObject = {};
+
+    userObject.email = email;
+    userObject.password = password;
+
+    if (!user.rows[0]) return noEmailMessage(res, userObject);
 
     if (!(await bcrypt.compare(password, user.rows[0].password))) {
-      return res.json({ errorMessage: "Incorrect password" });
+      return inCorrectPasswordMessage(res, userObject);
     }
-    const userObject = {
-      userId: user.rows[0].user_id,
-      userName: user.rows[0].user_name,
-      email: user.rows[0].email,
-    };
-    createSendToken(userObject, 200, res);
+
+    userObject.userId = user.rows[0].user_id;
+
+    assignCookieRedirectUser(res, userObject);
   } catch (error) {
     console.log("error", error.message);
   }
 };
 
-const sendSignUpPage = async (req, res) => {
-  //   res.sendFile(__dirname + "/views/signup.html");
-  res.render("/views/signup");
+const signout = (req, res) => {
+  // TODO: signout user here
 };
 
-module.exports = { signup, login, sendSignUpPage };
+module.exports = { signup, signin };
