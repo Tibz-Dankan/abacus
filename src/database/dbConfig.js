@@ -11,9 +11,9 @@ const credentialObjForLocalDev = {
 
 const credentialObjForProd = {
   connectionString: process.env.DATABASE_URL,
-  ssl: {
-    rejectUnauthorized: false,
-  },
+  // ssl: {
+  //   rejectUnauthorized: false,
+  // },
 };
 
 if (isProduction) {
@@ -26,10 +26,14 @@ const db = new pg.Client(credentialObject);
 db.connect((error) => {
   if (error) {
     console.log("Failed to connect to the database!");
-    console.log("error: " + error.message);
+    console.log("error message: " + error.message);
+    console.log(error);
   } else {
     console.log("Database successfully connected!");
   }
+});
+db.on("error", (err) => {
+  console.error("something bad has happened!", err.stack);
 });
 
 module.exports = db;
