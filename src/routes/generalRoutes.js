@@ -13,6 +13,7 @@ const {
   services,
   notFound,
   loginRegister,
+  applyTemp,
 } = require("../controllers/generalRouteController");
 
 const router = express.Router();
@@ -29,7 +30,8 @@ router.get("/blog_details", blogDetails);
 router.get("/contact", contact);
 router.get("/elements", elements);
 router.get("/services", services);
-router.get("/temp", loginRegister); // to be removed
+router.get("/login-register", loginRegister); // to be removed
+router.get("/apply-temp", applyTemp); // to be removed
 router.get("*", notFound);
 
 module.exports = router;

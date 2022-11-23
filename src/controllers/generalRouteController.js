@@ -104,6 +104,14 @@ const loginRegister = async (req, res) => {
   }
 };
 
+const applyTemp = async (req, res) => {
+  try {
+    res.render("apply-form-temp");
+  } catch (error) {
+    console.log("error: " + error.message);
+  }
+};
+
 module.exports = {
   home,
   signup,
@@ -116,4 +124,5 @@ module.exports = {
   services,
   notFound,
   loginRegister,
+  applyTemp,
 };

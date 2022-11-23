@@ -1,5 +1,9 @@
 require("dotenv").config();
-const pg = require("pg");
+// const pg = require("pg");
+// const db = require("pg");
+
+const { Client } = require("pg");
+
 const isProduction = process.env.NODE_ENV === "production";
 const connectionString = `postgresql://${process.env.DB_USER}:${process.env.DB_PASSWORD}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_DATABASE}`;
 
@@ -22,8 +26,9 @@ if (isProduction) {
   credentialObject = credentialObjForLocalDev;
 }
 
-const db = new pg.Client(credentialObject);
-db.connect((error) => {
+const client = new Client(credentialObject);
+
+client.connect((error) => {
   if (error) {
     console.log("Failed to connect to the database!");
     console.log("error message: " + error.message);
@@ -32,8 +37,9 @@ db.connect((error) => {
     console.log("Database successfully connected!");
   }
 });
-db.on("error", (err) => {
-  console.error("something bad has happened!", err.stack);
-});
 
+// db.on("error", (err) => {
+//   // const client = new pg.Client(credentialObject);
+// });
+const db = client;
 module.exports = db;
