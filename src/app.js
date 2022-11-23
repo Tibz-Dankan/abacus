@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const userRoutes = require("./routes/userRoutes");
 const generalRoutes = require("./routes/generalRoutes");
+const loanRoutes = require("./routes/loanRoutes");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 
@@ -18,10 +19,12 @@ app.set("view engine", "ejs");
 
 app.use(express.static(path.join(__dirname, "views")));
 
-// // user routes
+app.use(cookieParser());
+
+app.use("/", loanRoutes);
+
 app.use("/", userRoutes);
 
-// general routes
 app.use("/", generalRoutes);
 
 const http = require("http");

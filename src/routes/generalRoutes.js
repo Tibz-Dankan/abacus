@@ -1,9 +1,10 @@
 const express = require("express");
+const { verifyToken } = require("../utils/verifyToken");
+
 const {
   home,
   signup,
   signin,
-  apply,
   about,
   blog,
   blogDetails,
@@ -11,6 +12,7 @@ const {
   elements,
   services,
   notFound,
+  loginRegister,
 } = require("../controllers/generalRouteController");
 
 const router = express.Router();
@@ -21,13 +23,13 @@ router.get("/signup", signup);
 router.get("/register", signup);
 router.get("/signin", signin);
 router.get("/login", signin);
-router.get("/apply", apply);
 router.get("/about", about);
 router.get("/blog", blog);
-router.get("/blog-details", blogDetails);
+router.get("/blog_details", blogDetails);
 router.get("/contact", contact);
 router.get("/elements", elements);
 router.get("/services", services);
+router.get("/temp", loginRegister); // to be removed
 router.get("*", notFound);
 
 module.exports = router;

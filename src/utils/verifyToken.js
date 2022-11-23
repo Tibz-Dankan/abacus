@@ -2,8 +2,10 @@ const jwt = require("jsonwebtoken");
 
 const verifyJWT = (token, req, res, next) => {
   jwt.verify(token, process.env.JWT_SECRETE_TOKEN, (error, userId) => {
-    res.clearCookie("token");
-    if (error) return res.redirect("signin");
+    if (error) {
+      res.clearCookie("token");
+      return res.redirect("signin");
+    }
     req.id = userId;
     next();
   });

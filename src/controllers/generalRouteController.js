@@ -5,9 +5,20 @@ const home = async (req, res) => {
     console.log("error: " + error.message);
   }
 };
+
 const signup = async (req, res) => {
   try {
-    res.render("signup");
+    const userObject = {
+      username: "",
+      email: "",
+      password: "",
+      confirmpassword: "",
+    };
+
+    res.render("signup", {
+      message: "",
+      user: userObject,
+    });
   } catch (error) {
     console.log("error: " + error.message);
   }
@@ -15,7 +26,15 @@ const signup = async (req, res) => {
 
 const signin = async (req, res) => {
   try {
-    res.render("signin");
+    const userObject = {
+      email: "",
+      password: "",
+    };
+
+    res.render("signin", {
+      message: "",
+      user: userObject,
+    });
   } catch (error) {
     console.log("error: " + error.message);
   }
@@ -24,14 +43,6 @@ const signin = async (req, res) => {
 const about = async (req, res) => {
   try {
     res.render("about");
-  } catch (error) {
-    console.log("error: " + error.message);
-  }
-};
-
-const apply = async (req, res) => {
-  try {
-    res.render("apply");
   } catch (error) {
     console.log("error: " + error.message);
   }
@@ -85,11 +96,18 @@ const notFound = async (req, res) => {
   }
 };
 
+const loginRegister = async (req, res) => {
+  try {
+    res.render("login-register");
+  } catch (error) {
+    console.log("error: " + error.message);
+  }
+};
+
 module.exports = {
   home,
   signup,
   signin,
-  apply,
   about,
   blog,
   blogDetails,
@@ -97,4 +115,5 @@ module.exports = {
   elements,
   services,
   notFound,
+  loginRegister,
 };
