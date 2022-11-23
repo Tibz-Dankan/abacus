@@ -3,6 +3,35 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
+const baseUrl = (requestRawHeaders) => {
+  let originUrlIndex;
+  requestRawHeaders.map((rawHeaderElement, index) => {
+    if (rawHeaderElement === "Origin") {
+      originUrlIndex = index + 1;
+    }
+  });
+  const baseUrl = requestRawHeaders[originUrlIndex];
+  return baseUrl;
+};
+
+// Referer is the full url path making request to the server E.g http://localhost:8000/register
+const refererUrl = (requestRawHeaders) => {
+  let refererUrlIndex;
+  requestRawHeaders.map((rawHeaderElement, index) => {
+    if (rawHeaderElement === "Referer") {
+      refererUrlIndex = index + 1;
+    }
+  });
+  const refererUrl = requestRawHeaders[refererUrlIndex];
+  return refererUrl;
+};
+
+const assignUserRole = (baseUrl, refererUrl) => {
+  if (`${baseUrl}/signup` === refererUrl) return "client";
+  if (`${baseUrl}/register` === refererUrl) return "client";
+  if (`${baseUrl}/admin-signup` === refererUrl) return "admin";
+};
+
 const assignToken = (userId) => {
   return jwt.sign({ userId }, process.env.JWT_SECRETE_TOKEN, {
     expiresIn: "15m",
@@ -28,6 +57,14 @@ const noEmptyFieldMessage = (res, userObject) => {
 const validEmailMessage = (res, userObject) => {
   return res.render("signup", {
     message: "Invalid email",
+    user: userObject,
+  });
+};
+
+const validUserNameMessage = (res, userObject) => {
+  return res.render("signup", {
+    message:
+      "Username must not contain any space and have must a dash E.g 'firstname-lastname'",
     user: userObject,
   });
 };
@@ -71,6 +108,11 @@ const signup = async (req, res) => {
   try {
     const userName = req.body.username;
     const email = req.body.email;
+    const userRole = assignUserRole(
+      baseUrl(req.rawHeaders),
+      refererUrl(req.rawHeaders)
+    );
+    console.log("user role : ", userRole);
     const password = req.body.password;
     const confirmPassword = req.body.confirmpassword;
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
@@ -86,6 +128,9 @@ const signup = async (req, res) => {
     if (!userName || !email || !password || !confirmPassword) {
       return noEmptyFieldMessage(res, userObject);
     }
+    if (userName.includes(" ") && !userName.includes("-")) {
+      return validUserNameMessage(res, userObject);
+    }
     if (user.rows[0]) return registeredEmailMessage(res, userObject);
     if (!email.includes("@")) return validEmailMessage(res, userObject);
     if (password.length <= 5) return passwordLengthMessage(res, userObject);
@@ -93,7 +138,12 @@ const signup = async (req, res) => {
       return passwordMatchMessage(res, userObject);
     }
 
-    const newUser = await User.createUser(userName, email, hashedPassword);
+    const newUser = await User.createUser(
+      userName,
+      email,
+      userRole,
+      hashedPassword
+    );
 
     userObject.userId = newUser.rows[0].user_id;
     assignCookieRedirectUser(res, userObject);

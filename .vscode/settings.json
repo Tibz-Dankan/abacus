@@ -1,4 +1,10 @@
 {
   "liveServer.settings.port": 5501,
-  "cSpell.words": ["Abacusfinanceugltd", "confirmpassword", "signin"]
+  "cSpell.words": [
+    "Abacusfinanceugltd",
+    "confirmpassword",
+    "lastname",
+    "signin",
+    "signout"
+  ]
 }
