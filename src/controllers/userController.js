@@ -182,7 +182,12 @@ const signin = async (req, res) => {
 };
 
 const signout = (req, res) => {
-  // TODO: signout user here
+  try {
+    res.clearCookie("token");
+    return res.redirect("signin");
+  } catch (error) {
+    console.log("error", error.message);
+  }
 };
 
-module.exports = { signup, signin };
+module.exports = { signup, signin, signout };
