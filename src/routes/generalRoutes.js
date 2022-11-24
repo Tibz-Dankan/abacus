@@ -4,6 +4,7 @@ const { verifyToken } = require("../utils/verifyToken");
 const {
   home,
   signup,
+  signUpAdmin,
   signin,
   about,
   blog,
@@ -22,6 +23,7 @@ router.get("/", home);
 router.get("/home", home);
 router.get("/signup", signup);
 router.get("/register", signup);
+router.get("/signup-admin", signUpAdmin);
 router.get("/signin", signin);
 router.get("/login", signin);
 router.get("/about", about);

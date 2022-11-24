@@ -24,6 +24,23 @@ const signup = async (req, res) => {
   }
 };
 
+const signUpAdmin = (req, res) => {
+  try {
+    const userObject = {
+      username: "",
+      email: "",
+      password: "",
+      confirmpassword: "",
+    };
+    res.render("signup-admin", {
+      message: "",
+      user: userObject,
+    });
+  } catch (error) {
+    console.log("error: " + error.message);
+  }
+};
+
 const signin = async (req, res) => {
   try {
     const userObject = {
@@ -115,6 +132,7 @@ const applyTemp = async (req, res) => {
 module.exports = {
   home,
   signup,
+  signUpAdmin,
   signin,
   about,
   blog,

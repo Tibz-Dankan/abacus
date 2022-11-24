@@ -2,6 +2,7 @@ const User = require("../models/user");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
+const { decodeJwtGetUserId } = require("../utils/decodeJwt");
 
 const baseUrl = (requestRawHeaders) => {
   let originUrlIndex;
@@ -29,7 +30,7 @@ const refererUrl = (requestRawHeaders) => {
 const assignUserRole = (baseUrl, refererUrl) => {
   if (`${baseUrl}/signup` === refererUrl) return "client";
   if (`${baseUrl}/register` === refererUrl) return "client";
-  if (`${baseUrl}/admin-signup` === refererUrl) return "admin";
+  if (`${baseUrl}/signup-admin` === refererUrl) return "admin";
 };
 
 const assignToken = (userId, userName) => {
@@ -51,6 +52,20 @@ const assignCookieRedirectUser = (res, userObj) => {
 const noEmptyFieldMessage = (res, userObject) => {
   return res.render("signup", {
     message: "Please fill out all fields",
+    user: userObject,
+  });
+};
+
+const noAdminCodeMessage = (res, userObject) => {
+  return res.render("signup", {
+    message: "No admin signup code provided",
+    user: userObject,
+  });
+};
+
+const validCodeMessage = (res, userObject) => {
+  return res.render("signup", {
+    message: "Admin code provided is invalid",
     user: userObject,
   });
 };
@@ -105,6 +120,41 @@ const inCorrectPasswordMessage = (res, userObject) => {
   });
 };
 
+const saveDotEnvAdminCode = async (dotEnvCode) => {
+  const associatedEmail = "developer@email.com";
+  const used = "YES";
+  const codeStatus = "Invalid";
+  const generatedAt = '{"date":" 2022-11-24T20:46:08.250Z"}';
+  const createdByUserId = 0;
+
+  await User.saveAdminCode(
+    dotEnvCode,
+    associatedEmail,
+    used,
+    codeStatus,
+    generatedAt,
+    createdByUserId
+  );
+};
+
+const saveAdminCode = async (request) => {
+  const associatedEmail = request.body.associatedEmail;
+  const createdByUserId = decodeJwtGetUserId(request.cookies);
+  const adminCode = request.body.adminSignUpCode;
+  const used = "YES";
+  const codeStatus = "Invalid";
+  const generatedAt = request.body.generatedAt;
+
+  await User.saveAdminCode(
+    adminCode,
+    associatedEmail,
+    used,
+    codeStatus,
+    generatedAt,
+    createdByUserId
+  );
+};
+
 const signUp = async (req, res) => {
   try {
     const userName = req.body.username;
@@ -136,6 +186,18 @@ const signUp = async (req, res) => {
     if (password.length <= 5) return passwordLengthMessage(res, userObject);
     if (password !== confirmPassword) {
       return passwordMatchMessage(res, userObject);
+    }
+
+    if (userRole === "admin") {
+      const adminCode = req.body.associatedEmail;
+      if (!adminCode) return noAdminCodeMessage(req, userObject);
+      if (parseInt(adminCode) === process.env.ADMIN_SIGNUP_CODE) {
+        const code = await User.getAdminCode(adminCode);
+        if (code.rows[0]) return validCodeMessage(res, userObject);
+        saveDotEnvAdminCode(adminCode);
+      } else {
+        saveAdminCode(req);
+      }
     }
 
     const newUser = await User.createUser(
@@ -190,4 +252,57 @@ const signOut = (req, res) => {
   }
 };
 
-module.exports = { signUp, signIn, signOut };
+const notAdminMessage = (res) => {
+  return res.render("admin-signup-codes", {
+    message: "You are not allowed to generate codes since you are not an Admin",
+    user: userObject,
+  });
+};
+
+const noAssociatedEmailMessage = (res) => {
+  return res.render("admin-signup-codes", {
+    message: "Please provide email to associated with code being generated",
+    user: userObject,
+  });
+};
+
+const generateCode = () => {
+  let randomCode;
+  randomCode = Math.floor(Math.random() * 1000000);
+
+  if (!(randomCode.toString().length === 6)) {
+    randomCode = Math.floor(Math.random() * 1000000);
+  }
+  if (!(randomCode.toString().length === 6)) {
+    randomCode = Math.floor(Math.random() * 1000000);
+  }
+  if (!(randomCode.toString().length === 6)) {
+    randomCode = Math.floor(Math.random() * 1000000);
+  }
+  return randomCode;
+};
+
+const generateAdminCode = async (req, res) => {
+  const userId = decodeJwtGetUserId(req.cookies);
+  const associatedEmail = req.body.associatedEmail;
+  const user = await User.getUserById(userId);
+  const used = "NO";
+  let generatedAt; // to derived from the frontend
+
+  if (!(user.rows[0].user_role === "admin")) return notAdminMessage(res);
+  if (!associatedEmail) return noAssociatedEmailMessage(res);
+
+  const code = generateCode();
+
+  await User.saveAdminCode(
+    code,
+    associatedEmail,
+    used,
+    codeStatus,
+    generatedAt,
+    createdByUserId
+  );
+  // render page with all generated codes
+};
+
+module.exports = { signUp, signIn, signOut, generateAdminCode };
