@@ -1,11 +1,11 @@
 const express = require("express");
-const { signup, signin, signout } = require("../controllers/userController");
+const { signUp, signIn, signOut } = require("../controllers/userController");
 
 const router = express.Router();
 
-router.post("/signup", signup);
-router.post("/signin", signin);
-router.post("/signin", signout);
+router.post("/signup", signUp);
+router.post("/signin", signIn);
+router.post("/signin", signOut);
 
 // TODO: forgot password, update password
 

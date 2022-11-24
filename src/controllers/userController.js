@@ -65,7 +65,7 @@ const validEmailMessage = (res, userObject) => {
 const validUserNameMessage = (res, userObject) => {
   return res.render("signup", {
     message:
-      "Username must not contain any space and have must a dash E.g 'firstname-lastname'",
+      "Username must not contain any space and have must a dash e.g 'firstname-lastname'",
     user: userObject,
   });
 };
@@ -105,7 +105,7 @@ const inCorrectPasswordMessage = (res, userObject) => {
   });
 };
 
-const signup = async (req, res) => {
+const signUp = async (req, res) => {
   try {
     const userName = req.body.username;
     const email = req.body.email;
@@ -128,7 +128,7 @@ const signup = async (req, res) => {
     if (!userName || !email || !password || !confirmPassword) {
       return noEmptyFieldMessage(res, userObject);
     }
-    if (userName.includes(" ") && !userName.includes("-")) {
+    if (userName.includes(" ") || !userName.includes("-")) {
       return validUserNameMessage(res, userObject);
     }
     if (user.rows[0]) return registeredEmailMessage(res, userObject);
@@ -154,7 +154,7 @@ const signup = async (req, res) => {
   }
 };
 
-const signin = async (req, res) => {
+const signIn = async (req, res) => {
   try {
     const email = req.body.email;
     const password = req.body.password;
@@ -181,7 +181,7 @@ const signin = async (req, res) => {
   }
 };
 
-const signout = (req, res) => {
+const signOut = (req, res) => {
   try {
     res.clearCookie("token");
     return res.redirect("signin");
@@ -190,4 +190,4 @@ const signout = (req, res) => {
   }
 };
 
-module.exports = { signup, signin, signout };
+module.exports = { signUp, signIn, signOut };
