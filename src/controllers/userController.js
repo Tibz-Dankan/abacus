@@ -32,19 +32,20 @@ const assignUserRole = (baseUrl, refererUrl) => {
   if (`${baseUrl}/admin-signup` === refererUrl) return "admin";
 };
 
-const assignToken = (userId) => {
-  return jwt.sign({ userId }, process.env.JWT_SECRETE_TOKEN, {
+const assignToken = (userId, userName) => {
+  return jwt.sign({ userId, userName }, process.env.JWT_SECRETE_TOKEN, {
     expiresIn: "15m",
   });
 };
 
 const assignCookieRedirectUser = (res, userObj) => {
-  const token = assignToken(userObj.userId);
+  const token = assignToken(userObj.userId, userObj.userName);
   res.cookie("token", token, {
     httpOnly: true,
     // signed: true,
   });
-  return res.redirect("/apply");
+  if (userObj.userRole === "client") return res.redirect("/get-started");
+  if (userObj.userRole === "admin") return res.redirect("/who-applied");
 };
 
 const noEmptyFieldMessage = (res, userObject) => {
@@ -112,7 +113,6 @@ const signup = async (req, res) => {
       baseUrl(req.rawHeaders),
       refererUrl(req.rawHeaders)
     );
-    console.log("user role : ", userRole);
     const password = req.body.password;
     const confirmPassword = req.body.confirmpassword;
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
@@ -146,6 +146,8 @@ const signup = async (req, res) => {
     );
 
     userObject.userId = newUser.rows[0].user_id;
+    userObject.userName = newUser.rows[0].user_name;
+    userObject.userRole = newUser.rows[0].user_role;
     assignCookieRedirectUser(res, userObject);
   } catch (error) {
     console.log("error ", error.message);
@@ -170,6 +172,8 @@ const signin = async (req, res) => {
     }
 
     userObject.userId = user.rows[0].user_id;
+    userObject.userName = user.rows[0].user_name;
+    userObject.userRole = user.rows[0].user_role;
 
     assignCookieRedirectUser(res, userObject);
   } catch (error) {

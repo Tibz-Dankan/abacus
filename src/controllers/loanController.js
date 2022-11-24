@@ -75,4 +75,26 @@ const myLoanApplicationData = async (req, res) => {
   });
 };
 
-module.exports = { apply, applyForLoan, myLoanApplicationData };
+const getStarted = async (req, res) => {
+  try {
+    res.render("get-started");
+  } catch (error) {
+    console.log("error: " + error.message);
+  }
+};
+
+const whoApplied = async (req, res) => {
+  try {
+    res.render("who-applied");
+  } catch (error) {
+    console.log("error: " + error.message);
+  }
+};
+
+module.exports = {
+  apply,
+  applyForLoan,
+  myLoanApplicationData,
+  getStarted,
+  whoApplied,
+};
