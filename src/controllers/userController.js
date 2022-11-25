@@ -33,6 +33,12 @@ const assignUserRole = (baseUrl, refererUrl) => {
   if (`${baseUrl}/signup-admin` === refererUrl) return "admin";
 };
 
+const signUpPage = (baseUrl, refererUrl) => {
+  if (`${baseUrl}/signup` === refererUrl) return "signup";
+  if (`${baseUrl}/register` === refererUrl) return "signup";
+  if (`${baseUrl}/signup-admin` === refererUrl) return "signup-admin";
+};
+
 const assignToken = (userId, userName) => {
   return jwt.sign({ userId, userName }, process.env.JWT_SECRETE_TOKEN, {
     expiresIn: "15m",
@@ -49,58 +55,100 @@ const assignCookieRedirectUser = (res, userObj) => {
   if (userObj.userRole === "admin") return res.redirect("/who-applied");
 };
 
-const noEmptyFieldMessage = (res, userObject) => {
-  return res.render("signup", {
+const noEmptyFieldMessage = (req, res, userObject) => {
+  const signupPage = signUpPage(
+    baseUrl(req.rawHeaders),
+    refererUrl(req.rawHeaders)
+  );
+  return res.render(signupPage, {
     message: "Please fill out all fields",
     user: userObject,
   });
 };
 
-const noAdminCodeMessage = (res, userObject) => {
-  return res.render("signup", {
+const noAdminCodeMessage = (req, res, userObject) => {
+  const signupPage = signUpPage(
+    baseUrl(req.rawHeaders),
+    refererUrl(req.rawHeaders)
+  );
+  return res.render(signupPage, {
     message: "No admin signup code provided",
     user: userObject,
   });
 };
 
-const validCodeMessage = (res, userObject) => {
-  return res.render("signup", {
+const validCodeMessage = (req, res, userObject) => {
+  const signupPage = signUpPage(
+    baseUrl(req.rawHeaders),
+    refererUrl(req.rawHeaders)
+  );
+  return res.render(signupPage, {
     message: "Admin code provided is invalid",
     user: userObject,
   });
 };
+const invalidAssociatedEmailMessage = (req, res, userObject) => {
+  const signupPage = signUpPage(
+    baseUrl(req.rawHeaders),
+    refererUrl(req.rawHeaders)
+  );
+  return res.render(signupPage, {
+    message: "Email associated with admin code is invalid",
+    user: userObject,
+  });
+};
 
-const validEmailMessage = (res, userObject) => {
-  return res.render("signup", {
+const validEmailMessage = (req, res, userObject) => {
+  const signupPage = signUpPage(
+    baseUrl(req.rawHeaders),
+    refererUrl(req.rawHeaders)
+  );
+  return res.render(signupPage, {
     message: "Invalid email",
     user: userObject,
   });
 };
 
-const validUserNameMessage = (res, userObject) => {
-  return res.render("signup", {
+const validUserNameMessage = (req, res, userObject) => {
+  const signupPage = signUpPage(
+    baseUrl(req.rawHeaders),
+    refererUrl(req.rawHeaders)
+  );
+  return res.render(signupPage, {
     message:
       "Username must not contain any space and have must a dash e.g 'firstname-lastname'",
     user: userObject,
   });
 };
 
-const passwordMatchMessage = (res, userObject) => {
-  return res.render("signup", {
+const passwordMatchMessage = (req, res, userObject) => {
+  const signupPage = signUpPage(
+    baseUrl(req.rawHeaders),
+    refererUrl(req.rawHeaders)
+  );
+  return res.render(signupPage, {
     message: "Passwords don't match",
     user: userObject,
   });
 };
 
-const passwordLengthMessage = (res, userObject) => {
-  return res.render("signup", {
+const passwordLengthMessage = (req, res, userObject) => {
+  const signupPage = signUpPage(
+    baseUrl(req.rawHeaders),
+    refererUrl(req.rawHeaders)
+  );
+  return res.render(signupPage, {
     message: "password must have at least 6 characters",
     user: userObject,
   });
 };
 
-const registeredEmailMessage = (res, userObject) => {
-  return res.render("signup", {
+const registeredEmailMessage = (req, res, userObject) => {
+  const signupPage = signUpPage(
+    baseUrl(req.rawHeaders),
+    refererUrl(req.rawHeaders)
+  );
+  return res.render(signupPage, {
     message: "Email already registered",
     user: userObject,
   });
@@ -122,31 +170,13 @@ const inCorrectPasswordMessage = (res, userObject) => {
 
 const saveDotEnvAdminCode = async (dotEnvCode) => {
   const associatedEmail = "developer@email.com";
-  const used = "YES";
-  const codeStatus = "Invalid";
+  const used = "yes";
+  const codeStatus = "invalid";
   const generatedAt = '{"date":" 2022-11-24T20:46:08.250Z"}';
   const createdByUserId = 0;
 
   await User.saveAdminCode(
     dotEnvCode,
-    associatedEmail,
-    used,
-    codeStatus,
-    generatedAt,
-    createdByUserId
-  );
-};
-
-const saveAdminCode = async (request) => {
-  const associatedEmail = request.body.associatedEmail;
-  const createdByUserId = decodeJwtGetUserId(request.cookies);
-  const adminCode = request.body.adminSignUpCode;
-  const used = "YES";
-  const codeStatus = "Invalid";
-  const generatedAt = request.body.generatedAt;
-
-  await User.saveAdminCode(
-    adminCode,
     associatedEmail,
     used,
     codeStatus,
@@ -176,27 +206,36 @@ const signUp = async (req, res) => {
     userObject.confirmpassword = confirmPassword;
 
     if (!userName || !email || !password || !confirmPassword) {
-      return noEmptyFieldMessage(res, userObject);
+      return noEmptyFieldMessage(req, res, userObject);
     }
     if (userName.includes(" ") || !userName.includes("-")) {
-      return validUserNameMessage(res, userObject);
+      return validUserNameMessage(req, res, userObject);
     }
-    if (user.rows[0]) return registeredEmailMessage(res, userObject);
-    if (!email.includes("@")) return validEmailMessage(res, userObject);
-    if (password.length <= 5) return passwordLengthMessage(res, userObject);
+    if (user.rows[0]) return registeredEmailMessage(req, res, userObject);
+    if (!email.includes("@")) return validEmailMessage(req, res, userObject);
+    if (password.length <= 5)
+      return passwordLengthMessage(req, res, userObject);
     if (password !== confirmPassword) {
-      return passwordMatchMessage(res, userObject);
+      return passwordMatchMessage(req, res, userObject);
     }
 
     if (userRole === "admin") {
-      const adminCode = req.body.associatedEmail;
-      if (!adminCode) return noAdminCodeMessage(req, userObject);
+      const adminCode = req.body.adminSignUpCode;
+      if (!adminCode) return noAdminCodeMessage(req, res, userObject);
       if (parseInt(adminCode) === process.env.ADMIN_SIGNUP_CODE) {
         const code = await User.getAdminCode(adminCode);
-        if (code.rows[0]) return validCodeMessage(res, userObject);
+        if (code.rows[0]) return validCodeMessage(req, res, userObject);
         saveDotEnvAdminCode(adminCode);
       } else {
-        saveAdminCode(req);
+        const code = await User.getAdminCode(adminCode);
+        if (!code.rows[0] || code.rows[0].code_status === "invalid") {
+          return validCodeMessage(req, res, userObject);
+        }
+        if (!(email === code.rows[0].associated_email)) {
+          return invalidAssociatedEmailMessage(req, res, userObject);
+        }
+        // TODO: check for code expiration
+        await User.InvalidateAdminCodes(adminCode);
       }
     }
 
@@ -283,11 +322,13 @@ const generateCode = () => {
 };
 
 const generateAdminCode = async (req, res) => {
-  const userId = decodeJwtGetUserId(req.cookies);
+  const createdByUserId = decodeJwtGetUserId(req.cookies);
   const associatedEmail = req.body.associatedEmail;
-  const user = await User.getUserById(userId);
-  const used = "NO";
-  let generatedAt; // to derived from the frontend
+  const used = "no";
+  const codeStatus = "valid";
+  let generatedAt = JSON.stringify({ date: new Date(Date.now()) });
+
+  const user = await User.getUserById(createdByUserId);
 
   if (!(user.rows[0].user_role === "admin")) return notAdminMessage(res);
   if (!associatedEmail) return noAssociatedEmailMessage(res);

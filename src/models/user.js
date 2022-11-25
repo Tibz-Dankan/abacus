@@ -39,4 +39,11 @@ User.getAllAdminCodes = () => {
   return db.query("SELECT * FROM admin_signup_codes");
 };
 
+User.InvalidateAdminCodes = (adminCode) => {
+  return db.query(
+    "UPDATE admin_signup_codes SET code_status = 'Invalid' WHERE code = $1 ",
+    [adminCode]
+  );
+};
+
 module.exports = User;
