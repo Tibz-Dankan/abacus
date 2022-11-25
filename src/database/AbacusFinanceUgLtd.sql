@@ -15,7 +15,7 @@ CREATE TABLE admin_signup_codes (
    associated_email VARCHAR(255) NOT NULL,
    used VARCHAR(10) NOT NULL,
    code_status VARCHAR(20) NOT NULL,
-   generated_at VARCHAR(20) NOT NULL,
+   generated_at VARCHAR(50) NOT NULL,
    created_by_user_id INTEGER NOT NULL
 );
 

@@ -185,7 +185,57 @@ const saveDotEnvAdminCode = async (dotEnvCode) => {
   );
 };
 
-const signUp = async (req, res) => {
+const signUpClient = async (req, res) => {
+  try {
+    const userName = req.body.username;
+    const email = req.body.email;
+    const userRole = assignUserRole(
+      baseUrl(req.rawHeaders),
+      refererUrl(req.rawHeaders)
+    );
+    const password = req.body.password;
+    const confirmPassword = req.body.confirmpassword;
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
+
+    const user = await User.getUserByEmail(email);
+    const userObject = {};
+
+    userObject.username = userName;
+    userObject.email = email;
+    userObject.password = password;
+    userObject.confirmpassword = confirmPassword;
+
+    if (!userName || !email || !password || !confirmPassword) {
+      return noEmptyFieldMessage(req, res, userObject);
+    }
+    if (userName.includes(" ") || !userName.includes("-")) {
+      return validUserNameMessage(req, res, userObject);
+    }
+    if (user.rows[0]) return registeredEmailMessage(req, res, userObject);
+    if (!email.includes("@")) return validEmailMessage(req, res, userObject);
+    if (password.length <= 5)
+      return passwordLengthMessage(req, res, userObject);
+    if (password !== confirmPassword) {
+      return passwordMatchMessage(req, res, userObject);
+    }
+
+    const newUser = await User.createUser(
+      userName,
+      email,
+      userRole,
+      hashedPassword
+    );
+
+    userObject.userId = newUser.rows[0].user_id;
+    userObject.userName = newUser.rows[0].user_name;
+    userObject.userRole = newUser.rows[0].user_role;
+    assignCookieRedirectUser(res, userObject);
+  } catch (error) {
+    console.log("error ", error.message);
+  }
+};
+
+const signUpAdmin = async (req, res) => {
   try {
     const userName = req.body.username;
     const email = req.body.email;
@@ -222,8 +272,11 @@ const signUp = async (req, res) => {
     if (userRole === "admin") {
       const adminCode = req.body.adminSignUpCode;
       if (!adminCode) return noAdminCodeMessage(req, res, userObject);
-      if (parseInt(adminCode) === process.env.ADMIN_SIGNUP_CODE) {
+      if (adminCode === process.env.ADMIN_SIGNUP_CODE) {
         const code = await User.getAdminCode(adminCode);
+
+        console.log("Admin code from the database");
+        console.log(code.rows);
         if (code.rows[0]) return validCodeMessage(req, res, userObject);
         saveDotEnvAdminCode(adminCode);
       } else {
@@ -346,4 +399,10 @@ const generateAdminCode = async (req, res) => {
   // render page with all generated codes
 };
 
-module.exports = { signUp, signIn, signOut, generateAdminCode };
+module.exports = {
+  signUpClient,
+  signUpAdmin,
+  signIn,
+  signOut,
+  generateAdminCode,
+};
