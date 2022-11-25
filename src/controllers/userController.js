@@ -3,6 +3,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const { decodeJwtGetUserId } = require("../utils/decodeJwt");
+const { catchError } = require("../utils/catchError");
 
 const baseUrl = (requestRawHeaders) => {
   let originUrlIndex;
@@ -232,6 +233,7 @@ const signUpClient = async (req, res) => {
     assignCookieRedirectUser(res, userObject);
   } catch (error) {
     console.log("error ", error.message);
+    catchError(res, "signup");
   }
 };
 
@@ -305,6 +307,7 @@ const signUpAdmin = async (req, res) => {
     assignCookieRedirectUser(res, userObject);
   } catch (error) {
     console.log("error ", error.message);
+    catchError(res, "signup-admin");
   }
 };
 
@@ -332,6 +335,7 @@ const signIn = async (req, res) => {
     assignCookieRedirectUser(res, userObject);
   } catch (error) {
     console.log("error", error.message);
+    catchError(res, "signin");
   }
 };
 
