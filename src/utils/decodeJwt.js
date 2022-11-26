@@ -14,4 +14,15 @@ const decodeJwtGetUserName = (requestCookie) => {
   return userName;
 };
 
-module.exports = { decodeJwtGetUserId, decodeJwtGetUserName };
+const decodeJwtGetUserRole = (requestCookie) => {
+  const jwtToken = requestCookie.token;
+  const decodedToken = jwt_decode(jwtToken);
+  const userRole = decodedToken.userRole;
+  return userRole;
+};
+
+module.exports = {
+  decodeJwtGetUserId,
+  decodeJwtGetUserName,
+  decodeJwtGetUserRole,
+};

@@ -1,20 +1,22 @@
 const express = require("express");
 const { verifyToken } = require("../utils/verifyToken");
+const { verifyAdminToken } = require("../utils/verifyAdminToken");
 
 const {
-  apply,
+  getLoanForm,
   applyForLoan,
-  myLoanApplicationData,
-  getStarted,
-  whoApplied,
+  myLoanData,
+  startApplying,
+  loanApplicants,
 } = require("../controllers/loanController");
 
 const router = express.Router();
 
-router.get("/apply", verifyToken, apply);
-router.post("/apply", verifyToken, applyForLoan);
-router.get("/apply", verifyToken, myLoanApplicationData);
-router.get("/get-started", verifyToken, getStarted);
-router.get("/who-applied", verifyToken, whoApplied);
+router.get("/start-applying", verifyToken, startApplying);
+router.get("/apply-for-loan", verifyToken, getLoanForm);
+router.post("/apply-for-loan", verifyToken, applyForLoan);
+router.get("/my-loan-data", verifyToken, myLoanData);
+
+router.get("/loan-applicants", verifyAdminToken, loanApplicants);
 
 module.exports = router;

@@ -1,17 +1,7 @@
-const jwt = require("jsonwebtoken");
+const { decodeJwtGetUserRole } = require("./decodeJwt");
+const { verifyJWT } = require("./verifyToken");
 
-const verifyJWT = (token, req, res, next) => {
-  jwt.verify(token, process.env.JWT_SECRETE_TOKEN, (error, userId) => {
-    if (error) {
-      res.clearCookie("token");
-      return res.redirect("signin");
-    }
-    req.id = userId;
-    next();
-  });
-};
-
-const verifyToken = (req, res, next) => {
+const verifyAdminToken = (req, res, next) => {
   try {
     // TODO: implement signed cookie
     //console.log(req.signedCookies);
@@ -21,6 +11,13 @@ const verifyToken = (req, res, next) => {
     const token = req.cookies.token;
     if (!token) return res.redirect("signin");
 
+    const userRole = decodeJwtGetUserRole(req.cookies);
+    if (userRole !== "Admin") {
+      return res.render("not-admin", {
+        message: "You can't access this page since you are not an admin",
+      });
+    }
+
     verifyJWT(token, req, res, next);
   } catch (error) {
     console.log("Jwt catch error: " + error.message);
@@ -28,4 +25,4 @@ const verifyToken = (req, res, next) => {
   }
 };
 
-module.exports = { verifyToken, verifyJWT };
+module.exports = { verifyAdminToken };

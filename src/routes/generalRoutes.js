@@ -1,5 +1,6 @@
 const express = require("express");
-const { verifyToken } = require("../utils/verifyToken");
+// const { verifyToken } = require("../utils/verifyToken");
+const { verifyAdminToken } = require("../utils/verifyAdminToken");
 
 const {
   home,
@@ -13,8 +14,9 @@ const {
   elements,
   services,
   notFound,
-  loginRegister,
-  applyTemp,
+  // loginRegister,
+  // applyTemp,
+  applications,
 } = require("../controllers/generalRouteController");
 
 const router = express.Router();
@@ -32,8 +34,9 @@ router.get("/blog_details", blogDetails);
 router.get("/contact", contact);
 router.get("/elements", elements);
 router.get("/services", services);
-router.get("/login-register", loginRegister); // to be removed
-router.get("/apply-temp", applyTemp); // to be removed
+// router.get("/login-register", loginRegister); // to be removed
+// router.get("/apply-temp", applyTemp); // to be removed
+router.get("/applications", verifyAdminToken, applications);
 router.get("*", notFound);
 
 module.exports = router;

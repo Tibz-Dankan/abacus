@@ -1,43 +1,60 @@
 const db = require("../database/dbConfig");
 
 const Loan = {};
-// TODO: save loan in the database
 
 Loan.saveLoanApplicationData = (
   userId,
   firstName,
   lastName,
   gender,
+  job,
   phoneNumber,
   city,
   loanAmount,
-  loanCategory
+  loanCategory,
+  isSettled,
+  isRead
 ) => {
   return db.query(
-    "INSERT INTO loan_applications(user_id, first_name, last_name, gender, phone_number, city, loan_mount, loan_category) VALUES($1,$2,$3,$4,$5,$6,$7,&8)  RETURNING *",
+    "INSERT INTO loan_applications(user_id, first_name, last_name, gender, job, phone_number, city, loan_mount, loan_category,is_settled, is_read) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11)  RETURNING *",
     [
       userId,
       firstName,
       lastName,
       gender,
+      job,
       phoneNumber,
       city,
       loanAmount,
       loanCategory,
+      isSettled,
+      isRead,
     ]
   );
 };
 
-// TODO: get a Loan application from  the database
 Loan.getLoanApplicationByUserId = (userId) => {
   return db.query("SELECT * FROM loan_applications WHERE user_id = $1", [
     userId,
   ]);
 };
 
-// TODO: get all loan application from the database
-Loan.getAllLoanApplications = (userId) => {
-  return db.query("SELECT * FROM loan_applications ODER BY DESC", [userId]);
+Loan.getAllLoanApplications = () => {
+  return db.query("SELECT * FROM loan_applications ODER BY DESC");
+};
+
+Loan.applicationSettled = (loanId) => {
+  return db.query(
+    "UPDATE loan_applications SET is_settled = TRUE WHERE loan_id = $1",
+    [loanId]
+  );
+};
+
+Loan.applicationRead = (loanId) => {
+  return db.query(
+    "UPDATE loan_applications SET is_read = TRUE WHERE loan_id = $1",
+    [loanId]
+  );
 };
 
 module.exports = Loan;

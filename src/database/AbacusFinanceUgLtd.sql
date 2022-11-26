@@ -4,7 +4,7 @@ CREATE TABLE users (
    user_id SERIAL PRIMARY KEY ,
    user_name VARCHAR(255) NOT NULL,
    email VARCHAR(255) NOT NULL,
-   user_role VARCHAR(20) NOT NULL
+   user_role VARCHAR(20) NOT NULL,
    password VARCHAR(255) NOT NULL,
    UNIQUE (email) 
 );
@@ -18,6 +18,33 @@ CREATE TABLE admin_signup_codes (
    generated_at VARCHAR(50) NOT NULL,
    created_by_user_id INTEGER NOT NULL
 );
+    
+CREATE TABLE loan_applications (
+   loan_id SERIAL PRIMARY KEY ,
+   user_id INTEGER NOT NULL ,
+   first_name VARCHAR(255) NOT NULL,
+   last_name VARCHAR(255) NOT NULL,
+   gender VARCHAR(20) NOT NULL,
+   job VARCHAR(300) NOT NULL,
+   phone_number VARCHAR(50) NOT NULL,
+   city VARCHAR(100) NOT NULL,
+   loan_mount VARCHAR(255) NOT NULL,
+   loan_category VARCHAR(255) NOT NULL,
+   is_settled BOOLEAN NOT NULL,
+   is_read BOOLEAN NOT NULL
+);
 
+CREATE TABLE sacco_membership (
+   sacco_id SERIAL PRIMARY KEY ,
+   user_id INTEGER NOT NULL ,
+   first_name VARCHAR(255) NOT NULL,
+   last_name VARCHAR(255) NOT NULL,
+   gender VARCHAR(20) NOT NULL,
+   job VARCHAR(300) NOT NULL,
+   phone_number VARCHAR(50) NOT NULL, 
+   city VARCHAR(100) NOT NULL,
+   is_accepted BOOLEAN NOT NULL,
+   is_read BOOLEAN NOT NULL
+);
 
 -- ALTER TABLE users ADD user_role VARCHAR(20) NOT NULL DEFAULT 'client'; 

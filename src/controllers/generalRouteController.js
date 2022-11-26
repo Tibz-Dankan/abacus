@@ -113,19 +113,28 @@ const notFound = async (req, res) => {
   }
 };
 
-const loginRegister = async (req, res) => {
-  try {
-    res.render("login-register");
-  } catch (error) {
-    console.log("error: " + error.message);
-  }
-};
+// const loginRegister = async (req, res) => {
+//   try {
+//     res.render("login-register");
+//   } catch (error) {
+//     console.log("error: " + error.message);
+//   }
+// };
 
-const applyTemp = async (req, res) => {
+// const applyTemp = async (req, res) => {
+//   try {
+//     res.render("apply-form-temp");
+//   } catch (error) {
+//     console.log("error: " + error.message);
+//   }
+// };
+
+const applications = (req, res) => {
   try {
-    res.render("apply-form-temp");
+    res.render("applications", { message: "" });
   } catch (error) {
-    console.log("error: " + error.message);
+    console.log(error);
+    // if (error) return catchError(res, "applications");
   }
 };
 
@@ -141,6 +150,7 @@ module.exports = {
   elements,
   services,
   notFound,
-  loginRegister,
-  applyTemp,
+  // loginRegister,
+  // applyTemp,
+  applications,
 };

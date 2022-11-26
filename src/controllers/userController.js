@@ -40,20 +40,24 @@ const signUpPage = (baseUrl, refererUrl) => {
   if (`${baseUrl}/signup-admin` === refererUrl) return "signup-admin";
 };
 
-const assignToken = (userId, userName) => {
-  return jwt.sign({ userId, userName }, process.env.JWT_SECRETE_TOKEN, {
-    expiresIn: "15m",
-  });
+const assignToken = (userId, userName, userRole) => {
+  return jwt.sign(
+    { userId, userName, userRole },
+    process.env.JWT_SECRETE_TOKEN,
+    {
+      expiresIn: "15m",
+    }
+  );
 };
 
 const assignCookieRedirectUser = (res, userObj) => {
-  const token = assignToken(userObj.userId, userObj.userName);
+  const token = assignToken(userObj.userId, userObj.userName, userObj.userRole);
   res.cookie("token", token, {
     httpOnly: true,
     // signed: true,
   });
-  if (userObj.userRole === "client") return res.redirect("/get-started");
-  if (userObj.userRole === "admin") return res.redirect("/who-applied");
+  if (userObj.userRole === "client") return res.redirect("/start-applying");
+  if (userObj.userRole === "admin") return res.redirect("/applications");
 };
 
 const noEmptyFieldMessage = (req, res, userObject) => {
