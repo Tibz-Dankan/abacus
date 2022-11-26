@@ -99,6 +99,17 @@ const invalidAssociatedEmailMessage = (req, res, userObject) => {
   });
 };
 
+const expiredAdminCodeMessage = (req, res, userObject) => {
+  const signupPage = signUpPage(
+    baseUrl(req.rawHeaders),
+    refererUrl(req.rawHeaders)
+  );
+  return res.render(signupPage, {
+    message: "Admin code is expired",
+    user: userObject,
+  });
+};
+
 const validEmailMessage = (req, res, userObject) => {
   const signupPage = signUpPage(
     baseUrl(req.rawHeaders),
@@ -237,6 +248,11 @@ const signUpClient = async (req, res) => {
   }
 };
 
+const covertToDate = (stringifiedDate) => {
+  const date = JSON.parse(stringifiedDate).date;
+  return new Date(date);
+};
+
 const signUpAdmin = async (req, res) => {
   try {
     const userName = req.body.username;
@@ -274,11 +290,9 @@ const signUpAdmin = async (req, res) => {
     if (userRole === "admin") {
       const adminCode = req.body.adminSignUpCode;
       if (!adminCode) return noAdminCodeMessage(req, res, userObject);
+
       if (adminCode === process.env.ADMIN_SIGNUP_CODE) {
         const code = await User.getAdminCode(adminCode);
-
-        console.log("Admin code from the database");
-        console.log(code.rows);
         if (code.rows[0]) return validCodeMessage(req, res, userObject);
         saveDotEnvAdminCode(adminCode);
       } else {
@@ -289,7 +303,12 @@ const signUpAdmin = async (req, res) => {
         if (!(email === code.rows[0].associated_email)) {
           return invalidAssociatedEmailMessage(req, res, userObject);
         }
-        // TODO: check for code expiration
+        if (
+          new Date(Date.now()) - covertToDate(code.rows[0].generated_at) >
+          new Date(1000 * 60 * 60 * 24)
+        ) {
+          return expiredAdminCodeMessage(req, res, userObject);
+        }
         await User.InvalidateAdminCodes(adminCode);
       }
     }
@@ -306,8 +325,8 @@ const signUpAdmin = async (req, res) => {
     userObject.userRole = newUser.rows[0].user_role;
     assignCookieRedirectUser(res, userObject);
   } catch (error) {
-    console.log("error ", error.message);
-    catchError(res, "signup-admin");
+    console.log(error);
+    if (error) return catchError(res, "signup-admin");
   }
 };
 
@@ -334,8 +353,8 @@ const signIn = async (req, res) => {
 
     assignCookieRedirectUser(res, userObject);
   } catch (error) {
-    console.log("error", error.message);
-    catchError(res, "signin");
+    console.log(error);
+    if (error) return catchError(res, "signin");
   }
 };
 
@@ -344,7 +363,8 @@ const signOut = (req, res) => {
     res.clearCookie("token");
     return res.redirect("signin");
   } catch (error) {
-    console.log("error", error.message);
+    console.log(error);
+    if (error) return catchError(res, "signout");
   }
 };
 
@@ -379,27 +399,32 @@ const generateCode = () => {
 };
 
 const generateAdminCode = async (req, res) => {
-  const createdByUserId = decodeJwtGetUserId(req.cookies);
-  const associatedEmail = req.body.associatedEmail;
-  const used = "no";
-  const codeStatus = "valid";
-  let generatedAt = JSON.stringify({ date: new Date(Date.now()) });
+  try {
+    const createdByUserId = decodeJwtGetUserId(req.cookies);
+    const associatedEmail = req.body.associatedEmail;
+    const used = "no";
+    const codeStatus = "valid";
+    let generatedAt = JSON.stringify({ date: new Date(Date.now()) });
 
-  const user = await User.getUserById(createdByUserId);
+    const user = await User.getUserById(createdByUserId);
 
-  if (!(user.rows[0].user_role === "admin")) return notAdminMessage(res);
-  if (!associatedEmail) return noAssociatedEmailMessage(res);
+    if (!(user.rows[0].user_role === "admin")) return notAdminMessage(res);
+    if (!associatedEmail) return noAssociatedEmailMessage(res);
 
-  const code = generateCode();
+    const code = generateCode();
 
-  await User.saveAdminCode(
-    code,
-    associatedEmail,
-    used,
-    codeStatus,
-    generatedAt,
-    createdByUserId
-  );
+    await User.saveAdminCode(
+      code,
+      associatedEmail,
+      used,
+      codeStatus,
+      generatedAt,
+      createdByUserId
+    );
+  } catch (error) {
+    console.log(error);
+    if (error) return catchError(res, "admin-codes");
+  }
   // render page with all generated codes
 };
 
