@@ -8,6 +8,7 @@ const {
   myLoanData,
   startApplying,
   loanApplicants,
+  singleLoanApplication,
 } = require("../controllers/loanController");
 
 const router = express.Router();
@@ -18,5 +19,6 @@ router.post("/apply-for-loan", verifyToken, applyForLoan);
 router.get("/my-loan-data", verifyToken, myLoanData);
 
 router.get("/loan-applicants", verifyAdminToken, loanApplicants);
+router.get("/loan-applicants/:loanId", verifyAdminToken, singleLoanApplication);
 
 module.exports = router;

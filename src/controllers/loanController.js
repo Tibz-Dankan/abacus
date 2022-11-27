@@ -114,11 +114,30 @@ const loanApplicants = async (req, res) => {
   try {
     const applicants = await Loan.getAllLoanApplications();
     res.render("loan-applicants", {
+      message: "",
       loanApplicants: applicants.rows,
     });
   } catch (error) {
     console.log(error);
     if (error) return catchError(res, "loan-applicants");
+  }
+};
+
+const singleLoanApplication = async (req, res) => {
+  try {
+    const loanId = req.params.loanId;
+    const application = await Loan.getLoanApplicationByLoanId(loanId);
+
+    if (application.rows[0].is_read === false) {
+      await Loan.applicationRead(loanId);
+    }
+    res.render("single-loan-application", {
+      message: "",
+      loanApplication: application.rows[0],
+    });
+  } catch (error) {
+    console.log(error);
+    if (error) return catchError(res, "single-loan-application");
   }
 };
 
@@ -128,4 +147,5 @@ module.exports = {
   applyForLoan,
   myLoanData,
   loanApplicants,
+  singleLoanApplication,
 };

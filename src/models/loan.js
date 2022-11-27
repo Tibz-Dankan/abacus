@@ -39,20 +39,26 @@ Loan.getLoanApplicationByUserId = (userId) => {
   ]);
 };
 
+Loan.getLoanApplicationByLoanId = (loanId) => {
+  return db.query("SELECT * FROM loan_applications WHERE loan_id = $1", [
+    loanId,
+  ]);
+};
+
 Loan.getAllLoanApplications = () => {
-  return db.query("SELECT * FROM loan_applications ODER BY DESC");
+  return db.query("SELECT * FROM loan_applications ORDER BY loan_id DESC");
 };
 
 Loan.applicationSettled = (loanId) => {
   return db.query(
-    "UPDATE loan_applications SET is_settled = TRUE WHERE loan_id = $1",
+    "UPDATE loan_applications SET is_settled = true WHERE loan_id = $1",
     [loanId]
   );
 };
 
 Loan.applicationRead = (loanId) => {
   return db.query(
-    "UPDATE loan_applications SET is_read = TRUE WHERE loan_id = $1",
+    "UPDATE loan_applications SET is_read = true WHERE loan_id = $1",
     [loanId]
   );
 };

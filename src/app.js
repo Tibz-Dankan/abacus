@@ -3,6 +3,7 @@ const cors = require("cors");
 const userRoutes = require("./routes/userRoutes");
 const generalRoutes = require("./routes/generalRoutes");
 const loanRoutes = require("./routes/loanRoutes");
+const saccoRoutes = require("./routes/saccoRoutes");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 
@@ -24,6 +25,8 @@ app.use(cookieParser());
 app.use("/", loanRoutes);
 
 app.use("/", userRoutes);
+
+app.use("/", saccoRoutes);
 
 app.use("/", generalRoutes);
 

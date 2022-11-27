@@ -12,7 +12,7 @@ const verifyAdminToken = (req, res, next) => {
     if (!token) return res.redirect("signin");
 
     const userRole = decodeJwtGetUserRole(req.cookies);
-    if (userRole !== "Admin") {
+    if (userRole !== "admin") {
       return res.render("not-admin", {
         message: "You can't access this page since you are not an admin",
       });

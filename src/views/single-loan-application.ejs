@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>Applicants</title>
+    <title>Loan Application</title>
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="manifest" href="site.webmanifest" />
@@ -148,7 +148,7 @@
                   <!-- Main-menu -->
                   <div class="main-menu f-right d-none d-lg-block">
                     <nav>
-                      <ul id="navigation">
+                      <!-- <ul id="navigation">
                         <li><a href="home">Home</a></li>
                         <li><a href="about">About</a></li>
                         <li><a href="services">Services</a></li>
@@ -156,7 +156,10 @@
                           <a href="blog">Blog</a>
                         </li>
                         <li><a href="contact">Contact</a></li>
-                      </ul>
+                      </ul> -->
+                      <span>Person Icon</span>
+                      <span>Username</span>
+                      <span>Logout</span>
                     </nav>
                   </div>
                   <!-- <div class="header-right-btn f-right d-none d-lg-block">
@@ -183,7 +186,7 @@
           <div class="row">
             <div class="col-xl-12">
               <div class="hero-cap text-center pt-50">
-                <h2>Applicants</h2>
+                <h2><%= loanApplication.last_name %>'s loan application</h2>
               </div>
             </div>
           </div>
@@ -196,15 +199,25 @@
           <div class="row justify-content-center">
             <div class="col-lg-8">
               <div class="apply-wrapper">
+                <!-- Form -->
+                <!-- <form action="production-url" method="POST"> -->
                 <div>
-                  <a href="/loan-applicants" class="btn hero-btn mt-40 mb-40"
-                    >LOAN APPLICANTS</a
-                  >
-                  <a href="/sacco-applicants" class="btn hero-btn mt-40 mb-40"
-                    >SACCO APPLICANTS</a
-                  >
+                  <span><%= message %></span>
                 </div>
-                <!-- <a href="#" class="btn apply-btn mt-30">APPLY NOW </a> -->
+                <div>
+                  <div>
+                    <span><%= message %></span>
+                  </div>
+                  <div>
+                    <p><%= loanApplication.first_name %></p>
+                    <p><%= loanApplication.first_last %></p>
+                    <p><%= loanApplication.gender %></p>
+                    <p><%= loanApplication.job %></p>
+                    <p><%= loanApplication.city %></p>
+                    <p><%= loanApplication.phone_number %></p>
+                    <p><%= loanApplication.loan_amount %></p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -362,10 +375,3 @@
     <script src="./assets/js/main.js"></script>
   </body>
 </html>
-
-<!-- IMPORTANT LINKS -->
-
-<!-- <div>
-  <a href="/apply-for-loan">Apply For Loan</a>
-  <a href="/apply-for-sacco-membership">Apply For Sacco Membership</a>
-</div> -->
