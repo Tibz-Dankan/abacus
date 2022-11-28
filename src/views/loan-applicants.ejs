@@ -196,23 +196,37 @@
                   <div>
                     <% if(applicant.is_read){ %>
                     <div>
-                      <a href="loan-applicants/<%= applicant.loan_id%>">
-                        <p>
-                          <span><%= applicant.first_name %></span>
-                          <span><%= applicant.last_name %></span> from
-                          <span><%= applicant.city %></span> applied for a loan
-                        </p>
-                      </a>
+                      <form action="/single-loan-application" method="get">
+                        <button
+                          name="loanId"
+                          value="<%= applicant.loan_id%>"
+                          type="submit"
+                        >
+                          <p>
+                            <span><%= applicant.first_name %></span>
+                            <span><%= applicant.last_name %></span> from
+                            <span><%= applicant.city %></span> applied for a
+                            loan
+                          </p>
+                        </button>
+                      </form>
                     </div>
                     <%}else{ %>
                     <div style="font-weight: bold">
-                      <a href="loan-applicants/<%= applicant.loan_id%>">
-                        <p>
-                          <span><%= applicant.first_name %></span>
-                          <span><%= applicant.last_name %></span> from
-                          <span><%= applicant.city %></span> applied for a loan
-                        </p>
-                      </a>
+                      <form action="/single-loan-application" method="get">
+                        <button
+                          name="loanId"
+                          value="<%= applicant.loan_id%>"
+                          type="submit"
+                        >
+                          <p>
+                            <span><%= applicant.first_name %></span>
+                            <span><%= applicant.last_name %></span> from
+                            <span><%= applicant.city %></span> applied for a
+                            loan
+                          </p>
+                        </button>
+                      </form>
                     </div>
                     <% }%>
                   </div>

@@ -196,25 +196,43 @@
                   <div>
                     <% if(applicant.is_read){ %>
                     <div>
-                      <a href="sacco-applicant/<%= applicant.sacco_id%>">
-                        <p>
-                          <span><%= applicant.first_name %></span>
-                          <span><%= applicant.last_name %></span> from
-                          <span><%= applicant.city %></span> applied to join the
-                          sacco
-                        </p>
-                      </a>
+                      <form
+                        action="/single-sacco-membership-application"
+                        method="get"
+                      >
+                        <button
+                          name="saccoId"
+                          value="<%= applicant.sacco_id%>"
+                          type="submit"
+                        >
+                          <p>
+                            <span><%= applicant.first_name %></span>
+                            <span><%= applicant.last_name %></span> from
+                            <span><%= applicant.city %></span> applied for a
+                            sacco membership
+                          </p>
+                        </button>
+                      </form>
                     </div>
                     <%}else{ %>
                     <div style="font-weight: bold">
-                      <a href="sacco-applicant/<%= applicant.sacco_id%>">
-                        <p>
-                          <span><%= applicant.first_name %></span>
-                          <span><%= applicant.last_name %></span> from
-                          <span><%= applicant.city %></span> applied to join the
-                          sacco
-                        </p>
-                      </a>
+                      <form
+                        action="/single-sacco-membership-application"
+                        method="get"
+                      >
+                        <button
+                          name="saccoId"
+                          value="<%= applicant.sacco_id%>"
+                          type="submit"
+                        >
+                          <p>
+                            <span><%= applicant.first_name %></span>
+                            <span><%= applicant.last_name %></span> from
+                            <span><%= applicant.city %></span> applied for a
+                            sacco membership
+                          </p>
+                        </button>
+                      </form>
                     </div>
                     <% }%>
                   </div>

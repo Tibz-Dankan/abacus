@@ -22,7 +22,7 @@ router.get("/my-sacco-data", verifyToken, mySaccoData);
 
 router.get("/sacco-applicants", verifyAdminToken, saccoApplicants);
 router.get(
-  "/sacco-applicant/:saccoId",
+  "/single-sacco-membership-application",
   verifyAdminToken,
   singleSaccoApplication
 );

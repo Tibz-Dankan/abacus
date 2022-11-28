@@ -16,6 +16,14 @@ const alreadyHaveLoanMessage = (res, loanObject) => {
   });
 };
 
+const noLoanIdMessage = (res) => {
+  return res.render("single-loan-application", {
+    message:
+      "You no loan id is provided, contact the developers to fix the issue",
+    loanApplication: {},
+  });
+};
+
 const startApplying = async (req, res) => {
   try {
     res.render("start-applying");
@@ -125,9 +133,10 @@ const loanApplicants = async (req, res) => {
 
 const singleLoanApplication = async (req, res) => {
   try {
-    const loanId = req.params.loanId;
-    const application = await Loan.getLoanApplicationByLoanId(loanId);
+    const loanId = req.query.loanId;
+    if (!loanId) return noLoanIdMessage(res);
 
+    const application = await Loan.getLoanApplicationByLoanId(loanId);
     if (application.rows[0].is_read === false) {
       await Loan.applicationRead(loanId);
     }

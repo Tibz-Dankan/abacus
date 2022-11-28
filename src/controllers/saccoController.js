@@ -17,6 +17,14 @@ const appliedForSaccoMessage = (res, saccoObject) => {
   });
 };
 
+const noSaccoIdMessage = (res) => {
+  return res.render("single-sacco-membership-application", {
+    message:
+      "You no sacco id is provided, contact the developers to fix the issue",
+    saccoApplication: {},
+  });
+};
+
 const getSaccoMembershipForm = async (req, res) => {
   try {
     res.render("apply-for-sacco-membership", { message: "" });
@@ -99,8 +107,6 @@ const mySaccoData = async (req, res) => {
 const saccoApplicants = async (req, res) => {
   try {
     const applicants = await Sacco.getAllSaccoApplications();
-    console.log("sacco membership applicants");
-    console.log(applicants.rows);
     res.render("sacco-applicants", {
       message: "",
       saccoApplicants: applicants.rows,
@@ -113,7 +119,8 @@ const saccoApplicants = async (req, res) => {
 
 const singleSaccoApplication = async (req, res) => {
   try {
-    const saccoId = req.params.saccoId;
+    const saccoId = req.query.saccoId;
+    if (!saccoId) return noSaccoIdMessage(res);
     const application = await Sacco.getSaccoApplicationBySaccoId(saccoId);
 
     if (application.rows[0].is_read === false) {

@@ -186,7 +186,7 @@
           <div class="row">
             <div class="col-xl-12">
               <div class="hero-cap text-center pt-50">
-                <h2><%= loanApplication.last_name %>'s loan application</h2>
+                <h2><%= loanApplication?.last_name %>'s loan application</h2>
               </div>
             </div>
           </div>
@@ -199,23 +199,18 @@
           <div class="row justify-content-center">
             <div class="col-lg-8">
               <div class="apply-wrapper">
-                <!-- Form -->
-                <!-- <form action="production-url" method="POST"> -->
                 <div>
                   <span><%= message %></span>
                 </div>
                 <div>
                   <div>
-                    <span><%= message %></span>
-                  </div>
-                  <div>
-                    <p><%= loanApplication.first_name %></p>
-                    <p><%= loanApplication.first_last %></p>
-                    <p><%= loanApplication.gender %></p>
-                    <p><%= loanApplication.job %></p>
-                    <p><%= loanApplication.city %></p>
-                    <p><%= loanApplication.phone_number %></p>
-                    <p><%= loanApplication.loan_amount %></p>
+                    <p><%= loanApplication?.first_name %></p>
+                    <p><%= loanApplication?.last_name %></p>
+                    <p><%= loanApplication?.gender %></p>
+                    <p><%= loanApplication?.job %></p>
+                    <p><%= loanApplication?.city %></p>
+                    <p><%= loanApplication?.phone_number %></p>
+                    <p><%= loanApplication?.loan_amount %></p>
                   </div>
                 </div>
               </div>
