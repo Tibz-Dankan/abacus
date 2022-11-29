@@ -28,7 +28,7 @@ CREATE TABLE loan_applications (
    job VARCHAR(300) NOT NULL,
    phone_number VARCHAR(50) NOT NULL,
    city VARCHAR(100) NOT NULL,
-   loan_mount VARCHAR(255) NOT NULL,
+   loan_amount VARCHAR(255) NOT NULL,
    loan_category VARCHAR(255) NOT NULL,
    is_settled BOOLEAN NOT NULL,
    is_read BOOLEAN NOT NULL
@@ -48,3 +48,4 @@ CREATE TABLE sacco_membership (
 );
 
 -- ALTER TABLE users ADD user_role VARCHAR(20) NOT NULL DEFAULT 'client'; 
+-- ALTER TABLE loan_applications RENAME loan_mount TO loan_amount; -- To be done colleagues computer

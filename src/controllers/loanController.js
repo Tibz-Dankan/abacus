@@ -110,6 +110,7 @@ const myLoanData = async (req, res) => {
     const userId = decodeJwtGetUserId(req.cookies);
     const myApplicationData = await Loan.getLoanApplicationByUserId(userId);
     res.render("my-loan-applications", {
+      message: "",
       myLoanData: myApplicationData.rows,
     });
   } catch (error) {
