@@ -373,16 +373,28 @@ const signOut = (req, res) => {
 };
 
 const notAdminMessage = (res) => {
-  return res.render("admin-signup-codes", {
+  return res.render("admin-codes", {
     message: "You are not allowed to generate codes since you are not an Admin",
-    user: userObject,
+    adminCodes: [],
   });
 };
 
 const noAssociatedEmailMessage = (res) => {
-  return res.render("admin-signup-codes", {
+  return res.render("admin-codes", {
     message: "Please provide email to associated with code being generated",
-    user: userObject,
+    adminCodes: [],
+  });
+};
+const validAssociatedEmailMessage = (res) => {
+  return res.render("admin-codes", {
+    message: "Please provide a valid email address",
+    adminCodes: [],
+  });
+};
+const registeredAssociatedEmailMessage = (res) => {
+  return res.render("admin-codes", {
+    message: "Email address is already registered",
+    adminCodes: [],
   });
 };
 
@@ -390,9 +402,6 @@ const generateCode = () => {
   let randomCode;
   randomCode = Math.floor(Math.random() * 1000000);
 
-  if (!(randomCode.toString().length === 6)) {
-    randomCode = Math.floor(Math.random() * 1000000);
-  }
   if (!(randomCode.toString().length === 6)) {
     randomCode = Math.floor(Math.random() * 1000000);
   }
@@ -414,6 +423,10 @@ const generateAdminCode = async (req, res) => {
 
     if (!(user.rows[0].user_role === "admin")) return notAdminMessage(res);
     if (!associatedEmail) return noAssociatedEmailMessage(res);
+    if (!associatedEmail.includes("@")) return validAssociatedEmailMessage(res);
+
+    const userByEmail = await User.getUserByEmail(associatedEmail);
+    if (userByEmail.rows[0]) return registeredAssociatedEmailMessage(res);
 
     const code = generateCode();
 
@@ -425,11 +438,33 @@ const generateAdminCode = async (req, res) => {
       generatedAt,
       createdByUserId
     );
+    const AdminCodes = await User.getAdminCodesById(createdByUserId);
+    res.render("admin-codes", {
+      message: "",
+      adminCodes: AdminCodes.rows,
+    });
   } catch (error) {
     console.log(error);
     if (error) return catchError(res, "admin-codes");
   }
-  // render page with all generated codes
+};
+
+const getAdminCodes = async (req, res) => {
+  try {
+    const createdByUserId = decodeJwtGetUserId(req.cookies);
+
+    const user = await User.getUserById(createdByUserId);
+    if (!(user.rows[0].user_role === "admin")) return notAdminMessage(res);
+
+    const AdminCodes = await User.getAdminCodesById(createdByUserId);
+    res.render("admin-codes", {
+      message: "",
+      adminCodes: AdminCodes.rows,
+    });
+  } catch (error) {
+    console.log(error);
+    if (error) return catchError(res, "admin-codes");
+  }
 };
 
 module.exports = {
@@ -438,4 +473,5 @@ module.exports = {
   signIn,
   signOut,
   generateAdminCode,
+  getAdminCodes,
 };
