@@ -203,15 +203,44 @@
                   <span><%= message %></span>
                 </div>
                 <div>
-                  <div>
-                    <p><%= loanApplication?.first_name %></p>
-                    <p><%= loanApplication?.last_name %></p>
-                    <p><%= loanApplication?.gender %></p>
-                    <p><%= loanApplication?.job %></p>
-                    <p><%= loanApplication?.city %></p>
-                    <p><%= loanApplication?.phone_number %></p>
-                    <p><%= loanApplication?.loan_amount %></p>
-                  </div>
+                  <table class="table">
+                    <thead class="thead-dark">
+                      <tr>
+                        <th scope="col">Label</th>
+                        <th scope="col">Value</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>First name</td>
+                        <td><%= loanApplication.first_name %></td>
+                      </tr>
+                      <tr>
+                        <td>Last name</td>
+                        <td><%= loanApplication.last_name %></td>
+                      </tr>
+                      <tr>
+                        <td>Gender</td>
+                        <td><%= loanApplication.gender %></td>
+                      </tr>
+                      <tr>
+                        <td>Job</td>
+                        <td><%= loanApplication.job %></td>
+                      </tr>
+                      <tr>
+                        <td>City/Town</td>
+                        <td><%= loanApplication.city %></td>
+                      </tr>
+                      <tr>
+                        <td>Loan amount</td>
+                        <td><%= loanApplication.loan_amount %></td>
+                      </tr>
+                      <tr>
+                        <td>Phone number</td>
+                        <td><%= loanApplication.phone_number %></td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
               </div>
             </div>

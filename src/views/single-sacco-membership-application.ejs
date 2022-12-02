@@ -207,14 +207,40 @@
                   <div>
                     <span><%= message %></span>
                   </div>
-                  <div>
-                    <p><%= saccoApplication.first_name %></p>
-                    <p><%= saccoApplication.first_last %></p>
-                    <p><%= saccoApplication.gender %></p>
-                    <p><%= saccoApplication.job %></p>
-                    <p><%= saccoApplication.city %></p>
-                    <p><%= saccoApplication.phone_number %></p>
-                  </div>
+                  <table class="table">
+                    <thead class="thead-dark">
+                      <tr>
+                        <th scope="col">Label</th>
+                        <th scope="col">Value</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>First name</td>
+                        <td><%= saccoApplication.first_name %></td>
+                      </tr>
+                      <tr>
+                        <td>Last name</td>
+                        <td><%= saccoApplication.last_name %></td>
+                      </tr>
+                      <tr>
+                        <td>Gender</td>
+                        <td><%= saccoApplication.gender %></td>
+                      </tr>
+                      <tr>
+                        <td>Job</td>
+                        <td><%= saccoApplication.job %></td>
+                      </tr>
+                      <tr>
+                        <td>City/Town</td>
+                        <td><%= saccoApplication.city %></td>
+                      </tr>
+                      <tr>
+                        <td>Phone number</td>
+                        <td><%= saccoApplication.phone_number %></td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
               </div>
             </div>

@@ -192,51 +192,80 @@
                 </div>
                 <!-- PUT  INFORMATION BELOW IN A BOOTSTRAP TABLE -->
                 <div>
-                  <% saccoApplicants.map((applicant)=>{ %>
-                  <div>
-                    <% if(applicant.is_read){ %>
-                    <div>
-                      <form
-                        action="/single-sacco-membership-application"
-                        method="get"
+                  <table class="table">
+                    <thead class="thead-dark">
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">FirstName</th>
+                        <th scope="col">LastName</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Details</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% saccoApplicants.map((applicant,index)=>{ %> <%
+                      if(applicant.is_read){ %>
+                      <tr style="color: hsl(0, 0%, 30%)">
+                        <th scope="row"><%= index+1 %></th>
+                        <td><%= applicant.first_name %></td>
+                        <td><%= applicant.last_name %></td>
+                        <td>Date</td>
+                        <td>
+                          <form
+                            action="/single-sacco-membership-application"
+                            method="get"
+                          >
+                            <button
+                              name="saccoId"
+                              value="<%= applicant.sacco_id%>"
+                              type="submit"
+                              style="
+                                border: none;
+                                background-color: hsl(0, 0%, 15%);
+                                color: white;
+                                cursor: pointer;
+                              "
+                            >
+                              More
+                            </button>
+                          </form>
+                        </td>
+                      </tr>
+                      <%}else{ %>
+                      <tr
+                        style="
+                          font-weight: bold;
+                          background-color: hsl(0, 0%, 90%);
+                        "
                       >
-                        <button
-                          name="saccoId"
-                          value="<%= applicant.sacco_id%>"
-                          type="submit"
-                        >
-                          <p>
-                            <span><%= applicant.first_name %></span>
-                            <span><%= applicant.last_name %></span> from
-                            <span><%= applicant.city %></span> applied for a
-                            sacco membership
-                          </p>
-                        </button>
-                      </form>
-                    </div>
-                    <%}else{ %>
-                    <div style="font-weight: bold">
-                      <form
-                        action="/single-sacco-membership-application"
-                        method="get"
-                      >
-                        <button
-                          name="saccoId"
-                          value="<%= applicant.sacco_id%>"
-                          type="submit"
-                        >
-                          <p>
-                            <span><%= applicant.first_name %></span>
-                            <span><%= applicant.last_name %></span> from
-                            <span><%= applicant.city %></span> applied for a
-                            sacco membership
-                          </p>
-                        </button>
-                      </form>
-                    </div>
-                    <% }%>
-                  </div>
-                  <%}) %>
+                        <th scope="row"><%= index+1 %></th>
+                        <td><%= applicant.first_name %></td>
+                        <td><%= applicant.last_name %></td>
+                        <td>Date</td>
+                        <td>
+                          <form
+                            action="/single-sacco-membership-application"
+                            method="get"
+                          >
+                            <button
+                              name="saccoId"
+                              value="<%= applicant.sacco_id%>"
+                              type="submit"
+                              style="
+                                border: none;
+                                background-color: hsl(0, 0%, 15%);
+                                color: white;
+                                cursor: pointer;
+                              "
+                            >
+                              More
+                            </button>
+                          </form>
+                        </td>
+                      </tr>
+                      <% }%> <%}) %>
+                    </tbody>
+                  </table>
                 </div>
               </div>
             </div>
