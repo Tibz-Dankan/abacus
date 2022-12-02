@@ -181,7 +181,6 @@
         </div>
       </div>
       <!--Hero End -->
-
       <!-- Apply Area Start -->
       <div class="apply-area pt-150 pb-150">
         <div class="container">
@@ -193,69 +192,45 @@
                   <span><%= message %></span>
                 </div>
                 <div>
-                  <table class="table">
-                    <thead class="thead-dark">
-                      <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">FirstName</th>
-                        <th scope="col">LastName</th>
-                        <th scope="col">Date</th>
-                        <th scope="col">Details</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <% loanApplicants.map((applicant,index)=>{ %> <%
-                      if(applicant.is_read){ %>
-                      <tr style="color: hsl(0, 0%, 40%)">
-                        <th scope="row"><%= index+1 %></th>
-                        <td><%= applicant.first_name %></td>
-                        <td><%= applicant.last_name %></td>
-                        <td>Date</td>
-                        <td>
-                          <form action="/single-loan-application" method="get">
-                            <button
-                              name="loanId"
-                              value="<%= applicant.loan_id%>"
-                              type="submit"
-                              style="
-                                border: none;
-                                background-color: hsl(0, 0%, 15%);
-                                color: white;
-                                cursor: pointer;
-                              "
-                            >
-                              More
-                            </button>
-                          </form>
-                        </td>
-                      </tr>
-                      <%}else{ %>
-                      <tr style="font-weight: bold">
-                        <th scope="row"><%= index+1 %></th>
-                        <td><%= applicant.first_name %></td>
-                        <td><%= applicant.last_name %></td>
-                        <td>Date</td>
-                        <td>
-                          <form action="/single-loan-application" method="get">
-                            <button
-                              name="loanId"
-                              value="<%= applicant.loan_id%>"
-                              type="submit"
-                              style="
-                                border: none;
-                                background-color: hsl(0, 0%, 15%);
-                                color: white;
-                                cursor: pointer;
-                              "
-                            >
-                              More
-                            </button>
-                          </form>
-                        </td>
-                      </tr>
-                      <% }%> <%}) %>
-                    </tbody>
-                  </table>
+                  <% loanApplicants.map((applicant)=>{ %>
+                  <div>
+                    <% if(applicant.is_read){ %>
+                    <div>
+                      <form action="/single-loan-application" method="get">
+                        <button
+                          name="loanId"
+                          value="<%= applicant.loan_id%>"
+                          type="submit"
+                        >
+                          <p>
+                            <span><%= applicant.first_name %></span>
+                            <span><%= applicant.last_name %></span> from
+                            <span><%= applicant.city %></span> applied for a
+                            loan
+                          </p>
+                        </button>
+                      </form>
+                    </div>
+                    <%}else{ %>
+                    <div style="font-weight: bold">
+                      <form action="/single-loan-application" method="get">
+                        <button
+                          name="loanId"
+                          value="<%= applicant.loan_id%>"
+                          type="submit"
+                        >
+                          <p>
+                            <span><%= applicant.first_name %></span>
+                            <span><%= applicant.last_name %></span> from
+                            <span><%= applicant.city %></span> applied for a
+                            loan
+                          </p>
+                        </button>
+                      </form>
+                    </div>
+                    <% }%>
+                  </div>
+                  <%}) %>
                 </div>
               </div>
             </div>
