@@ -1,36 +1,43 @@
 const Sacco = require("../models/sacco");
 const { catchError } = require("../utils/catchError");
 const { decodeJwtGetUserId } = require("../utils/decodeJwt");
+const { signedInUser } = require("../utils/signedInUser");
 
-const noEmptyFieldMessage = (res, saccoObject) => {
+const noEmptyFieldMessage = (req, res, saccoObject) => {
   return res.render("apply-for-sacco-membership", {
     message: "please fill out all fields",
     user: saccoObject,
+    signedInUser: signedInUser(req.cookies),
   });
 };
 
-const appliedForSaccoMessage = (res, saccoObject) => {
+const appliedForSaccoMessage = (req, res, saccoObject) => {
   return res.render("apply-for-sacco-membership", {
     message:
       "You already applied for sacco membership whose approval is pending",
     user: saccoObject,
+    signedInUser: signedInUser(req.cookies),
   });
 };
 
-const noSaccoIdMessage = (res) => {
+const noSaccoIdMessage = (req, res) => {
   return res.render("single-sacco-membership-application", {
     message:
       "You no sacco id is provided, contact the developers to fix the issue",
     saccoApplication: {},
+    signedInUser: signedInUser(req.cookies),
   });
 };
 
 const getSaccoMembershipForm = async (req, res) => {
   try {
-    res.render("apply-for-sacco-membership", { message: "" });
+    res.render("apply-for-sacco-membership", {
+      message: "",
+      signedInUser: signedInUser(req.cookies),
+    });
   } catch (error) {
     console.log(error);
-    if (error) return catchError(res, "apply-for-sacco-membership");
+    if (error) return catchError(req, res, "apply-for-sacco-membership");
   }
 };
 
@@ -63,12 +70,12 @@ const applyForSaccoMembership = async (req, res) => {
       !phoneNumber ||
       !cityOrTown
     ) {
-      return noEmptyFieldMessage(res, saccoObject);
+      return noEmptyFieldMessage(req, res, saccoObject);
     }
 
     const sacco = await Sacco.getSaccoApplicationByUserId(userId);
     if (sacco.rows[0] && sacco.rows[0].is_accepted === false) {
-      return appliedForSaccoMessage(res, saccoObject);
+      return appliedForSaccoMessage(req, res, saccoObject);
     }
 
     await Sacco.saveSaccoMembershipApplication(
@@ -86,7 +93,7 @@ const applyForSaccoMembership = async (req, res) => {
     res.redirect("my-sacco-data");
   } catch (error) {
     console.log(error);
-    if (error) return catchError(res, "apply-for-sacco-membership");
+    if (error) return catchError(req, res, "apply-for-sacco-membership");
   }
 };
 
@@ -97,10 +104,11 @@ const mySaccoData = async (req, res) => {
     res.render("my-sacco-membership-applications", {
       message: "",
       mySaccoData: myApplicationData.rows,
+      signedInUser: signedInUser(req.cookies),
     });
   } catch (error) {
     console.log(error);
-    if (error) return catchError(res, "my-sacco-membership-applications");
+    if (error) return catchError(req, res, "my-sacco-membership-applications");
   }
 };
 
@@ -110,17 +118,18 @@ const saccoApplicants = async (req, res) => {
     res.render("sacco-applicants", {
       message: "",
       saccoApplicants: applicants.rows,
+      signedInUser: signedInUser(req.cookies),
     });
   } catch (error) {
     console.log(error);
-    if (error) return catchError(res, "sacco-applicants");
+    if (error) return catchError(req, res, "sacco-applicants");
   }
 };
 
 const singleSaccoApplication = async (req, res) => {
   try {
     const saccoId = req.query.saccoId;
-    if (!saccoId) return noSaccoIdMessage(res);
+    if (!saccoId) return noSaccoIdMessage(req, res);
     const application = await Sacco.getSaccoApplicationBySaccoId(saccoId);
 
     if (application.rows[0].is_read === false) {
@@ -129,10 +138,12 @@ const singleSaccoApplication = async (req, res) => {
     res.render("single-sacco-membership-application", {
       message: "",
       saccoApplication: application.rows[0],
+      signedInUser: signedInUser(req.cookies),
     });
   } catch (error) {
     console.log(error);
-    if (error) return catchError(res, "single-sacco-membership-application");
+    if (error)
+      return catchError(req, res, "single-sacco-membership-application");
   }
 };
 

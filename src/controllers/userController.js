@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const { decodeJwtGetUserId } = require("../utils/decodeJwt");
 const { catchError } = require("../utils/catchError");
+const { signedInUser } = require("../utils/signedInUser");
 
 const baseUrl = (requestRawHeaders) => {
   let originUrlIndex;
@@ -248,7 +249,7 @@ const signUpClient = async (req, res) => {
     assignCookieRedirectUser(res, userObject);
   } catch (error) {
     console.log("error ", error.message);
-    catchError(res, "signup");
+    catchError(req, res, "signup");
   }
 };
 
@@ -330,7 +331,7 @@ const signUpAdmin = async (req, res) => {
     assignCookieRedirectUser(res, userObject);
   } catch (error) {
     console.log(error);
-    if (error) return catchError(res, "signup-admin");
+    if (error) return catchError(req, res, "signup-admin");
   }
 };
 
@@ -358,7 +359,7 @@ const signIn = async (req, res) => {
     assignCookieRedirectUser(res, userObject);
   } catch (error) {
     console.log(error);
-    if (error) return catchError(res, "signin");
+    if (error) return catchError(req, res, "signin");
   }
 };
 
@@ -368,33 +369,36 @@ const signOut = (req, res) => {
     return res.redirect("signin");
   } catch (error) {
     console.log(error);
-    if (error) return catchError(res, "signout");
   }
 };
 
-const notAdminMessage = (res) => {
+const notAdminMessage = (req, res) => {
   return res.render("admin-codes", {
     message: "You are not allowed to generate codes since you are not an Admin",
     adminCodes: [],
+    signedInUser: signedInUser(req.cookies),
   });
 };
 
-const noAssociatedEmailMessage = (res) => {
+const noAssociatedEmailMessage = (req, res) => {
   return res.render("admin-codes", {
     message: "Please provide email to associated with code being generated",
     adminCodes: [],
+    signedInUser: signedInUser(req.cookies),
   });
 };
-const validAssociatedEmailMessage = (res) => {
+const validAssociatedEmailMessage = (req, res) => {
   return res.render("admin-codes", {
     message: "Please provide a valid email address",
     adminCodes: [],
+    signedInUser: signedInUser(req.cookies),
   });
 };
-const registeredAssociatedEmailMessage = (res) => {
+const registeredAssociatedEmailMessage = (req, res) => {
   return res.render("admin-codes", {
     message: "Email address is already registered",
     adminCodes: [],
+    signedInUser: signedInUser(req.cookies),
   });
 };
 
@@ -421,12 +425,14 @@ const generateAdminCode = async (req, res) => {
 
     const user = await User.getUserById(createdByUserId);
 
-    if (!(user.rows[0].user_role === "admin")) return notAdminMessage(res);
-    if (!associatedEmail) return noAssociatedEmailMessage(res);
-    if (!associatedEmail.includes("@")) return validAssociatedEmailMessage(res);
+    if (!(user.rows[0].user_role === "admin")) return notAdminMessage(req, res);
+    if (!associatedEmail) return noAssociatedEmailMessage(req, res);
+    if (!associatedEmail.includes("@")) {
+      return validAssociatedEmailMessage(req, res);
+    }
 
     const userByEmail = await User.getUserByEmail(associatedEmail);
-    if (userByEmail.rows[0]) return registeredAssociatedEmailMessage(res);
+    if (userByEmail.rows[0]) return registeredAssociatedEmailMessage(req, res);
 
     const code = generateCode();
 
@@ -442,6 +448,7 @@ const generateAdminCode = async (req, res) => {
     res.render("admin-codes", {
       message: "",
       adminCodes: AdminCodes.rows,
+      signedInUser: signedInUser(req.cookies),
     });
   } catch (error) {
     console.log(error);
@@ -454,16 +461,17 @@ const getAdminCodes = async (req, res) => {
     const createdByUserId = decodeJwtGetUserId(req.cookies);
 
     const user = await User.getUserById(createdByUserId);
-    if (!(user.rows[0].user_role === "admin")) return notAdminMessage(res);
+    if (!(user.rows[0].user_role === "admin")) return notAdminMessage(req, res);
 
     const AdminCodes = await User.getAdminCodesById(createdByUserId);
     res.render("admin-codes", {
       message: "",
       adminCodes: AdminCodes.rows,
+      signedInUser: signedInUser(req.cookies),
     });
   } catch (error) {
     console.log(error);
-    if (error) return catchError(res, "admin-codes");
+    if (error) return catchError(req, res, "admin-codes");
   }
 };
 

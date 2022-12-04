@@ -1,0 +1,137 @@
+/* The sidebar menu */
+.sidebar {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: hsl(240, 100%, 12%);
+  color: hsl(0, 0%, 85%);
+  overflow-x: hidden;
+  padding-top: 4em;
+  transition: 0.5s;
+  font-size: 14px;
+}
+
+.logged-in-user {
+  background-color: inherit;
+}
+.user-role {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.user-role span {
+  background-color: hsl(0, 0%, 85%);
+  padding: 0.2em 0.5em;
+  border-radius: 3px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+.user-role .admin {
+  color: hsl(120, 100%, 25%);
+}
+.user-role .client {
+  color: hsl(240, 100%, 65%);
+}
+.icon-username {
+  display: flex;
+  align-items: center;
+  padding: 0.5em 0.5em 0.5em 2em;
+}
+.icon-username i {
+  margin-right: 0.3em;
+}
+
+.signout {
+  padding: 0.5em 2em;
+}
+
+.signout a {
+  background-color: hsl(0, 0%, 30%);
+  color: hsl(0, 100%, 70%);
+  padding: 0.15em 0.6em;
+  border-radius: 3px;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+}
+.signout a:hover {
+  color: hsl(0, 100%, 60%);
+  transition: 0.35s;
+}
+
+/* The sidebar links */
+.sidebar-links a {
+  padding: 0.4em 0.4em 0.4em 2.5em;
+  text-decoration: none;
+  color: hsl(0, 0%, 80%);
+  display: block;
+  transition: 0.3s;
+}
+
+.sidebar-links a:hover {
+  color: hsl(240, 100%, 75%);
+  transition: 0.35s;
+}
+
+.sidebar-links h6 {
+  color: hsl(0, 0%, 85%);
+  background-color: hsl(0, 0%, 30%);
+  display: inline-block;
+  padding: 0.15em 0.5em;
+  margin: 1em 0.5em 0.5em 2em;
+  border-radius: 3px;
+  text-transform: uppercase;
+}
+
+.closebtn {
+  position: absolute;
+  top: 0;
+  right: 0.65em;
+  font-size: 36px;
+  /* margin-left: 50px;
+  margin-left: 3.5em; */
+}
+.closebtn:hover {
+  color: hsl(240, 100%, 75%);
+  transition: 0.35s;
+}
+
+.openbtn {
+  font-size: 20px;
+  cursor: pointer;
+  background-color: #111;
+  background-color: hsl(240, 100%, 12%);
+  color: white;
+  padding: 10px 15px;
+  border: none;
+}
+
+.openbtn:hover {
+  color: hsl(240, 100%, 75%);
+  transition: 0.35s;
+}
+
+/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+#main {
+  transition: margin-left 0.5s;
+  padding: 20px;
+  position: absolute;
+  top: 0em;
+  right: 2em;
+}
+.logo {
+  position: absolute;
+  top: 0em;
+  left: 4em;
+}
+
+@media screen and (max-height: 450px) {
+  .sidebar {
+    padding-top: 1em; /*TO BE TESTED  ON SMALLER SCREENS*/
+    font-size: 12px;
+  }
+}

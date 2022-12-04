@@ -1,3 +1,6 @@
+const { signedInUser } = require("../utils/signedInUser");
+const { catchError } = require("../utils/catchError");
+
 const home = async (req, res) => {
   try {
     res.render("home");
@@ -113,28 +116,15 @@ const notFound = async (req, res) => {
   }
 };
 
-// const loginRegister = async (req, res) => {
-//   try {
-//     res.render("login-register");
-//   } catch (error) {
-//     console.log("error: " + error.message);
-//   }
-// };
-
-// const applyTemp = async (req, res) => {
-//   try {
-//     res.render("apply-form-temp");
-//   } catch (error) {
-//     console.log("error: " + error.message);
-//   }
-// };
-
 const applications = (req, res) => {
   try {
-    res.render("applications", { message: "" });
+    res.render("applications", {
+      message: "",
+      signedInUser: signedInUser(req.cookies),
+    });
   } catch (error) {
     console.log(error);
-    // if (error) return catchError(res, "applications");
+    if (error) return catchError(req, res, "applications");
   }
 };
 
@@ -150,7 +140,5 @@ module.exports = {
   elements,
   services,
   notFound,
-  // loginRegister,
-  // applyTemp,
   applications,
 };

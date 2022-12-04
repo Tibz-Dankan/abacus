@@ -6,6 +6,9 @@ const loanRoutes = require("./routes/loanRoutes");
 const saccoRoutes = require("./routes/saccoRoutes");
 const path = require("path");
 const cookieParser = require("cookie-parser");
+// const ejsLint = require("ejs-lint");
+
+// ejsLint(text, options);
 
 const app = express();
 

@@ -1,43 +1,53 @@
 const Loan = require("../models/loan");
 const { catchError } = require("../utils/catchError");
 const { decodeJwtGetUserId } = require("../utils/decodeJwt");
+const { signedInUser } = require("../utils/signedInUser");
 
-const noEmptyFieldMessage = (res, loanObject) => {
+const noEmptyFieldMessage = (req, res, loanObject) => {
   return res.render("apply-for-loan", {
     message: "please fill out all fields",
     user: loanObject,
+    signedInUser: signedInUser(req.cookies),
   });
 };
 
-const alreadyHaveLoanMessage = (res, loanObject) => {
+const alreadyHaveLoanMessage = (req, res, loanObject) => {
   return res.render("apply-for-loan", {
     message: "You already applied for a loan whose approval is pending",
     user: loanObject,
+    signedInUser: signedInUser(req.cookies),
   });
 };
 
-const noLoanIdMessage = (res) => {
+const noLoanIdMessage = (req, res) => {
   return res.render("single-loan-application", {
     message:
       "You no loan id is provided, contact the developers to fix the issue",
     loanApplication: {},
+    signedInUser: signedInUser(req.cookies),
   });
 };
 
 const startApplying = async (req, res) => {
   try {
-    res.render("start-applying");
+    res.render("start-applying", {
+      signedInUser: signedInUser(req.cookies),
+    });
   } catch (error) {
     console.log(error);
+    if (error) return catchError(req, res, "start-applying");
   }
 };
 
 const getLoanForm = async (req, res) => {
   try {
-    res.render("apply-for-loan", { message: "" });
+    res.render("apply-for-loan", {
+      message: "",
+      signedInUser: signedInUser(req.cookies),
+    });
   } catch (error) {
     console.log(error);
-    if (error) return catchError(res, "apply-for-loan");
+    if (error) return catchError(req, res, "apply-for-loan");
   }
 };
 
@@ -76,12 +86,12 @@ const applyForLoan = async (req, res) => {
       !phoneNumber ||
       !cityOrTown
     ) {
-      return noEmptyFieldMessage(res, loanObject);
+      return noEmptyFieldMessage(req, res, loanObject);
     }
 
     const loan = await Loan.getLoanApplicationByUserId(userId);
     if (loan.rows[0] && loan.rows[0].is_settled === false) {
-      return alreadyHaveLoanMessage(res, loanObject);
+      return alreadyHaveLoanMessage(req, res, loanObject);
     }
 
     await Loan.saveLoanApplicationData(
@@ -101,7 +111,7 @@ const applyForLoan = async (req, res) => {
     res.redirect("/my-loan-data");
   } catch (error) {
     console.log(error);
-    if (error) return catchError(res, "apply-for-loan");
+    if (error) return catchError(req, res, "apply-for-loan");
   }
 };
 
@@ -112,10 +122,11 @@ const myLoanData = async (req, res) => {
     res.render("my-loan-applications", {
       message: "",
       myLoanData: myApplicationData.rows,
+      signedInUser: signedInUser(req.cookies),
     });
   } catch (error) {
     console.log(error);
-    if (error) return catchError(res, "my-loan-applications");
+    if (error) return catchError(req, res, "my-loan-applications");
   }
 };
 
@@ -125,17 +136,18 @@ const loanApplicants = async (req, res) => {
     res.render("loan-applicants", {
       message: "",
       loanApplicants: applicants.rows,
+      signedInUser: signedInUser(req.cookies),
     });
   } catch (error) {
     console.log(error);
-    if (error) return catchError(res, "loan-applicants");
+    if (error) return catchError(req, res, "loan-applicants");
   }
 };
 
 const singleLoanApplication = async (req, res) => {
   try {
     const loanId = req.query.loanId;
-    if (!loanId) return noLoanIdMessage(res);
+    if (!loanId) return noLoanIdMessage(req, res);
 
     const application = await Loan.getLoanApplicationByLoanId(loanId);
     if (application.rows[0].is_read === false) {
@@ -144,10 +156,11 @@ const singleLoanApplication = async (req, res) => {
     res.render("single-loan-application", {
       message: "",
       loanApplication: application.rows[0],
+      signedInUser: signedInUser(req.cookies),
     });
   } catch (error) {
     console.log(error);
-    if (error) return catchError(res, "single-loan-application");
+    if (error) return catchError(req, res, "single-loan-application");
   }
 };
 
