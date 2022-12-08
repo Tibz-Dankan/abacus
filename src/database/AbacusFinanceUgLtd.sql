@@ -9,6 +9,13 @@ CREATE TABLE users (
    UNIQUE (email) 
 );
 
+CREATE TABLE reset_tokens (
+   token_id SERIAL PRIMARY KEY ,
+   user_id INTEGER NOT NULL,
+   token VARCHAR(500) NOT NULL,
+   token_expires VARCHAR(50) NOT NULL
+);
+
 CREATE TABLE admin_signup_codes (
    code_id SERIAL PRIMARY KEY ,
    code INTEGER NOT NULL,
@@ -48,4 +55,4 @@ CREATE TABLE sacco_membership (
 );
 
 -- ALTER TABLE users ADD user_role VARCHAR(20) NOT NULL DEFAULT 'client'; 
--- ALTER TABLE loan_applications RENAME loan_mount TO loan_amount; -- To be done colleagues computer
+-- ALTER TABLE loan_applications RENAME loan_mount TO loan_amount; -- To be done colleagues computer 

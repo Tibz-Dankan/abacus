@@ -17,6 +17,43 @@ User.getUserByEmail = (email) => {
   return db.query("SELECT * FROM users WHERE email =$1", [email]);
 };
 
+User.updateUserData = (userId, userName, email) => {
+  return db.query(
+    "UPDATE users SET user_name = $1 and email = $2 WHERE user_id = $3 RETURNING *",
+    [userId, userName, email]
+  );
+};
+
+User.updatePassword = (userId, hashedPassword) => {
+  return db.query("UPDATE users SET password = $1 WHERE user_id = $2", [
+    hashedPassword,
+    userId,
+  ]);
+};
+
+User.savePasswordResetToken = (userId, token, tokenExpires) => {
+  return db.query(
+    "INSERT INTO reset_tokens(user_id, token, token_expires) VALUES($1,$2,$3)  RETURNING *",
+    [userId, token, tokenExpires]
+  );
+};
+
+User.getPasswordResetToken = (token) => {
+  return db.query("SELECT * FROM reset_tokens WHERE token = $1", [token]);
+};
+
+User.getPasswordResetTokenByUserId = (userId) => {
+  return db.query("SELECT * FROM reset_tokens WHERE user_id = $1", [userId]);
+};
+
+User.updateResetTokenExpires = (token) => {
+  const resetTokenExpires = JSON.stringify({ date: new Date(Date.now()) });
+  return db.query(
+    "UPDATE reset_tokens SET token_expires = $1 WHERE token = $2",
+    [resetTokenExpires, token]
+  );
+};
+
 User.saveAdminCode = (
   code,
   associatedEmail,

@@ -1,6 +1,9 @@
 const User = require("../models/user");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const { randomBytes, createHash } = require("crypto");
+// const Email = require("../utils/email");
+
 require("dotenv").config();
 const { decodeJwtGetUserId } = require("../utils/decodeJwt");
 const { catchError } = require("../utils/catchError");
@@ -253,7 +256,7 @@ const signUpClient = async (req, res) => {
   }
 };
 
-const covertToDate = (stringifiedDate) => {
+const convertToDate = (stringifiedDate) => {
   const date = JSON.parse(stringifiedDate).date;
   return new Date(date);
 };
@@ -286,8 +289,9 @@ const signUpAdmin = async (req, res) => {
     }
     if (user.rows[0]) return registeredEmailMessage(req, res, userObject);
     if (!email.includes("@")) return validEmailMessage(req, res, userObject);
-    if (password.length <= 5)
+    if (password.length <= 5) {
       return passwordLengthMessage(req, res, userObject);
+    }
     if (password !== confirmPassword) {
       return passwordMatchMessage(req, res, userObject);
     }
@@ -309,7 +313,7 @@ const signUpAdmin = async (req, res) => {
           return invalidAssociatedEmailMessage(req, res, userObject);
         }
         if (
-          new Date(Date.now()) - covertToDate(code.rows[0].generated_at) >
+          new Date(Date.now()) - convertToDate(code.rows[0].generated_at) >
           new Date(1000 * 60 * 60 * 24)
         ) {
           return expiredAdminCodeMessage(req, res, userObject);
@@ -363,12 +367,271 @@ const signIn = async (req, res) => {
   }
 };
 
-const signOut = (req, res) => {
+const signOut = async (req, res) => {
   try {
     res.clearCookie("token");
     return res.redirect("signin");
   } catch (error) {
     console.log(error);
+  }
+};
+
+const noResetEmailMessage = (res) => {
+  return res.render("forgot-password", {
+    message: "Please provide a valid email",
+  });
+};
+
+const noUserWithProvidedEmail = (res) => {
+  return res.render("forgot-password", {
+    message: "No user with provided email  address",
+  });
+};
+const noResetToken = (res) => {
+  return res.render("reset-password", {
+    message: "No token is provided",
+  });
+};
+
+const invalidResetToken = (res) => {
+  return res.render("reset-password", {
+    message: "please provide a valid token",
+  });
+};
+
+const expiredResetToken = (res) => {
+  return res.render("reset-password", {
+    message: "Token is expired",
+  });
+};
+
+const updateResetPasswordPages = (baseUrl, refererUrl) => {
+  if (`${baseUrl}/update-password` === refererUrl) return "update-password";
+  if (`${baseUrl}/reset-password` === refererUrl) return "reset-password";
+};
+
+const noPassword = (req, res) => {
+  const page = updateResetPasswordPages(
+    baseUrl(req.rawHeaders),
+    refererUrl(req.rawHeaders)
+  );
+  return res.render(page, {
+    message: "Please fill out password field",
+    signedInUser: signedInUser(req.cookies),
+  });
+};
+
+const incorrectCurrentPassword = (req, res) => {
+  return res.render("update-password", {
+    message: "Incorrect current password",
+    signedInUser: signedInUser(req.cookies),
+  });
+};
+
+const passwordsDontMatch = (req, res, pageName) => {
+  res.render(pageName, {
+    message: "passwords don't match",
+    signedInUser: signedInUser(req.cookies),
+  });
+};
+
+const shortPassword = (req, res) => {
+  res.render("update-password", {
+    message: "password must have at least 6 characters",
+    signedInUser: signedInUser(req.cookies),
+  });
+};
+
+const getUpdatePassword = async (req, res) => {
+  try {
+    res.render("update-password", {
+      message: "",
+      signedInUser: signedInUser(req.cookies),
+    });
+  } catch (error) {
+    console.log(error);
+    if (error) return catchError(req, res, "update-password");
+  }
+};
+
+const updatePassword = async (req, res) => {
+  try {
+    const currentPassword = req.body.currentPassword;
+    const newPassword = req.body.newPassword;
+    const confirmNewPassword = req.body.confirmNewPassword;
+
+    if (!currentPassword || !newPassword) return noPassword(req, res);
+    const userId = decodeJwtGetUserId(req.cookies);
+    const user = await User.getUserById(userId);
+
+    if (!(await bcrypt.compare(currentPassword, user.rows[0].password))) {
+      return incorrectCurrentPassword(req, res);
+    }
+    if (newPassword.length <= 5) return shortPassword(req, res);
+
+    if (newPassword != confirmNewPassword) {
+      return passwordsDontMatch(req, res, "update-password");
+    }
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+    await User.updatePassword(userId, hashedPassword);
+
+    res.clearCookie("token");
+    res.redirect("signin");
+  } catch (error) {
+    console.log(error);
+    if (error) return catchError(req, res, "update-password");
+  }
+};
+
+const getForgotPassword = async (req, res) => {
+  try {
+    res.render("forgot-password", { message: "" });
+  } catch (error) {
+    console.log(error);
+    if (error) return catchError(req, res, "forgot-password");
+  }
+};
+
+const expireExistingResetTokens = (tokenArray) => {
+  tokenArray.map(async (tokenObj) => {
+    if (convertToDate(tokenObj.token_expires) > new Date(Date.now())) {
+      await User.updateResetTokenExpires(tokenObj.token);
+    }
+  });
+};
+
+const forgotPassword = async (req, res) => {
+  try {
+    const email = req.body.email;
+    if (!email) return noResetEmailMessage(res);
+    const user = await User.getUserByEmail(email);
+
+    if (!user.rows[0]) return noUserWithProvidedEmail(res);
+
+    const userResetTokens = await User.getPasswordResetTokenByUserId(
+      user.rows[0].user_id
+    );
+    if (userResetTokens.rows[0]) {
+      expireExistingResetTokens(userResetTokens.rows);
+    }
+    const resetToken = randomBytes(32).toString("hex");
+    const hashedToken = createHash("sha256").update(resetToken).digest("hex");
+    const userId = user.rows[0].user_id;
+    const tokenExpires = JSON.stringify({
+      date: new Date(Date.now() + 1000 * 60 * 20),
+    });
+
+    await User.savePasswordResetToken(userId, hashedToken, tokenExpires);
+
+    // const resetURL = `${req.protocol}://abacusuganda.com/reset-password/${resetToken}`;
+    const resetURL = `${req.protocol}://localhost:8000/reset-password?token=${resetToken}`;
+    // const resetURL = `${req.protocol}://localhost:8000/reset-password/:${resetToken}`;
+    console.log("Reset url :", resetURL);
+    const subject = "Reset Password";
+
+    // await new Email(email, subject).sendPasswordReset(
+    //   resetURL,
+    //   user.rows[0].user_name
+    // );
+
+    res.render("forgot-password", { message: "Reset Token sent to email" });
+  } catch (error) {
+    console.log(error);
+    if (error) return catchError(req, res, "forgot-password");
+  }
+};
+
+const getResetPassword = async (req, res) => {
+  try {
+    res.render("reset-password", { message: "" });
+  } catch (error) {
+    console.log(error);
+    if (error) return catchError(req, res, "reset-password");
+  }
+};
+
+const resetPassword = async (req, res) => {
+  try {
+    console.log("REQUEST");
+    console.log(req);
+
+    // const token = req.params.token;
+
+    const token = req.query.token;
+    console.log("Token: ", token);
+    if (!token) return noResetToken(res);
+    const hashedToken = createHash("sha256").update(token).digest("hex");
+
+    const dbHashedToken = await User.getPasswordResetToken(token);
+    if (!dbHashedToken.rows[0]) return invalidResetToken(res);
+
+    if (
+      new Date(Date.now()) > convertToDate(dbHashedToken.rows[0].token_expires)
+    ) {
+      return expiredResetToken(res);
+    }
+
+    if (dbHashedToken.rows[0].token != hashedToken) {
+      return invalidResetToken(res);
+    }
+
+    if (!req.body.password || !req.body.confirmPassword) return noPassword(res);
+
+    if (req.body.password != req.body.confirmPassword) {
+      return passwordsDontMatch(req, res, "reset-password");
+    }
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
+    const userId = dbHashedToken.rows[0].user_id;
+    await User.updatePassword(userId, hashedPassword);
+    await User.updateResetTokenExpires(token);
+
+    res.redirect("signin");
+  } catch (error) {
+    console.log(error);
+    if (error) return catchError(req, res, "reset-password");
+  }
+};
+
+const noUserData = (req, res) => {
+  res.render("user-profile", {
+    message: "Please fill out all fields",
+    signedInUser: signedInUser(req.cookies),
+  });
+};
+
+const getUserProfile = async (req, res) => {
+  try {
+    const userId = decodeJwtGetUserId(req.cookies);
+    const user = await User.getUserById(userId);
+
+    res.render("user-profile", {
+      user: user.rows[0],
+      message: "",
+      signedInUser: signedInUser(req.cookies),
+    });
+  } catch (error) {
+    console.log(error);
+    if (error) return catchError(req, res, "user-profile");
+  }
+};
+
+const updateUserProfile = async (req, res) => {
+  try {
+    const userName = req.body.userName;
+    const email = req.body.email;
+    if (!userName || !email) return noUserData(req, res);
+
+    const userId = decodeJwtGetUserId(req.cookies);
+    const user = await User.updateUserData(userId, userName, email);
+
+    res.render("user-profile", {
+      user: user.rows[0],
+      message: "",
+      signedInUser: signedInUser(req.cookies),
+    });
+  } catch (error) {
+    console.log(error);
+    if (error) return catchError(req, res, "user-profile");
   }
 };
 
@@ -480,6 +743,14 @@ module.exports = {
   signUpAdmin,
   signIn,
   signOut,
+  getUpdatePassword,
+  updatePassword,
+  getForgotPassword,
+  forgotPassword,
+  getResetPassword,
+  resetPassword,
+  getUserProfile,
+  updateUserProfile,
   generateAdminCode,
   getAdminCodes,
 };
