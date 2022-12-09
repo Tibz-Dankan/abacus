@@ -19,8 +19,8 @@ User.getUserByEmail = (email) => {
 
 User.updateUserData = (userId, userName, email) => {
   return db.query(
-    "UPDATE users SET user_name = $1 and email = $2 WHERE user_id = $3 RETURNING *",
-    [userId, userName, email]
+    "UPDATE users SET user_name = $1, email = $2 WHERE user_id = $3 RETURNING *",
+    [userName, email, userId]
   );
 };
 

@@ -1,0 +1,56 @@
+.profile {
+  display: inline-block;
+  display: grid;
+  place-items: center;
+  width: 100%;
+}
+
+.heading {
+  font-weight: bold;
+  margin-bottom: 1.2em;
+}
+
+.profile-content {
+  display: grid;
+  place-items: center;
+  width: 12em;
+  padding: 1em;
+  background-color: hsl(0, 0%, 90%);
+  border-radius: 4px;
+}
+
+.username {
+  font-weight: bold;
+  margin-top: 0.8em;
+}
+
+.role {
+  text-transform: uppercase;
+  color: hsl(0, 0%, 35%);
+}
+
+.email {
+  color: hsl(0, 0%, 35%);
+  /* margin-bottom: 0.8em; */
+}
+.date {
+  color: hsl(0, 0%, 35%);
+}
+
+/* show edit button */
+.show-edit-form {
+  background-color: hsl(0, 0%, 0%);
+  color: hsl(0, 0%, 80%);
+  border-radius: 3px;
+  margin: 0.8em 0em;
+}
+
+.edit-profile {
+  display: none;
+  transition: 0.5s;
+}
+
+.hide-edit-form {
+  background-color: black;
+  transition: 0.5s;
+}

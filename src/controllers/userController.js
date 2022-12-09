@@ -592,8 +592,12 @@ const resetPassword = async (req, res) => {
   }
 };
 
-const noUserData = (req, res) => {
+const noUserData = async (req, res) => {
+  const userId = decodeJwtGetUserId(req.cookies);
+  const user = await User.getUserById(userId);
+
   res.render("user-profile", {
+    user: user.rows[0],
     message: "Please fill out all fields",
     signedInUser: signedInUser(req.cookies),
   });
@@ -620,6 +624,9 @@ const updateUserProfile = async (req, res) => {
     const userName = req.body.userName;
     const email = req.body.email;
     if (!userName || !email) return noUserData(req, res);
+
+    // TODO: ensure email is not yet registered
+    // TODO: ensure user name contains no space and has a dash e.g firstname-lastname
 
     const userId = decodeJwtGetUserId(req.cookies);
     const user = await User.updateUserData(userId, userName, email);

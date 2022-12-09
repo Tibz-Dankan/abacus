@@ -1,0 +1,80 @@
+<div class="profile" id="myProfile">
+  <span class="heading">BASIC INFO</span>
+  <div class="profile-content">
+    <div class="person-icon">
+      <i class="fas fa-user-circle" style="font-size: 72px"></i>
+    </div>
+    <div class="username">
+      <span><%= user.user_name %></span>
+    </div>
+    <div class="role">
+      <span><%= user.user_role %></span>
+    </div>
+    <div class="email">
+      <span class="date"><%= user.email %></span>
+    </div>
+    <!--TODO: <span>date of registration</span> -->
+    <!-- <div>
+      <span>Since 9 Dec 2022</span>
+    </div> -->
+    <button onclick="showEditForm()" class="show-edit-form">
+      Edit Profile
+    </button>
+  </div>
+</div>
+
+<div class="edit-profile" id="editMyProfile">
+  <div class="col">
+    <div class="col-lg-6">
+      <span><%= message %></span>
+    </div>
+  </div>
+  <form action="user-profile" method="post">
+    <div class="col">
+      <div class="col-lg-6">
+        <div class="person-icon">
+          <i class="fas fa-user-circle" style="font-size: 72px"></i>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="single-form">
+          <label>USERNAME</label>
+          <input
+            type="text"
+            name="userName"
+            value="<%= user.user_name %>"
+            placeholder="UserName"
+            required
+          />
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="single-form">
+          <label>EMAIL ADDRESS</label>
+          <input
+            type="email"
+            name="email"
+            value="<%= user.email %>"
+            placeholder="Email Address"
+            required
+          />
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <button type="submit" class="btn apply-btn mt-30">EDIT</button>
+      </div>
+      <div class="col-lg-6">
+        <!-- <button class="hide-edit-form" onclick="hideEditForm()">
+          HIDE FORM
+        </button> -->
+        <a
+          href="javascript:void(0)"
+          class="btn hero-btn mt-30 hide-edit-form"
+          style="border-radius: 3px"
+          onclick="hideEditForm()"
+          >HIDE FORM</a
+        >
+      </div>
+    </div>
+  </form>
+</div>
