@@ -38,6 +38,9 @@
 
     <!-- SIDEBAR CSS -->
     <link rel="stylesheet" href="partials/sidebar/sidebar.css" />
+
+    <!-- USER PROFILE CSS -->
+    <link rel="stylesheet" href="partials/profile/profile.css" />
   </head>
 
   <body>
@@ -74,64 +77,7 @@
                     <span><%= message %></span>
                   </div>
                 </div>
-                <div>
-                  <!-- </div> -->
-                  <form action="update-password" method="POST">
-                    <div class="col">
-                      <div class="col-lg-6">
-                        <span class="form-heading">
-                          PLEASE NOTE YOU ARE RESETTING YOUR PASSWORD
-                        </span>
-                      </div>
-                      <div class="col-lg-6">
-                        <div class="single-form">
-                          <label>*CURRENT PASSWORD </label>
-                          <input
-                            type="password"
-                            name="currentPassword"
-                            placeholder="Enter password"
-                            required
-                          />
-                        </div>
-                      </div>
-                      <div class="col-lg-6">
-                        <div class="single-form">
-                          <label>*NEW PASSWORD </label>
-                          <input
-                            type="password"
-                            name="newPassword"
-                            placeholder="Enter password"
-                            required
-                          />
-                        </div>
-                      </div>
-                      <div class="col-lg-6">
-                        <div class="single-form">
-                          <label>*CONFIRM NEW PASSWORD </label>
-                          <input
-                            type="password"
-                            name="confirmNewPassword"
-                            placeholder="Enter password"
-                            required
-                          />
-                        </div>
-                      </div>
-                      <div class="col-lg-6">
-                        <button
-                          type="submit"
-                          class="btn apply-btn mt-30"
-                          id="reset-btn"
-                          name="token"
-                        >
-                          UPDATE
-                        </button>
-                      </div>
-                    </div>
-                  </form>
-                  <!-- End From -->
-                  <!-- Form btn -->
-                  <!-- <a href="#" class="btn apply-btn mt-30">APPLY NOW </a> -->
-                </div>
+                <div><%- include('./partials/profile/profile'); %></div>
               </div>
             </div>
           </div>
@@ -290,6 +236,9 @@
 
     <!-- SIDEBAR JAVASCRIPT -->
     <script src="./partials/sidebar/sidebar.js"></script>
+
+    <!-- USER PROFILE JAVASCRIPT -->
+    <script src="./partials/profile/profile.js"></script>
 
     <!-- FONTAWESOME  FOR ICONS -->
     <script

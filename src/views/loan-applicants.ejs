@@ -91,7 +91,10 @@
                         <td><%= applicant.last_name %></td>
                         <td>Date</td>
                         <td>
-                          <form action="/single-loan-application" method="get">
+                          <form
+                            action="<%= baseUrl %>/single-loan-application"
+                            method="get"
+                          >
                             <button
                               name="loanId"
                               value="<%= applicant.loan_id%>"

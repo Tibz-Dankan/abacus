@@ -91,10 +91,7 @@
                         <td><%= applicant.last_name %></td>
                         <td>Date</td>
                         <td>
-                          <form
-                            action="/single-sacco-membership-application"
-                            method="get"
-                          >
+                          <form action="<%= baseUrl %>/single-sacco-membership-application" method="get">
                             <button
                               name="saccoId"
                               value="<%= applicant.sacco_id%>"

@@ -1,5 +1,6 @@
 const { signedInUser } = require("../utils/signedInUser");
 const { catchError } = require("../utils/catchError");
+const { baseUrl } = require("../utils/constants");
 
 const home = async (req, res) => {
   try {
@@ -21,6 +22,7 @@ const signup = async (req, res) => {
     res.render("signup", {
       message: "",
       user: userObject,
+      baseUrl: baseUrl(),
     });
   } catch (error) {
     console.log("error: " + error.message);
@@ -38,6 +40,7 @@ const signUpAdmin = (req, res) => {
     res.render("signup-admin", {
       message: "",
       user: userObject,
+      baseUrl: baseUrl(),
     });
   } catch (error) {
     console.log("error: " + error.message);
@@ -54,6 +57,7 @@ const signin = async (req, res) => {
     res.render("signin", {
       message: "",
       user: userObject,
+      baseUrl: baseUrl(),
     });
   } catch (error) {
     console.log("error: " + error.message);
@@ -121,6 +125,7 @@ const applications = (req, res) => {
     res.render("applications", {
       message: "",
       signedInUser: signedInUser(req.cookies),
+      baseUrl: baseUrl(),
     });
   } catch (error) {
     console.log(error);

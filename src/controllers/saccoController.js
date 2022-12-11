@@ -2,12 +2,14 @@ const Sacco = require("../models/sacco");
 const { catchError } = require("../utils/catchError");
 const { decodeJwtGetUserId } = require("../utils/decodeJwt");
 const { signedInUser } = require("../utils/signedInUser");
+const { baseUrl } = require("../utils/constants");
 
 const noEmptyFieldMessage = (req, res, saccoObject) => {
   return res.render("apply-for-sacco-membership", {
     message: "please fill out all fields",
     user: saccoObject,
     signedInUser: signedInUser(req.cookies),
+    baseUrl: baseUrl(),
   });
 };
 
@@ -17,6 +19,7 @@ const appliedForSaccoMessage = (req, res, saccoObject) => {
       "You already applied for sacco membership whose approval is pending",
     user: saccoObject,
     signedInUser: signedInUser(req.cookies),
+    baseUrl: baseUrl(),
   });
 };
 
@@ -26,6 +29,7 @@ const noSaccoIdMessage = (req, res) => {
       "You no sacco id is provided, contact the developers to fix the issue",
     saccoApplication: {},
     signedInUser: signedInUser(req.cookies),
+    baseUrl: baseUrl(),
   });
 };
 
@@ -34,6 +38,7 @@ const getSaccoMembershipForm = async (req, res) => {
     res.render("apply-for-sacco-membership", {
       message: "",
       signedInUser: signedInUser(req.cookies),
+      baseUrl: baseUrl(),
     });
   } catch (error) {
     console.log(error);
@@ -105,6 +110,7 @@ const mySaccoData = async (req, res) => {
       message: "",
       mySaccoData: myApplicationData.rows,
       signedInUser: signedInUser(req.cookies),
+      baseUrl: baseUrl(),
     });
   } catch (error) {
     console.log(error);
@@ -119,6 +125,7 @@ const saccoApplicants = async (req, res) => {
       message: "",
       saccoApplicants: applicants.rows,
       signedInUser: signedInUser(req.cookies),
+      baseUrl: baseUrl(),
     });
   } catch (error) {
     console.log(error);
@@ -139,6 +146,7 @@ const singleSaccoApplication = async (req, res) => {
       message: "",
       saccoApplication: application.rows[0],
       signedInUser: signedInUser(req.cookies),
+      baseUrl: baseUrl(),
     });
   } catch (error) {
     console.log(error);

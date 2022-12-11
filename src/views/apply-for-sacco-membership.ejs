@@ -71,7 +71,11 @@
                 <div>
                   <span><%= message %></span>
                 </div>
-                <form action="apply-for-sacco-membership" method="POST">
+                <!-- <form action="apply-for-sacco-membership" method="POST"> -->
+                <form
+                  action="<%= baseUrl %>/apply-for-sacco-membership"
+                  method="POST"
+                >
                   <div class="row">
                     <!-- First Name -->
                     <div class="col-lg-6">

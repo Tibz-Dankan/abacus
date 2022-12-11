@@ -3,6 +3,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { randomBytes, createHash } = require("crypto");
 // const Email = require("../utils/email");
+const { baseUrl } = require("../utils/constants");
 
 require("dotenv").config();
 const { decodeJwtGetUserId } = require("../utils/decodeJwt");
@@ -80,6 +81,7 @@ const noEmptyFieldMessage = (req, res, userObject) => {
   return res.render(signupPage, {
     message: "Please fill out all fields",
     user: userObject,
+    baseUrl: baseUrl(),
   });
 };
 
@@ -92,6 +94,7 @@ const noAdminCodeMessage = (req, res, userObject) => {
   return res.render(signupPage, {
     message: "No admin signup code provided",
     user: userObject,
+    baseUrl: baseUrl(),
   });
 };
 
@@ -104,6 +107,7 @@ const validCodeMessage = (req, res, userObject) => {
   return res.render(signupPage, {
     message: "Admin code provided is invalid",
     user: userObject,
+    baseUrl: baseUrl(),
   });
 };
 const invalidAssociatedEmailMessage = (req, res, userObject) => {
@@ -116,6 +120,7 @@ const invalidAssociatedEmailMessage = (req, res, userObject) => {
   return res.render(signupPage, {
     message: "Email associated with admin code is invalid",
     user: userObject,
+    baseUrl: baseUrl(),
   });
 };
 
@@ -128,6 +133,7 @@ const expiredAdminCodeMessage = (req, res, userObject) => {
   return res.render(signupPage, {
     message: "Admin code is expired",
     user: userObject,
+    baseUrl: baseUrl(),
   });
 };
 
@@ -140,6 +146,7 @@ const validEmailMessage = (req, res, userObject) => {
   return res.render(signupPage, {
     message: "Invalid email",
     user: userObject,
+    baseUrl: baseUrl(),
   });
 };
 
@@ -153,6 +160,7 @@ const validUserNameMessage = (req, res, userObject) => {
     message:
       "Username must not contain any space and have must a dash e.g 'firstname-lastname'",
     user: userObject,
+    baseUrl: baseUrl(),
   });
 };
 
@@ -165,6 +173,7 @@ const passwordMatchMessage = (req, res, userObject) => {
   return res.render(signupPage, {
     message: "Passwords don't match",
     user: userObject,
+    baseUrl: baseUrl(),
   });
 };
 
@@ -177,6 +186,7 @@ const passwordLengthMessage = (req, res, userObject) => {
   return res.render(signupPage, {
     message: "password must have at least 6 characters",
     user: userObject,
+    baseUrl: baseUrl(),
   });
 };
 
@@ -190,6 +200,7 @@ const registeredEmailMessage = (req, res, userObject) => {
   return res.render(signupPage, {
     message: "Email already registered",
     user: userObject,
+    baseUrl: baseUrl(),
   });
 };
 
@@ -197,6 +208,7 @@ const noEmailMessage = (res, userObject) => {
   return res.render("signin", {
     message: "Email does not exist",
     user: userObject,
+    baseUrl: baseUrl(),
   });
 };
 
@@ -204,6 +216,7 @@ const inCorrectPasswordMessage = (res, userObject) => {
   return res.render("signin", {
     message: "Incorrect password",
     user: userObject,
+    baseUrl: baseUrl(),
   });
 };
 
@@ -400,29 +413,34 @@ const signOut = async (req, res) => {
 const noResetEmailMessage = (res) => {
   return res.render("forgot-password", {
     message: "Please provide a valid email",
+    baseUrl: baseUrl(),
   });
 };
 
 const noUserWithProvidedEmail = (res) => {
   return res.render("forgot-password", {
     message: "No user with provided email  address",
+    baseUrl: baseUrl(),
   });
 };
 const noResetToken = (res) => {
   return res.render("reset-password", {
     message: "No token is provided",
+    baseUrl: baseUrl(),
   });
 };
 
 const invalidResetToken = (res) => {
   return res.render("reset-password", {
     message: "please provide a valid token",
+    baseUrl: baseUrl(),
   });
 };
 
 const expiredResetToken = (res) => {
   return res.render("reset-password", {
     message: "Token is expired",
+    baseUrl: baseUrl(),
   });
 };
 
@@ -443,6 +461,7 @@ const noPassword = (req, res) => {
   return res.render(page, {
     message: "Please fill out password field",
     signedInUser: signedInUser(req.cookies),
+    baseUrl: baseUrl(),
   });
 };
 
@@ -450,6 +469,7 @@ const incorrectCurrentPassword = (req, res) => {
   return res.render("update-password", {
     message: "Incorrect current password",
     signedInUser: signedInUser(req.cookies),
+    baseUrl: baseUrl(),
   });
 };
 
@@ -457,6 +477,7 @@ const passwordsDontMatch = (req, res, pageName) => {
   res.render(pageName, {
     message: "passwords don't match",
     signedInUser: signedInUser(req.cookies),
+    baseUrl: baseUrl(),
   });
 };
 
@@ -464,6 +485,7 @@ const shortPassword = (req, res) => {
   res.render("update-password", {
     message: "password must have at least 6 characters",
     signedInUser: signedInUser(req.cookies),
+    baseUrl: baseUrl(),
   });
 };
 
@@ -472,6 +494,7 @@ const getUpdatePassword = async (req, res) => {
     res.render("update-password", {
       message: "",
       signedInUser: signedInUser(req.cookies),
+      baseUrl: baseUrl(),
     });
   } catch (error) {
     console.log(error);
@@ -627,6 +650,7 @@ const noUserData = async (req, res) => {
     user: user.rows[0],
     message: "Please fill out all fields",
     signedInUser: signedInUser(req.cookies),
+    baseUrl: baseUrl(),
   });
 };
 
@@ -639,6 +663,7 @@ const getUserProfile = async (req, res) => {
       user: user.rows[0],
       message: "",
       signedInUser: signedInUser(req.cookies),
+      baseUrl: baseUrl(),
     });
   } catch (error) {
     console.log(error);
@@ -662,6 +687,7 @@ const updateUserProfile = async (req, res) => {
       user: user.rows[0],
       message: "",
       signedInUser: signedInUser(req.cookies),
+      baseUrl: baseUrl(),
     });
   } catch (error) {
     console.log(error);
@@ -674,6 +700,7 @@ const notAdminMessage = (req, res) => {
     message: "You are not allowed to generate codes since you are not an Admin",
     adminCodes: [],
     signedInUser: signedInUser(req.cookies),
+    baseUrl: baseUrl(),
   });
 };
 
@@ -682,6 +709,7 @@ const noAssociatedEmailMessage = (req, res) => {
     message: "Please provide email to associated with code being generated",
     adminCodes: [],
     signedInUser: signedInUser(req.cookies),
+    baseUrl: baseUrl(),
   });
 };
 const validAssociatedEmailMessage = (req, res) => {
@@ -689,6 +717,7 @@ const validAssociatedEmailMessage = (req, res) => {
     message: "Please provide a valid email address",
     adminCodes: [],
     signedInUser: signedInUser(req.cookies),
+    baseUrl: baseUrl(),
   });
 };
 const registeredAssociatedEmailMessage = (req, res) => {
@@ -696,6 +725,7 @@ const registeredAssociatedEmailMessage = (req, res) => {
     message: "Email address is already registered",
     adminCodes: [],
     signedInUser: signedInUser(req.cookies),
+    baseUrl: baseUrl(),
   });
 };
 
@@ -746,6 +776,7 @@ const generateAdminCode = async (req, res) => {
       message: "",
       adminCodes: AdminCodes.rows,
       signedInUser: signedInUser(req.cookies),
+      baseUrl: baseUrl(),
     });
   } catch (error) {
     console.log(error);
@@ -765,6 +796,7 @@ const getAdminCodes = async (req, res) => {
       message: "",
       adminCodes: AdminCodes.rows,
       signedInUser: signedInUser(req.cookies),
+      baseUrl: baseUrl(),
     });
   } catch (error) {
     console.log(error);

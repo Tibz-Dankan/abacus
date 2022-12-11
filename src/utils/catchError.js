@@ -1,4 +1,5 @@
 const { signedInUser } = require("./signedInUser");
+const { baseUrl } = require("./constants");
 
 const catchError = (req, res, pageName) => {
   // FUTURE TODO: when error occurs in production send email to the devs
@@ -10,6 +11,7 @@ const catchError = (req, res, pageName) => {
     message: "Sorry something went wrong, try again",
     // user: userObject,
     signedInUser: signInUser,
+    baseUrl: baseUrl(),
   });
 };
 

@@ -2,12 +2,14 @@ const Loan = require("../models/loan");
 const { catchError } = require("../utils/catchError");
 const { decodeJwtGetUserId } = require("../utils/decodeJwt");
 const { signedInUser } = require("../utils/signedInUser");
+const { baseUrl } = require("../utils/constants");
 
 const noEmptyFieldMessage = (req, res, loanObject) => {
   return res.render("apply-for-loan", {
     message: "please fill out all fields",
     user: loanObject,
     signedInUser: signedInUser(req.cookies),
+    baseUrl: baseUrl(),
   });
 };
 
@@ -16,6 +18,7 @@ const alreadyHaveLoanMessage = (req, res, loanObject) => {
     message: "You already applied for a loan whose approval is pending",
     user: loanObject,
     signedInUser: signedInUser(req.cookies),
+    baseUrl: baseUrl(),
   });
 };
 
@@ -25,6 +28,7 @@ const noLoanIdMessage = (req, res) => {
       "You no loan id is provided, contact the developers to fix the issue",
     loanApplication: {},
     signedInUser: signedInUser(req.cookies),
+    baseUrl: baseUrl(),
   });
 };
 
@@ -32,6 +36,7 @@ const startApplying = async (req, res) => {
   try {
     res.render("start-applying", {
       signedInUser: signedInUser(req.cookies),
+      baseUrl: baseUrl(),
     });
   } catch (error) {
     console.log(error);
@@ -44,6 +49,7 @@ const getLoanForm = async (req, res) => {
     res.render("apply-for-loan", {
       message: "",
       signedInUser: signedInUser(req.cookies),
+      baseUrl: baseUrl(),
     });
   } catch (error) {
     console.log(error);
@@ -123,6 +129,7 @@ const myLoanData = async (req, res) => {
       message: "",
       myLoanData: myApplicationData.rows,
       signedInUser: signedInUser(req.cookies),
+      baseUrl: baseUrl(),
     });
   } catch (error) {
     console.log(error);
@@ -137,6 +144,7 @@ const loanApplicants = async (req, res) => {
       message: "",
       loanApplicants: applicants.rows,
       signedInUser: signedInUser(req.cookies),
+      baseUrl: baseUrl(),
     });
   } catch (error) {
     console.log(error);
@@ -157,6 +165,7 @@ const singleLoanApplication = async (req, res) => {
       message: "",
       loanApplication: application.rows[0],
       signedInUser: signedInUser(req.cookies),
+      baseUrl: baseUrl(),
     });
   } catch (error) {
     console.log(error);
