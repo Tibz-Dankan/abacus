@@ -533,7 +533,7 @@ const updatePassword = async (req, res) => {
 
 const getForgotPassword = async (req, res) => {
   try {
-    res.render("forgot-password", { message: "" });
+    res.render("forgot-password", { message: "", baseUrl: baseUrl() });
   } catch (error) {
     console.log(error);
     if (error) return catchError(req, res, "forgot-password");
@@ -582,7 +582,10 @@ const forgotPassword = async (req, res) => {
     //   user.rows[0].user_name
     // );
 
-    res.render("forgot-password", { message: "Reset Token sent to email" });
+    res.render("forgot-password", {
+      message: "Reset Token sent to email",
+      baseUrl: baseUrl(),
+    });
   } catch (error) {
     console.log(error);
     if (error) return catchError(req, res, "forgot-password");
@@ -591,7 +594,7 @@ const forgotPassword = async (req, res) => {
 
 const getResetPassword = async (req, res) => {
   try {
-    res.render("reset-password", { message: "" });
+    res.render("reset-password", { message: "", baseUrl: baseUrl() });
   } catch (error) {
     console.log(error);
     if (error) return catchError(req, res, "reset-password");
@@ -600,17 +603,14 @@ const getResetPassword = async (req, res) => {
 
 const resetPassword = async (req, res) => {
   try {
-    console.log("REQUEST");
-    console.log(req);
-
-    // const token = req.params.token;
-
+    console.log("Request query");
+    console.log(req.query);
     const token = req.query.token;
-    console.log("Token: ", token);
+
     if (!token) return noResetToken(res);
     const hashedToken = createHash("sha256").update(token).digest("hex");
 
-    const dbHashedToken = await User.getPasswordResetToken(token);
+    const dbHashedToken = await User.getPasswordResetToken(hashedToken);
     if (!dbHashedToken.rows[0]) return invalidResetToken(res);
 
     if (
