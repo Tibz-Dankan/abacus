@@ -3,13 +3,13 @@
   height: 100%;
   width: 0;
   position: fixed;
-  z-index: 1;
+  z-index: 1000;
   top: 0;
   left: 0;
   background-color: hsl(240, 100%, 12%);
   color: hsl(0, 0%, 85%);
   overflow-x: hidden;
-  padding-top: 4em;
+  padding: 4em 0em;
   transition: 0.5s;
   font-size: 14px;
 }
@@ -106,7 +106,7 @@
   background-color: #111;
   background-color: hsl(240, 100%, 12%);
   color: white;
-  padding: 10px 15px;
+  padding: 0.15em 0.6em;
   border: none;
 }
 
@@ -120,18 +120,52 @@
   transition: margin-left 0.5s;
   padding: 20px;
   position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   top: 0em;
   right: 2em;
 }
+.nav-user {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 0.5em;
+}
+.nav-user i {
+  color: hsl(0, 0%, 50%);
+}
+
 .logo {
   position: absolute;
   top: 0em;
   left: 4em;
+}
+.logo img {
+  width: 180px;
+  height: 150px;
 }
 
 @media screen and (max-height: 450px) {
   .sidebar {
     padding-top: 1em; /*TO BE TESTED  ON SMALLER SCREENS*/
     font-size: 12px;
+  }
+}
+@media screen and (max-width: 520px) {
+  #main {
+    right: 0.25em;
+  }
+  .nav-username {
+    display: none;
+  }
+  .logo {
+    position: absolute;
+    top: 0em;
+    left: 1em;
+  }
+  .logo img {
+    width: 100px;
+    height: 100px;
   }
 }

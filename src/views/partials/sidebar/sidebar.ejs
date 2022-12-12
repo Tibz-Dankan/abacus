@@ -49,10 +49,17 @@
 
 <!-- Logo -->
 <div class="logo">
-  <img src="../../assets/img/logo/logo.jpeg" width="180" height="150" alt="" />
+  <img src="../../assets/img/logo/logo.jpeg" alt="" />
 </div>
 
 <!-- Open sidebar -->
 <div id="main">
+  <div class="nav-user">
+    <i
+      class="fas fa-user-circle"
+      style="font-size: 40px; margin-right: 0.2em"
+    ></i>
+    <span class="nav-username"><%= signedInUser.name %></span>
+  </div>
   <button class="openbtn" onclick="openSideBar()">&#9776;</button>
 </div>
