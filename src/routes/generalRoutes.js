@@ -15,6 +15,8 @@ const {
   services,
   notFound,
   applications,
+  applyRedirect,
+  homeRedirect,
 } = require("../controllers/generalRouteController");
 
 const router = express.Router();
@@ -32,7 +34,9 @@ router.get("/blog_details", blogDetails);
 router.get("/contact", contact);
 router.get("/elements", elements);
 router.get("/services", services);
+router.get("/apply", applyRedirect);
 router.get("/applications", verifyAdminToken, applications);
-router.get("*", notFound);
+// router.get("*", notFound);
+router.get("*", homeRedirect);
 
 module.exports = router;

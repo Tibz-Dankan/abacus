@@ -133,6 +133,22 @@ const applications = (req, res) => {
   }
 };
 
+const applyRedirect = (req, res) => {
+  try {
+    res.redirect("apply-for-loan");
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const homeRedirect = (req, res) => {
+  try {
+    res.redirect("home");
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 module.exports = {
   home,
   signup,
@@ -146,4 +162,6 @@ module.exports = {
   services,
   notFound,
   applications,
+  applyRedirect,
+  homeRedirect,
 };
