@@ -80,9 +80,14 @@
   color: #16161a;
 }
 
+/* line 91,../../../abacus/assets/scss/_color.scss */
+.light-red-text {
+  color: #de0505; /* light red color */
+}
+
 /* line 90, ../../../abacus/assets/scss/_color.scss */
 .theme-color {
-  color: #3589f1;
+  color: #01152e;
 }
 
 /*------------------- Responsive --------------------------*/
