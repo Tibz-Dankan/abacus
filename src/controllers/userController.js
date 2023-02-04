@@ -2,7 +2,7 @@ const User = require("../models/user");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { randomBytes, createHash } = require("crypto");
-// const Email = require("../utils/email");
+const Email = require("../utils/email");
 const { baseUrl } = require("../utils/constants");
 
 require("dotenv").config();
@@ -10,43 +10,13 @@ const { decodeJwtGetUserId } = require("../utils/decodeJwt");
 const { catchError } = require("../utils/catchError");
 const { signedInUser } = require("../utils/signedInUser");
 
-// const baseUrl = (requestRawHeaders) => {
-//   let originUrlIndex;
-//   requestRawHeaders.map((rawHeaderElement, index) => {
-//     if (rawHeaderElement === "Origin") {
-//       originUrlIndex = index + 1;
-//     }
-//   });
-//   const baseUrl = requestRawHeaders[originUrlIndex];
-//   return baseUrl;
-// };
-
-// Referer is the full url path making request to the server E.g http://localhost:8000/register
-// const refererUrl = (requestRawHeaders) => {
-//   let refererUrlIndex;
-//   requestRawHeaders.map((rawHeaderElement, index) => {
-//     if (rawHeaderElement === "Referer") {
-//       refererUrlIndex = index + 1;
-//     }
-//   });
-//   const refererUrl = requestRawHeaders[refererUrlIndex];
-//   return refererUrl;
-// };
-
-// const assignUserRole = (baseUrl, refererUrl) => {
 const assignUserRole = (req) => {
-  // if (`${baseUrl}/signup` === refererUrl) return "client";
-  // if (`${baseUrl}/register` === refererUrl) return "client";
-  // if (`${baseUrl}/signup-admin` === refererUrl) return "admin";
   if (req.url === "/signup") return "client";
   if (req.url === "/register") return "client";
   if (req.url === "/signup-admin") return "admin";
 };
 
 const signUpPage = (req) => {
-  // if (`${baseUrl}/signup` === refererUrl) return "signup";
-  // if (`${baseUrl}/register` === refererUrl) return "signup";
-  // if (`${baseUrl}/signup-admin` === refererUrl) return "signup-admin";
   if (req.url === "/signup") return "signup";
   if (req.url === "/register") return "signup";
   if (req.url === "/signup-admin") return "signup-admin";
@@ -73,10 +43,6 @@ const assignCookieRedirectUser = (res, userObj) => {
 };
 
 const noEmptyFieldMessage = (req, res, userObject) => {
-  // const signupPage = signUpPage(
-  //   baseUrl(req.rawHeaders),
-  //   refererUrl(req.rawHeaders)
-  // );
   const signupPage = signUpPage(req);
   return res.render(signupPage, {
     message: "Please fill out all fields",
@@ -86,10 +52,6 @@ const noEmptyFieldMessage = (req, res, userObject) => {
 };
 
 const noAdminCodeMessage = (req, res, userObject) => {
-  // const signupPage = signUpPage(
-  //   baseUrl(req.rawHeaders),
-  //   refererUrl(req.rawHeaders)
-  // );
   const signupPage = signUpPage(req);
   return res.render(signupPage, {
     message: "No admin signup code provided",
@@ -99,10 +61,6 @@ const noAdminCodeMessage = (req, res, userObject) => {
 };
 
 const validCodeMessage = (req, res, userObject) => {
-  // const signupPage = signUpPage(
-  //   baseUrl(req.rawHeaders),
-  //   refererUrl(req.rawHeaders)
-  // );
   const signupPage = signUpPage(req);
   return res.render(signupPage, {
     message: "Admin code provided is invalid",
@@ -111,10 +69,6 @@ const validCodeMessage = (req, res, userObject) => {
   });
 };
 const invalidAssociatedEmailMessage = (req, res, userObject) => {
-  // const signupPage = signUpPage(
-  //   baseUrl(req.rawHeaders),
-  //   refererUrl(req.rawHeaders)
-  // );
   const signupPage = signUpPage(req);
 
   return res.render(signupPage, {
@@ -125,10 +79,6 @@ const invalidAssociatedEmailMessage = (req, res, userObject) => {
 };
 
 const expiredAdminCodeMessage = (req, res, userObject) => {
-  // const signupPage = signUpPage(
-  //   baseUrl(req.rawHeaders),
-  //   refererUrl(req.rawHeaders)
-  // );
   const signupPage = signUpPage(req);
   return res.render(signupPage, {
     message: "Admin code is expired",
@@ -138,10 +88,6 @@ const expiredAdminCodeMessage = (req, res, userObject) => {
 };
 
 const validEmailMessage = (req, res, userObject) => {
-  // const signupPage = signUpPage(
-  //   baseUrl(req.rawHeaders),
-  //   refererUrl(req.rawHeaders)
-  // );
   const signupPage = signUpPage(req);
   return res.render(signupPage, {
     message: "Invalid email",
@@ -151,10 +97,6 @@ const validEmailMessage = (req, res, userObject) => {
 };
 
 const validUserNameMessage = (req, res, userObject) => {
-  // const signupPage = signUpPage(
-  //   baseUrl(req.rawHeaders),
-  //   refererUrl(req.rawHeaders)
-  // );
   const signupPage = signUpPage(req);
   return res.render(signupPage, {
     message:
@@ -165,10 +107,6 @@ const validUserNameMessage = (req, res, userObject) => {
 };
 
 const passwordMatchMessage = (req, res, userObject) => {
-  // const signupPage = signUpPage(
-  //   baseUrl(req.rawHeaders),
-  //   refererUrl(req.rawHeaders)
-  // );
   const signupPage = signUpPage(req);
   return res.render(signupPage, {
     message: "Passwords don't match",
@@ -178,10 +116,6 @@ const passwordMatchMessage = (req, res, userObject) => {
 };
 
 const passwordLengthMessage = (req, res, userObject) => {
-  // const signupPage = signUpPage(
-  //   baseUrl(req.rawHeaders),
-  //   refererUrl(req.rawHeaders)
-  // );
   const signupPage = signUpPage(req);
   return res.render(signupPage, {
     message: "password must have at least 6 characters",
@@ -191,10 +125,6 @@ const passwordLengthMessage = (req, res, userObject) => {
 };
 
 const registeredEmailMessage = (req, res, userObject) => {
-  // const signupPage = signUpPage(
-  //   baseUrl(req.rawHeaders),
-  //   refererUrl(req.rawHeaders)
-  // );
   const signupPage = signUpPage(req);
 
   return res.render(signupPage, {
@@ -241,10 +171,6 @@ const signUpClient = async (req, res) => {
   try {
     const userName = req.body.username;
     const email = req.body.email;
-    // const userRole = assignUserRole(
-    //   baseUrl(req.rawHeaders),
-    //   refererUrl(req.rawHeaders)
-    // );
     const userRole = assignUserRole(req);
     const password = req.body.password;
     const confirmPassword = req.body.confirmpassword;
@@ -261,9 +187,9 @@ const signUpClient = async (req, res) => {
     if (!userName || !email || !password || !confirmPassword) {
       return noEmptyFieldMessage(req, res, userObject);
     }
-    if (userName.includes(" ") || !userName.includes("-")) {
-      return validUserNameMessage(req, res, userObject);
-    }
+    // if (userName.includes(" ") || !userName.includes("-")) {
+    //   return validUserNameMessage(req, res, userObject);
+    // }
     if (user.rows[0]) return registeredEmailMessage(req, res, userObject);
     if (!email.includes("@")) return validEmailMessage(req, res, userObject);
     if (password.length <= 5)
@@ -298,10 +224,6 @@ const signUpAdmin = async (req, res) => {
   try {
     const userName = req.body.username;
     const email = req.body.email;
-    // const userRole = assignUserRole(
-    //   baseUrl(req.rawHeaders),
-    //   refererUrl(req.rawHeaders)
-    // );
     const userRole = assignUserRole(req);
     const password = req.body.password;
     const confirmPassword = req.body.confirmpassword;
@@ -318,9 +240,9 @@ const signUpAdmin = async (req, res) => {
     if (!userName || !email || !password || !confirmPassword) {
       return noEmptyFieldMessage(req, res, userObject);
     }
-    if (userName.includes(" ") || !userName.includes("-")) {
-      return validUserNameMessage(req, res, userObject);
-    }
+    // if (userName.includes(" ") || !userName.includes("-")) {
+    //   return validUserNameMessage(req, res, userObject);
+    // }
     if (user.rows[0]) return registeredEmailMessage(req, res, userObject);
     if (!email.includes("@")) return validEmailMessage(req, res, userObject);
     if (password.length <= 5) {
@@ -444,19 +366,12 @@ const expiredResetToken = (res) => {
   });
 };
 
-// const updateResetPasswordPages = (baseUrl, refererUrl) => {
 const updateResetPasswordPages = (req) => {
-  // if (`${baseUrl}/update-password` === refererUrl) return "update-password";
-  // if (`${baseUrl}/reset-password` === refererUrl) return "reset-password";
   if (req.url === "/update-password") return "update-password";
   if (req.url === "/reset-password") return "reset-password";
 };
 
 const noPassword = (req, res) => {
-  // const page = updateResetPasswordPages(
-  //   baseUrl(req.rawHeaders),
-  //   refererUrl(req.rawHeaders)
-  // );
   const page = updateResetPasswordPages(req);
   return res.render(page, {
     message: "Please fill out password field",
@@ -571,16 +486,16 @@ const forgotPassword = async (req, res) => {
 
     await User.savePasswordResetToken(userId, hashedToken, tokenExpires);
 
-    // const resetURL = `${req.protocol}://abacusuganda.com/reset-password/${resetToken}`;
-    const resetURL = `${req.protocol}://localhost:8000/reset-password?token=${resetToken}`;
-    // const resetURL = `${req.protocol}://localhost:8000/reset-password/:${resetToken}`;
+    const baseURL = baseUrl();
+    const resetURL = `${baseURL}/reset-password?token=${resetToken}`;
+
     console.log("Reset url :", resetURL);
     const subject = "Reset Password";
 
-    // await new Email(email, subject).sendPasswordReset(
-    //   resetURL,
-    //   user.rows[0].user_name
-    // );
+    await new Email(email, subject).sendPasswordReset(
+      resetURL,
+      user.rows[0].user_name
+    );
 
     res.render("forgot-password", {
       message: "Reset Token sent to email",
