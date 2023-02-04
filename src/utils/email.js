@@ -64,7 +64,7 @@ class Email {
         contactSubject: subject,
       }
     );
-    await this.sendHtml(html, "Reset Password");
+    await this.sendHtml(html, "Contact Us Message");
   }
 
   async sendDevsBug(error, userName) {

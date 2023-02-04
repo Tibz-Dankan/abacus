@@ -90,7 +90,10 @@ const blogDetails = async (req, res) => {
 
 const contact = async (req, res) => {
   try {
-    res.render("contact");
+    res.render("contact", {
+      message: "",
+      baseUrl: baseUrl(),
+    });
   } catch (error) {
     console.log("error: " + error.message);
   }
