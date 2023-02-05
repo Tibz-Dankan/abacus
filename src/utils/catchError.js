@@ -1,8 +1,17 @@
 const { signedInUser } = require("./signedInUser");
 const { baseUrl } = require("./constants");
+// const Email = require("./email");
 
-const catchError = (req, res, pageName) => {
-  // FUTURE TODO: when error occurs in production send email to the devs
+const catchError = async (req, res, pageName) => {
+  // const devEmailOne = process.env.DEV_EMAIL_ONE;
+  // const devNameOne = process.env.DEV_NAME_ONE;
+  // const devEmailTwo = process.env.DEV_EMAIL_TWO;
+  // const devNameTwo = process.env.DEV_NAME_TWO;
+
+  // const subject = "A bug in production";
+
+  // await new Email(devEmailOne, subject).sendDevsBug(error, devNameOne);
+
   let signInUser;
   if (req.cookies.token) {
     signInUser = signedInUser(req.cookies);
