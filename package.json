@@ -5,7 +5,9 @@
   "main": "app.js",
   "scripts": {
     "start": "node src/app.js",
-    "server": "nodemon src/app.js"
+    "server": "nodemon src/app.js",
+    "build": "tailwindcss -i ./src/views/css/input.css -o ./src/views/css/output.css",
+    "watch": "tailwindcss -i ./src/views/css/input.css -o ./src/css/views/output.css --watch"
   },
   "repository": {
     "type": "git",
@@ -28,7 +30,8 @@
     "pg": "^8.7.3"
   },
   "devDependencies": {
-    "nodemon": "^2.0.16"
+    "nodemon": "^2.0.16",
+    "tailwindcss": "^3.2.6"
   },
   "bugs": {
     "url": "https://github.com/AbacusFinanceUgLtd/AbacusFinanceUgLtd.github.io/issues"
