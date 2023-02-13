@@ -7,7 +7,7 @@
     "start": "node src/app.js",
     "server": "nodemon src/app.js",
     "build": "tailwindcss -i ./src/views/css/input.css -o ./src/views/css/output.css",
-    "watch": "tailwindcss -i ./src/views/css/input.css -o ./src/css/views/output.css --watch"
+    "watch": "tailwindcss -i ./src/views/css/input.css -o ./src/views/css/output.css --watch"
   },
   "repository": {
     "type": "git",

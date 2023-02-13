@@ -1,669 +1,368 @@
 <!DOCTYPE html>
-<html class="no-js" lang="zxx">
+<html lang="en">
   <head>
-    <meta charset="utf-8" />    
-    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Abacus Finance Uganda</title>
-    <meta name="description" content="" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="manifest" href="site.webmanifest" />
-    <link
-      rel="shortcut icon"
-      type="image/x-icon"
-      href="assets/img/logo/logo.jpeg"
-    />
-    <!-- Icon Font Stylesheet -->
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css"
-      rel="stylesheet"
-    />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"
-      rel="stylesheet"
-    />
-
-    <!-- CSS here -->
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="assets/css/owl.carousel.min.css" />
-    <link rel="stylesheet" href="assets/css/slicknav.css" />
-    <link rel="stylesheet" href="assets/css/flaticon.css" />
-    <link rel="stylesheet" href="assets/css/animate.min.css" />
-    <link rel="stylesheet" href="assets/css/magnific-popup.css" />
-    <link rel="stylesheet" href="assets/css/fontawesome-all.min.css" />
-    <link rel="stylesheet" href="assets/css/themify-icons.css" />
-    <link rel="stylesheet" href="assets/css/slick.css" />
-    <link rel="stylesheet" href="assets/css/nice-select.css" />
-    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="css/output.css" />
   </head>
+  <body class="relative bg-greyLight1 text-base">
+    <!-- HERO SECTION -->
 
-  <body>
-    <!-- Preloader Start -->
-    <div id="preloader-active">
-      <div class="preloader d-flex align-items-center justify-content-center">
-        <div class="preloader-inner position-relative">
-          <!-- <div class="preloader-circle"></div> -->
-          <div class="preloader-img pere-text">
-            <img src="assets/img/logo/logo.png" alt="" />
-          </div>
+    <header class="">
+      <div
+        class="bg-greyLight1 flex justify-between items-center px-16 sticky top-0 shadow z-50"
+      >
+        <img
+          src="assets/img/logo/logo.jpeg"
+          alt="logo"
+          class="w-32 h-24 rounded bg-greyLight2"
+        />
+        <!-- MEDIUM TO LARGE NV  -->
+        <nav class="hidden flex-1 md:flex justify-end items-center space-x-14">
+          <ion-icon name="home-outline"></ion-icon>
+          <a
+            href="home"
+            class="px-4 pb-3 py-2 rounded-full text-greyDark4 hover:bg-primaryDark hover:text-greyLight1 delay-100 ease-in-out"
+            >Home</a
+          >
+          <a
+            href="services"
+            class="px-4 pb-3 py-2 rounded-full text-greyDark4 hover:bg-primaryDark hover:text-greyLight1 delay-100 ease-in-out"
+            >Services</a
+          >
+          <a
+            href="about"
+            class="px-4 pb-3 py-2 rounded-full text-greyDark4 hover:bg-primaryDark hover:text-greyLight1 delay-100 ease-in-out"
+            >About</a
+          >
+          <a
+            href="contact"
+            class="px-4 pb-3 py-2 rounded-full text-greyDark4 hover:bg-primaryDark hover:text-greyLight1 delay-100 ease-in-out"
+            >Contact</a
+          >
+          <a
+            href="apply"
+            class="px-4 pb-3 py-2 rounded-full bg-primary text-greyLight1 hover:bg-primaryDark hover:text-greyLight1 delay-100 ease-in-out"
+            >Apply Now</a
+          >
+        </nav>
+        <!-- HANG BURG MENU  TO DISPLAY LINKS-->
+        <span class="md:hidden"> Menu </span>
+      </div>
+      <!-- MOBILE NAV  -->
+      <nav
+        id="mobile-nav"
+        class="md:hidden bg-greyLight2 text-greyDark4 flex flex-col justify-center p-4 mx-16 mt-8 space-y-3 shadow-md"
+      >
+        <p><span class="mr-6">icon</span><a href="home">Home</a></p>
+        <p><span class="mr-6">icon</span><a href="serveices">Services</a></p>
+        <p><span class="mr-6">icon</span><a href="about">About</a></p>
+        <p><span class="mr-6">icon</span><a href="contact">Contact</a></p>
+        <p><span class="mr-6">icon</span><a href="apply">Apply now</a></p>
+        <p><span class="mr-6">icon</span><a href="signin">Login</a></p>
+      </nav>
+      <div class="flex items-center z-10">
+        <div class="flex flex-col space-y-8 p-16">
+          <p class="font-bold text-secondary text-lg">
+            Achieve your financial goal
+          </p>
+          <h2 class="text-6xl font-bold">Small Loans For Daily Expenses</h2>
+          <p class="">
+            <a
+              href="signup"
+              class="bg-primary hover:bg-primaryDark rounded-full text-center text-greyLight1 py-3 px-8 uppercase inline-block"
+              >Get started</a
+            >
+          </p>
+        </div>
+        <div>
+          <img
+            class="hidden md:inline-block"
+            src="assets/img/hero/hero_img2.jpg"
+          />
         </div>
       </div>
-    </div>
-    <!-- Preloader end -->
-    <!-- Topbar End -->
-    <header>
-      <!-- Header Start -->
-      <div class="header-area header-transparent">
-        <div class="main-header header-sticky">
-          <div class="container-fluid">
-            <div class="row align-items-center">
-              <!-- Logo -->
-              <div class="col-xl-2 col-lg-2 col-md-1">
-                <div class="logo">
-                  <a href="home"
-                    ><img
-                      src="assets/img/logo/logo.jpeg"
-                      width="150"
-                      height="120"
-                      alt=""
-                  /></a>
-                </div>
-              </div>
-              <div class="col-xl-10 col-lg-10 col-md-10">
-                <div
-                  class="menu-main d-flex align-items-center justify-content-end">
-                  <!-- Main-menu -->
-                  <div class="main-menu f-right d-none d-lg-block">
-                    <nav>
-                      <ul id="navigation">
-                        <li class="active"><a href="home">Home</a></li>
-                        <li><a href="about">About</a></li>
-                        <li><a href="services">Services</a></li>
-                        <li><a href="apply">Apply</a></li>
-                        <li><a href="contact">Contact</a></li>
-                      </ul>
-                    </nav>
-                  </div>
-                  <div class="header-right-btn f-right d-none d-lg-block">
-                    <a href="#" class="btn header-btn">0800113213</a>
-                  </div>
-                </div>
-              </div>
-              <!-- Mobile Menu -->
-              <div class="col-12">
-                <div class="mobile_menu d-block d-lg-none"></div>
-                
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Header End -->
     </header>
     <main>
-      <!-- slider Area Start-->
-      <div
-        class="slider-area slider-height"
-        data-background="assets/img/hero/h1_hero.jpg"
+      <section
+        class="hidden bg-primary sm:flex items-center justify-between text-xl ml-16 py-6 px-4 text-greyLight1"
       >
-        <div class="slider-active">
-          <!-- Single Slider -->
-          <div class="single-slider">
-            <div class="slider-cap-wrapper">
-              <div class="hero__caption">
-                <p data-animation="fadeInLeft" data-delay=".2s" style="color: #00008B">
-                  Achieve your financial goal
-                </p>
-                <h1 data-animation="fadeInLeft" data-delay=".5s" style="color:#de0505">
-                  Small Business Loans For Daily Expenses.
-                </h1>
-                <!-- Hero Btn -->
-                <a
-                  href="apply"
-                  class="btn hero-btn"
-                  data-animation="fadeInLeft"
-                  data-delay=".8s"
-                  >Apply for Loan</a
-                >
-              </div>
-              <div class="hero__img">
-                <!-- <img src="assets/img/hero/hero_img2.jpg" alt="" /> -->
-                <img src="https://res.cloudinary.com/dnj7bagkr/image/upload/v1676130537/Abacus%20Web%20Photos/hero_img2_ehzn00.jpg" alt="" />
-              </div>
-            </div>
-          </div>
+        <div>
+          <span>Icon</span>
+          <span>Quick</span>
         </div>
-        <!-- slider-footer Start -->
-        <div class="slider-footer section-bg d-none d-sm-block" >
-          <div class="footer-wrapper">
-            <!-- single -->
-            <div class="single-caption">
-              <div class="caption-icon">
-                <span class="flaticon-clock"></span>
-              </div>
-              <div class="caption">
-                <p>Quick</p>
-                <!-- <p>Approvals</p> -->
-              </div>
-            </div>
-            <!-- single -->
-            <div class="single-caption">
-              <div class="caption-icon">
-                <span class="flaticon-like"></span>
-              </div>
-              <div class="caption">
-                <p>Easy</p>
-                <!-- <p>Approvals</p> -->
-              </div>
-            </div>
-            <!-- single -->
-            <div class="single-caption">
-              <div class="caption-icon">
-                <span class="flaticon-money"></span>
-              </div>
-              <div class="caption">
-                <p>Loan Approvals</p>
-                <!-- <p>Approvals</p> -->
-              </div>
-            </div>
-          </div>
+        <div>
+          <span>Icon</span>
+          <span>Easy</span>
         </div>
-        <!-- slider-footer End -->
-      </div>
-      <!-- slider Area End-->
-      <!-- About Law Start-->
-      <div class="about-low-area section-padding2">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-6 col-md-12">
-              <div class="about-caption mb-50">
-                <!-- Section Tittle -->
-                <div class="section-tittle mb-35">
-                  <span style="color: #00008B">About Our Company</span>
-                  <h2 style="color:#de0505">Building a Brighter financial Future & Good Support.</h2>
-                </div>
-                <p>
-                  To provide innovative government-compliant financial solutions
-                  and quality services to our customers.
-                </p>
-                <p>
-                  To maximize returns for our shareholders and partners. To
-                  nurture an internal environment of qualified professionals and
-                  cutting-edge technology.
-                </p>
-                <a href="apply" class="btn">Apply for Loan</a>
-              </div>
-            </div>
-            <div class="col-lg-6 col-md-12">
-              <!-- about-img -->
-              <div class="about-img">
-                <div class="about-font-img d-none d-lg-block">
-                  <!-- <img src="assets/img/gallery/about2.png" alt="" /> -->
-                  <img src="https://res.cloudinary.com/dnj7bagkr/image/upload/v1676131149/Abacus%20Web%20Photos/about2_s1k0gn.png" alt="" />
-                </div>
-                <div class="about-back-img">
-                  <!-- <img src="assets/img/gallery/about1.png" alt="" /> -->
-                  <img src="https://res.cloudinary.com/dnj7bagkr/image/upload/v1676131126/Abacus%20Web%20Photos/about1_uwxjyu.png" alt="" />
-                </div>
-              </div>
-            </div>
-          </div>
+        <div>
+          <span>Icon</span>
+          <span>Loan approvals</span>
         </div>
-      </div>
-      <!-- About Law End-->
-      <!-- Services Area Start -->
-      <div
-        class="services-area pt-150 pb-150"
-        data-background="assets/img/gallery/section_bg02.jpg"
-      >
-        <div class="container">
-          <div class="row justify-content-center">
-            <div class="col-lg-6 col-md-10">
-              <!-- Section Tittle -->
-              <div class="section-tittle text-center mb-80">
-                <span style="color: #00008B">Services that we are providing</span>
-                <h2 style="color:#de0505">High Performance Services For All Industries.</h2>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-lg-3 col-md-6 col-sm-6">
-              <div class="single-cat text-center mb-50">
-                <div class="cat-icon">
-                  <span class="flaticon-work"></span>
-                </div>
-                <div class="cat-cap">
-                  <h5 style="color: #00008B"><a href="services">AFL AGRICULTURE LOAN</a></h5>
-                  <p style="color: #006400;">
-                    We have a responsibility to support our agriculture sector
-                    because it employs over 60 percent of our population. We
-                    seek to finance agricultural projects with huge commercial
-                    potential and domestic or export level.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
-              <div class="single-cat text-center mb-50">
-                <div class="cat-icon">
-                  <span class="flaticon-loan"></span>
-                </div>
-                <div class="cat-cap">
-                  <h5 style="color: #00008B"><a href="services">AFL OVERDRAFT LOAN.</a></h5>
-                  <p style="color: #006400;">
-                    How does an overdraft work? This is a lending arrangement on
-                    a current account allowing the account holder to overdraw
-                    the 50% of monthly income and with a specific expiry date.
-                    The overdraft can be marked over a few days or up to a
-                    period of one year.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
-              <div class="single-cat text-center mb-50">
-                <div class="cat-icon">
-                  <span class="flaticon-loan-1"></span>
-                </div>
-                <div class="cat-cap">
-                  <h5 style="color: #00008B"><a href="services">CONSTRUCTION LOAN</a></h5>
-                  <p style="color: #006400;">
-                    Everyone has their own dream house and it is normally hard
-                    to find that dream house built by someone else and ready for
-                    outright purchase. With our construction mortgage product,
-                    you get to build your house as you imagined it in your
-                    dreams.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
-              <div class="single-cat text-center mb-50">
-                <div class="cat-icon">
-                  <span class="flaticon-like"></span>
-                </div>
-                <div class="cat-cap">
-                  <h5 style="color: #00008B"><a href="services">BUSINESS LOAN</a></h5>
-                  <p style="color: #006400;">
-                    We take the responisibilities to support the small business
-                    in Uganda in order to support the so called low income
-                    earners. This will increase the country's average income
-                    thus development of our country which is our main goal. As
-                    we develop with you.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Services Area End -->
-      <!-- Support Company Start-->
-      <div class="support-company-area section-padding3 fix">
-        <div class="container">
-          <div class="row align-items-center">
-            <div class="col-xl-6 col-lg-6">
-              <div class="support-location-img mb-50">
-                <!-- <img src="assets/img/gallery/perm_sec.jpg" alt="" /> -->
-                <img src="https://res.cloudinary.com/dnj7bagkr/image/upload/v1676131275/Abacus%20Web%20Photos/perm_sec_kln56z.jpg" alt="" />
-                <div class="support-img-cap">
-                  <span>Since 1992</span>
-                </div>
-              </div>
-            </div>
-            <div class="col-xl-6 col-lg-6">
-              <div class="right-caption">
-                <!-- Section Tittle -->
-                <div class="section-tittle">
-                  <span style="color: #00008B">Why Choose Our Company</span>
-                  <h2 style="color:#de0505">We Promise Sustainable Future For You.</h2>
-                </div>
-                <div class="support-caption">
-                  <p style="color: #006400;">
-                   <b>Vision:</b> 
-                </br>
-                    To become a leading, innovative and a nation wide financial
-                    institution adhering to the highest government and ethical
-                    principles; meeting international financial standards;
-                    partnering the development of the global economy and
-                    participating in the advancement of the society.
-                  </p>
-                  <div class="select-suport-items">
-                    <label class="single-items"
-                      >Integrity
-                      <input type="checkbox" checked="checked active" />
-                      <span class="checkmark"></span>
-                    </label>
-                    <label class="single-items"
-                      >Transparency
-                      <input type="checkbox" checked="checked active" />
-                      <span class="checkmark"></span>
-                    </label>
-                    <label class="single-items"
-                      >Justice
-                      <input type="checkbox" checked="checked active" />
-                      <span class="checkmark"></span>
-                    </label>
-                    <label class="single-items"
-                      >Cooperation and Teamwork
-                      <input type="checkbox" checked="checked active" />
-                      <span class="checkmark"></span>
-                    </label>
-                    <label class="single-items"
-                      >Loyalty and Commitment
-                      <input type="checkbox" checked="checked active" />
-                      <span class="checkmark"></span>
-                    </label>
-                    <label class="single-items"
-                      >Excellence
-                      <input type="checkbox" checked="checked active" />
-                      <span class="checkmark"></span>
-                    </label>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Support Company End-->
-      <!--Team Ara Start -->
-      <div class="team-area section-padding30">
-        <div class="container">
-          <div class="row justify-content-center">
-            <div class="cl-xl-7 col-lg-8 col-md-10">
-              <!-- Section Tittle -->
-              <div class="section-tittle text-center mb-70">
-                <span style="color: #00008B">Our Loan Section Team Mambers</span>
-                <h2 style="color:#de0505">Take a look to our professional team members.</h2>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-lg-3 col-md-4 col-sm-6">
-              <div class="single-team mb-30">
-                <div class="team-img">
-                  <!-- <img src="assets/img/gallery/Exe_officer.jpg" alt="" height="300"/> -->
-                  <img src="https://res.cloudinary.com/dnj7bagkr/image/upload/v1676131406/Abacus%20Web%20Photos/Exe_officer_pcuqex.jpg" alt="" height="300"/>
-                  
-                  <!-- Blog Social -->
-                  <div class="team-social">
-                    <li>
-                      <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    </li>
-                    <li>
-                      <a href="#"><i class="fab fa-twitter"></i></a>
-                    </li>
-                    <li>
-                      <a href="#"><i class="fas fa-globe"></i></a>
-                    </li>
-                  </div>
-                </div>
-                <div class="team-caption">
-                  <h3><a href="#">Nizeyimana Obed</a></h3>
-                  <p>Executuve officer</p>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6">
-              <div class="single-team mb-30">
-                <div class="team-img">
-                  <!-- <img src="assets/img/gallery/chief_fin.jpg" alt="" height="300" /> -->
-                  <img src="https://res.cloudinary.com/dnj7bagkr/image/upload/v1676131756/Abacus%20Web%20Photos/chief_fin_nwugad.jpg" alt="" height="300" />
-                 
-                  <!-- Blog Social -->
-                  <div class="team-social">
-                    <li>
-                      <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    </li>
-                    <li>
-                      <a href="#"><i class="fab fa-twitter"></i></a>
-                    </li>
-                    <li>
-                      <a href="#"><i class="fas fa-globe"></i></a>
-                    </li>
-                  </div>
-                </div>
-                <div class="team-caption">
-                  <h3><a href="#">Mohammed Bin Rahib</a></h3>
-                  <p>Chief finance officer</p>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6">
-              <div class="single-team mb-30">
-                <div class="team-img">
-                  <!-- <img src="assets/img/gallery/perm_sec.jpg" alt="" height="300"/> -->
-                  <img src=" https://res.cloudinary.com/dnj7bagkr/image/upload/v1676131275/Abacus%20Web%20Photos/perm_sec_kln56z.jpg" alt="" height="300"/>
-                 
-                  <!-- Blog Social -->
-                  <div class="team-social">
-                    <li>
-                      <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    </li>
-                    <li>
-                      <a href="#"><i class="fab fa-twitter"></i></a>
-                    </li>
-                    <li>
-                      <a href="#"><i class="fas fa-globe"></i></a>
-                    </li>
-                  </div>
-                </div>
-                <div class="team-caption">
-                  <h3><a href="#">Irankunda Sarah</a></h3>
-                  <p>Permanent secretary</p>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6">
-              <div class="single-team mb-30">
-                <div class="team-img">
-                  <!-- <img src="assets/img/gallery/public_rel.jpg" alt="" height="300"/> -->
-                  <img src="https://res.cloudinary.com/dnj7bagkr/image/upload/v1676131494/Abacus%20Web%20Photos/public_rel_b7igxh.jpg" alt="" height="300"/>
-                  <!-- Blog Social -->
-                  <div class="team-social">
-                    <li>
-                      <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    </li>
-                    <li>
-                      <a href="#"><i class="fab fa-twitter"></i></a>
-                    </li>
-                    <li>
-                      <a href="#"><i class="fas fa-globe"></i></a>
-                    </li>
-                  </div>
-                </div>
-                <div class="team-caption">
-                  <h3><a href="#">Atyamisa Solange</a></h3>
-                  <p>Public relations officer</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Team Ara End -->
-      <!-- Testimonial Start -->
-      <div class="testimonial-area t-bg testimonial-padding">
-        <div class="container">
-          <div class="row d-flex justify-content-center">
-            <div class="col-xl-11 col-lg-11 col-md-9">
-              <div class="h1-testimonial-active">
-                <!-- Single Testimonial -->
-                <div class="single-testimonial text-center">
-                  <!-- Testimonial Content -->
-                  <div class="testimonial-caption">
-                    <div class="testimonial-top-cap">
-                      <!-- <img src="assets/img/gallery/testimonial.png" alt="" /> -->
-                      <img src="https://res.cloudinary.com/dnj7bagkr/image/upload/v1676131553/Abacus%20Web%20Photos/testimonial_shuuky.png" alt="" />
-                      <p>
-                        Abacus finance Uganda limited has established 
-                        nation wide branches in order to reach the to 
-                        the general population and serve them better.
-                      </p>
-                    </div>
-                    <!-- founder -->
-                    <div
-                      class="testimonial-founder d-flex align-items-center justify-content-center"
-                    >
-                    <style>
-                      .circle {
-                        border-radius: 50%;
-                        width: 150px;
-                        height: 150px;
-                      }
-                    </style>
-                      <div class="founder-img">
-                        <!-- <img src="assets/img/gallery/Exe_officer.jpg" alt="" class="circle" /> -->
-                        <img src="https://res.cloudinary.com/dnj7bagkr/image/upload/v1676131406/Abacus%20Web%20Photos/Exe_officer_pcuqex.jpg" alt="" class="circle" />
+      </section>
 
-                      </div>
-                      <div class="founder-text">
-                        <span>Nizeyimana Obed</span>
-                        <p>Executuve officer</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                
-      <!-- Testimonial End -->og-area section-padding30">
-        <div class="container">
-          <div class="row justify-content-center">
-            <div class="col-lg-7 col-md-10">
-             
+      <!-- ABOUT COMPANY -->
+
+      <section class="lg:flex justify-between items-center m-16">
+        <div class="flex flex-col space-y-4 md:max-w-xl lg:mr-16 mb-4 lg:mb-0">
+          <p class="text-secondary font-bold">About Our Company</p>
+          <h1 class="text-5xl font-bold text-greyDark4">
+            Building a Brighter financial Future & Good Support.
+          </h1>
+          <p>
+            To provide innovative government-compliant financial solutions and
+            quality services to our customers.
+          </p>
+          <p>
+            To maximize returns for our shareholders and partners. To nurture an
+            internal environment of qualified professionals and cutting-edge
+            technology.
+          </p>
+          <p>
+            <a
+              href="apply"
+              class="bg-primary hover:bg-primaryDark rounded-full text-center text-greyLight1 py-3 px-8 uppercase inline-block"
+              >Apply for loan</a
+            >
+          </p>
+        </div>
+        <div class="relative">
+          <img src="assets/img/gallery/about1.png" alt="about-image-1" />
+          <img
+            src="assets/img/gallery/about2.png"
+            alt="about-image-2"
+            class="hidden lg:inline absolute right-8 top-8"
+          />
+        </div>
+      </section>
+      <section class="m-16">
+        <div class="text-center space-y-4 my-8">
+          <p class="font-bold text-secondary text-lg">
+            Services that we are providing
+          </p>
+          <h1 class="font-bold text-4xl text-greyDark4">
+            High Performance Services For All Industries.
+          </h1>
+        </div>
+        <div class="my-4 space-y-8">
+          <div
+            class="flex flex-col justify-center items-center bg-greyLight2 p-4 space-y-4 border-l-8 border-green-600 rounded shadow-md"
+          >
+            <p>icon</p>
+            <p>
+              <a
+                href="services"
+                class="uppercase text-primaryDark font-semibold"
+              >
+                alf agriculture loan
+              </a>
+            </p>
+            <p class="text-center">
+              We have a responsibility to support our agriculture sector because
+              it employs over 60 percent of our population. We seek to finance
+              agricultural projects with huge commercial potential and domestic
+              or export level.
+            </p>
+          </div>
+          <div
+            class="flex flex-col justify-center items-center bg-greyLight2 p-4 space-y-4 border-l-8 border-green-600 rounded shadow-md"
+          >
+            <p>icon</p>
+
+            <p>
+              <a
+                href="services"
+                class="uppercase text-primaryDark font-semibold"
+              >
+                afl overdraft loan
+              </a>
+            </p>
+            <p class="text-center">
+              How does an overdraft work? This is a lending arrangement on a
+              current account allowing the account holder to overdraw the 50% of
+              monthly income and with a specific expiry date. The overdraft can
+              be marked over a few days or up to a period of one year.
+            </p>
+          </div>
+          <div
+            class="flex flex-col justify-center items-center bg-greyLight2 p-4 space-y-4 border-l-8 border-green-600 rounded shadow-md"
+          >
+            <p>icon</p>
+            <p>
+              <a
+                href="services"
+                class="uppercase text-primaryDark font-semibold"
+              >
+                construction loan
+              </a>
+            </p>
+            <p class="text-center">
+              Everyone has their own dream house and it is normally hard to find
+              that dream house built by someone else and ready for outright
+              purchase. With our construction mortgage product, you get to build
+              your house as you imagined it in your dreams.
+            </p>
+          </div>
+          <div
+            class="flex flex-col justify-center items-center bg-greyLight2 p-4 space-y-4 border-l-8 border-green-600 rounded shadow-md"
+          >
+            <p>icon</p>
+            <p>
+              <a
+                href="services"
+                class="uppercase text-primaryDark font-semibold"
+              >
+                business loan
+              </a>
+            </p>
+            <p class="text-center">
+              We take the responsibilities to support the small business in
+              Uganda in order to support the so called low income earners. This
+              will increase the country's average income thus development of our
+              country which is our main goal. As we develop with you.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- VISION -->
+
+      <section
+        class="lg:flex items-center justify-between mx-16 my-8 space-y-4"
+      >
+        <div
+          class="bg-primary w-3/5 lg:w-1/2 relative rounded hidden sm:inline-block"
+        >
+          <img
+            src="assets/img/gallery/perm_sec.jpg"
+            alt="permanent secretary"
+            class="h-full w-11/12 rounded"
+          />
+          <p
+            class="absolute bg-greyLight1 hidden md:inline-block opacity-70 bottom-16 -right-28 h-20 w-64 -rotate-90"
+          >
+            .
+          </p>
+          <p
+            class="font-bold text-3xl uppercase text-blue-900 py-4 px-16 hidden md:inline-block absolute bottom-20 -right-28 -rotate-90"
+          >
+            since 1992
+          </p>
+        </div>
+        <div class="space-y-4 lg:w-1/2 pl-8">
+          <p class="text-secondary font-semibold">Why Choose Our Company</p>
+          <h4 class="font-bold text-4xl">
+            We Promise Sustainable Future For You.
+          </h4>
+          <p class="text-primaryDark font-semibold">Vision:</p>
+          <p>
+            To become a leading, innovative and a nation wide financial
+            institution adhering to the highest government and ethical
+            principles; meeting international financial standards; partnering
+            the development of the global economy and participating in the
+            advancement of the society.
+          </p>
+          <div
+            class="flex flex-col justify-center items-start text-greyDark4 space-y-2"
+          >
+            <p>
+              <input type="checkbox" checked class="mr-4" /><span
+                >Integrity</span
+              >
+            </p>
+            <p>
+              <input type="checkbox" checked class="mr-4" />
+              <span>Transparency</span>
+            </p>
+            <p>
+              <input type="checkbox" checked class="mr-4" />
+              <span>Justice </span>
+            </p>
+            <p>
+              <input type="checkbox" checked class="mr-4" />
+              <span>Cooperation and Team work</span>
+            </p>
+            <p>
+              <input type="checkbox" checked class="mr-4" />
+              <span>Loyalty and Commitment</span>
+            </p>
+            <p>
+              <input type="checkbox" checked class="mr-4" />
+              <span>Excellence</span>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- TEAM MEMBERS -->
+
+      <section class="space-y-4 my-16">
+        <p class="text-lg text-secondary font-semibold text-center">
+          Our Loan Section Team Members
+        </p>
+        <h1 class="font-bold text-4xl text-center">
+          Take a look to our professional team members.
+        </h1>
+        <div
+          class="m-8 mb sm:m-16 space-4 grid gap-3 mmd:grid-cols-2 md:gap-6 lg:gap-4 lg:mmd:grid-cols-4 xl:10"
+        >
+          <div
+            class="bg-greyLight1 flex flex-col justify-center p-4 rounded shadow"
+          >
+            <img
+              src="assets/img/gallery/Exe_officer.jpg"
+              alt="executive office"
+              class="w-68 h-72 md:h-76 lg:h-56"
+            />
+            <span class="text-lg font-semibold">Nizeyimana Obed</span>
+            <span class="text-greyDark3">Executuve officer</span>
+          </div>
+          <div
+            class="bg-greyLight1 flex flex-col justify-center p-4 rounded shadow"
+          >
+            <img
+              src="assets/img/gallery/chief_fin.jpg"
+              alt="Chief finance officer"
+              class="w-68 h-72 md:h-76 lg:h-56"
+            />
+            <span class="text-lg font-semibold">Mohammed Bin Rahib</span>
+            <span class="text-greyDark3">Chief finance officer</span>
+          </div>
+          <div
+            class="bg-greyLight1 flex flex-col justify-center p-4 rounded shadow"
+          >
+            <img
+              src="assets/img/gallery/perm_sec.jpg"
+              alt="Permanent secretary"
+              class="w-auto h-72 lg:h-56"
+            />
+            <span class="text-lg font-semibold">Irankunda Sarah</span>
+            <span class="text-greyDark3">Permanent secretary</span>
+          </div>
+          <div
+            class="bg-greyLight1 flex flex-col justify-center p-4 rounded shadow"
+          >
+            <img
+              src="assets/img/gallery/public_rel.jpg"
+              alt="Public relations officer"
+              class="w-auto h-72 lg:h-56"
+            />
+            <span class="text-lg font-semibold">Atyamisa Solange</span>
+            <span class="text-greyDark3">Public relations officer</span>
+          </div>
+        </div>
+      </section>
     </main>
-    <footer>
-      <!-- Footer Start-->
-      <div class="footer-area">
-        <div class="container">
-          <div class="footer-top footer-padding">
-            <div class="row justify-content-between">
-              <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6">
-                <div class="single-footer-caption mb-50">
 
-                    <h4 class=" footer-tittle">
-                      <span style="color: #fff; font-weight: 500; font-family: Rubik, sans-serif; font-size: 20px;">Get In Touch</span>
-                    </h4>
-                    <p class="mb-4">
-                      Our offices are open and our professionals continue to serve you.
-                    </p>
-                    <p class="mb-2">
-                      <span>
-                        <i class="fa fa-map-marker-alt class-icon me-3" style="color: #13c5dd"></i></span>&nbsp Kampala, Uganda
-                    </p>
-                    <p class="mb-2">
-                      <i class="fa fa-envelope class-icon me-3" aria-hidden="true"
-                        style="color: #13c5dd"></i>&nbsp abucausfinance@gmail.com
-                    </p>
-                    <p class="mb-0">
-                      <i class="fa fa-phone-alt class-icon me-3" style="color: #13c5dd"></i>&nbsp +256 759938344
-                      <br />
-                      &nbsp &nbsp &nbsp &nbsp 0800113213
-                    </p> 
-                </div>
-              </div>
-              <div class="col-xl-2 col-lg-2 col-md-4 col-sm-6">
-                <div class="single-footer-caption mb-50">
-                  <div class="footer-tittle">
-                    <h4>Quick Link</h4>
-                    <ul>
-                      <li><a href="#">About</a></li>
-                      <li><a href="#">Offers & Discounts</a></li>
-                      <li><a href="#">Get Coupon</a></li>
-                      <li><a href="#"> Contact Us</a></li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
-                <div class="single-footer-caption mb-50">
-                  <div class="footer-tittle">
-                    <h4>Support</h4>
-                    <ul>
-                      <li><a href="#">Frequently Asked Questions</a></li>
-                      <li><a href="#">Terms & Conditions</a></li>
-                      <li><a href="#"> Privacy Policy</a></li>
-                      <li><a href="#">Report a Payment Issue</a></li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="footer-bottom">
-            <div class="row d-flex justify-content-between align-items-center">
-              <div class="col-xl-9 col-lg-8">
-                <div class="footer-copy-right">
-                  <p>
-                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                    Copyright &copy;
-                    <script>
-                      document.write(new Date().getFullYear());
-                    </script>
-                    <a class="text-primary" href="#">
-                      <span style="color: #13c5dd"
-                        >Abacus Finance Uganda Limited</span
-                      ></a
-                    >. All Rights Reserved.
-                  </p>
-                </div>
-              </div>
-              <div class="col-xl-3 col-lg-4">
-                <!-- Footer Social -->
-                <div class="footer-social f-right">
-                  <a href="#"><i class="fab fa-twitter"></i></a>
-                  <a href="#"><i class="fab fa-facebook-f"></i></a>
-                  <a href="#"><i class="fas fa-globe"></i></a>
-                  <a href="#"><i class="fab fa-instagram"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Footer End-->
-    </footer>
-    <!-- Scroll Up -->
-    <div id="back-top">
-      <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
-    </div>
-
-    <!-- JS here -->
-    <!-- All JS Custom Plugins Link Here here -->
-    <!-- Jquery, Popper, Bootstrap -->
-    
-    <!-- One Page, Animated-HeadLin -->
-    <!-- Jquery Slick , Owl-Carousel Plugins -->
-    <!-- Jquery Plugins, main Jquery -->
-    <!-- contact js -->
-    <!-- Nice-select, sticky -->
-    <!-- Jquery Mobile Menu -->
-
-    <script src="./assets/js/jquery.slicknav.min.js"></script>
-    <script src="./assets/js/owl.carousel.min.js"></script>
-    <script src="./assets/js/slick.min.js"></script>
-    <script src="./assets/js/vendor/modernizr-3.5.0.min.js"></script>
-    <script src="./assets/js/vendor/jquery-1.12.4.min.js"></script>
-    <script src="./assets/js/popper.min.js"></script>
-    <script src="./assets/js/bootstrap.min.js"></script>
-    <script src="./assets/js/wow.min.js"></script>
-    <script src="./assets/js/animated.headline.js"></script>
-    <script src="./assets/js/jquery.magnific-popup.js"></script>
-
-    <script src="./assets/js/jquery.nice-select.min.js"></script>
-    <script src="./assets/js/jquery.sticky.js"></script>
-
-    <script src="./assets/js/contact.js"></script>
-    <script src="./assets/js/jquery.form.js"></script>
-    <script src="./assets/js/jquery.validate.min.js"></script>
-    <script src="./assets/js/mail-script.js"></script>
-    <script src="./assets/js/jquery.ajaxchimp.min.js"></script>
-
-    <script src="./assets/js/plugins.js"></script>
-    <script src="./assets/js/main.js"></script>
-
-    <!-- js cdn -->
-
-    <!-- Latest compiled and minified JavaScript -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
   </body>
 </html>
