@@ -17,6 +17,9 @@ module.exports = {
         secondary: "#2b8a3e",
         secondaryLight: "#40c057",
 
+        blueDark1: "hsl(240, 80%, 30%)",
+        blueDark2: "hsl(240, 10%, 20%)",
+
         greyLight1: "#f8f9fa",
         greyLight2: "#e9ecef",
         greyLight3: "#dee2e6",
