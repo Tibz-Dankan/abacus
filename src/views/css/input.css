@@ -7,3 +7,43 @@
   background-size: cover;
   background-repeat: no-repeat;
 }
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-field {
+  padding: 0.6rem;
+  padding-top: 0.4rem;
+  background-color: #e9ecef;
+  color: #212529;
+  border: 4px solid #e9ecef;
+  border-bottom: 4px solid #868e96;
+  border-radius: 4px;
+  outline: none;
+}
+
+.input-field:focus {
+  color: #f8f9fa;
+  background-color: #495057;
+  border: 4px solid #495057;
+  border-bottom: 4px solid #74c0fc;
+  transition: 0.3s;
+}
+
+.submit-btn {
+  background-color: #228be6;
+  padding: 0.6rem 2.4rem;
+  font-weight: bold;
+  color: #f8f9fa;
+  border-radius: 4px;
+  text-transform: uppercase;
+  text-align: center;
+  outline: none;
+}
+
+.submit-btn:hover,
+.submit-btn:focus {
+  background-color: #1864ab;
+}
