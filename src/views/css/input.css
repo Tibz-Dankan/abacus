@@ -47,3 +47,25 @@
 .submit-btn:focus {
   background-color: #1864ab;
 }
+
+.error {
+  color: #343a40;
+  background-color: hsl(0, 100%, 95%);
+  border: 1px solid hsl(0, 100%, 80%);
+  border-radius: 4px;
+  padding: 24px;
+  text-align: center;
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.success {
+  color: #343a40;
+  background-color: hsl(120, 100%, 90%);
+  border: 1px solid hsl(120, 100%, 40%);
+  border-radius: 4px;
+  padding: 24px;
+  text-align: center;
+  width: 100%;
+  margin-bottom: 16px;
+}
