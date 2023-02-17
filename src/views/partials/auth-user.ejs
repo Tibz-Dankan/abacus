@@ -8,17 +8,20 @@
     <img
       src="../assets/icons/nav/icon-profile.svg"
       alt="icon-profile"
-      class="w-5 mr-2 icon"
+      class="icon-profile w-7 mr-1 mmd:mr-2"
     />
-    <span class="font-semibold"><%= signedInUser.name %></span>
+    <span class="font-semibold text-profile"><%= signedInUser.name %></span>
   </a>
-  <a href="signout" class="flex items-center text-greyDark3">
+  <a
+    href="signout"
+    class="bg-gray-100 hover:bg-greyLight2 flex justify-center items-center text-greyDark3 px-3 py-2 pb-3 shadow-md rounded-full"
+  >
     <img
       src="../assets/icons/nav/icon-logout.svg"
       alt="icon-logout"
-      class="w-5 mr-2 icon-logout"
+      class="icon-logout w-5 mr-2"
     />
-    <span class="font-semibold">Logout</span>
+    <span class="font-semibold text-logout">Logout</span>
   </a>
 </div>
 
@@ -27,7 +30,7 @@
   <img
     src="../assets/icons/nav/icon-profile.svg"
     alt="icon-profile"
-    class="w-7 mr-2 icon"
+    class="icon-profile w-7 mr-2 icon"
   />
 </div>
 

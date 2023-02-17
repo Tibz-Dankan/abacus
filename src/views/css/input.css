@@ -70,15 +70,23 @@
   margin-bottom: 16px;
 }
 
-/* .icon{
+/* .icon {
+  filter: opacity(0.5) drop-shadow(0 0 0 hsl(0, 0%, 100%));
+} */
 
-} */
-/* 
+.icon-profile {
+  filter: opacity(0.45) grayscale(0.8) drop-shadow(0 0 0 #212529);
+}
+.text-profile {
+  color: #495057;
+}
+
 .icon-logout {
-  background-color: hsl(0, 100%, 60%);
-  fill: currentColor;
-  filter: opacity(0.2);
-} */
+  filter: opacity(0.4) drop-shadow(0 0 0 hsl(0, 100%, 50%));
+}
+.text-logout {
+  color: hsl(0, 60%, 30%);
+}
 
 .sidebar {
   position: fixed;
@@ -105,7 +113,7 @@
   height: auto;
 }
 .scrollbar::-webkit-scrollbar-thumb {
-  background: linear-gradient(to bottom, #228be6, #2b8a3e);
+  background: linear-gradient(to bottom, #228be6, #495057);
   border-radius: 0.8rem;
 }
 .scrollbar::-webkit-scrollbar-track {
@@ -118,7 +126,7 @@
   height: auto;
 }
 .scrollbar::-moz-scrollbar-thumb {
-  background: linear-gradient(to bottom, #228be6, #2b8a3e);
+  background: linear-gradient(to bottom, #228be6, #495057);
   border-radius: 0.8rem;
 }
 .scrollbar::-moz-scrollbar-track {
@@ -127,7 +135,7 @@
 
 /* SCROLLBAR STYLES FOR INTERNET EXPLORER */
 .ie ::-ms-thumb {
-  background: linear-gradient(to bottom, #228be6, #2b8a3e);
+  background: linear-gradient(to bottom, #228be6, #495057);
   border-radius: 0.8rem;
 }
 .ie ::-ms-track {
