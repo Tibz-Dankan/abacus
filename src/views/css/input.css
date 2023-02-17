@@ -69,3 +69,67 @@
   width: 100%;
   margin-bottom: 16px;
 }
+
+/* .icon{
+
+} */
+/* 
+.icon-logout {
+  background-color: hsl(0, 100%, 60%);
+  fill: currentColor;
+  filter: opacity(0.2);
+} */
+
+.sidebar {
+  position: fixed;
+  overflow-x: hidden;
+  height: 100%;
+  width: 256px;
+  padding: 24px 0px;
+  background-color: #343a40;
+  color: #e9ecef;
+  transition: 0.45s;
+  z-index: 1000;
+}
+
+/* TODO : To define more styles for mobile devices  */
+@media screen and (max-width: 600px) {
+  .sidebar {
+    left: -256px;
+  }
+}
+
+/* SCROLLBAR STYLES FOR WEBKIT BROWSERS */
+.scrollbar::-webkit-scrollbar {
+  width: 0.4rem;
+  height: auto;
+}
+.scrollbar::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #228be6, #2b8a3e);
+  border-radius: 0.8rem;
+}
+.scrollbar::-webkit-scrollbar-track {
+  background: #212529;
+}
+
+/* SCROLLBAR STYLES FOR FIREFOX */
+.scrollbar::-moz-scrollbar {
+  width: 0.4rem;
+  height: auto;
+}
+.scrollbar::-moz-scrollbar-thumb {
+  background: linear-gradient(to bottom, #228be6, #2b8a3e);
+  border-radius: 0.8rem;
+}
+.scrollbar::-moz-scrollbar-track {
+  background: #212529;
+}
+
+/* SCROLLBAR STYLES FOR INTERNET EXPLORER */
+.ie ::-ms-thumb {
+  background: linear-gradient(to bottom, #228be6, #2b8a3e);
+  border-radius: 0.8rem;
+}
+.ie ::-ms-track {
+  background: #212529;
+}

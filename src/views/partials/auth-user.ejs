@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+<div
+  class="authenticated-user hidden lg:flex items-center gap-4"
+  id="auth-user"
+>
+  <a href="user-profile" class="flex items-center text-greyDark3">
+    <img
+      src="../assets/icons/nav/icon-profile.svg"
+      alt="icon-profile"
+      class="w-5 mr-2 icon"
+    />
+    <span class="font-semibold"><%= signedInUser.name %></span>
+  </a>
+  <a href="signout" class="flex items-center text-greyDark3">
+    <img
+      src="../assets/icons/nav/icon-logout.svg"
+      alt="icon-logout"
+      class="w-5 mr-2 icon-logout"
+    />
+    <span class="font-semibold">Logout</span>
+  </a>
+</div>
+
+<!-- show username on click -->
+<div class="lg:hidden cursor-pointer" onclick="showUser()">
+  <img
+    src="../assets/icons/nav/icon-profile.svg"
+    alt="icon-profile"
+    class="w-7 mr-2 icon"
+  />
+</div>
+
+<!-- show and hide sidebar on mobile screens -->
+<div class="flex justify-center items-center mmd:hidden">
+  <img
+    src="../assets/icons/nav/icon-menu.svg"
+    alt="icon-menu"
+    class="w-8 border-2 border-greyDark3 rounded px-1"
+    id="open-sidebar"
+    onclick="showSidebar()"
+  />
+  <img
+    src="../assets/icons/nav/icon-close.svg"
+    alt="icon-menu"
+    class="hidden w-8 border-2 border-greyDark3 rounded px-1"
+    id="close-sidebar"
+    onclick="showSidebar()"
+  />
+</div>
