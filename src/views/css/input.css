@@ -18,17 +18,16 @@
   padding-top: 0.4rem;
   background-color: #e9ecef;
   color: #212529;
-  border: 4px solid #e9ecef;
   border-bottom: 4px solid #868e96;
-  border-radius: 4px;
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
   outline: none;
 }
 
 .input-field:focus {
   color: #f8f9fa;
   background-color: #495057;
-  border: 4px solid #495057;
-  border-bottom: 4px solid #74c0fc;
+  border-bottom: 4px solid #228be6;
   transition: 0.3s;
 }
 
@@ -36,7 +35,8 @@
   background-color: #228be6;
   padding: 0.6rem 2.4rem;
   font-weight: bold;
-  color: #f8f9fa;
+  /* color: #f8f9fa; */
+  color: #dee2e6;
   border-radius: 4px;
   text-transform: uppercase;
   text-align: center;
@@ -46,4 +46,136 @@
 .submit-btn:hover,
 .submit-btn:focus {
   background-color: #1864ab;
+}
+
+.apply-form {
+  width: 100%;
+}
+@media screen and (min-width: 976px) {
+  .apply-form {
+    width: 576px;
+  }
+}
+
+.link-btn {
+  font-size: 16px;
+  background-color: #2b8a3e;
+  padding: 1rem 2rem;
+  color: #f8f9fa;
+  border-radius: 4px;
+  text-transform: uppercase;
+  text-align: center;
+  outline: none;
+}
+
+.link-btn:hover,
+.link-btn:focus {
+  /* background-color: #495057;
+  background-color: hsl(240, 30%, 50%);
+  background-color: #40c057; */
+  background-color: #1864ab;
+}
+
+.error {
+  color: #343a40;
+  background-color: hsl(0, 100%, 95%);
+  border: 1px solid hsl(0, 100%, 80%);
+  border-radius: 4px;
+  padding: 24px;
+  text-align: center;
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.success {
+  color: #343a40;
+  background-color: hsl(120, 100%, 90%);
+  border: 1px solid hsl(120, 100%, 40%);
+  border-radius: 4px;
+  padding: 24px;
+  text-align: center;
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.icon {
+  color: #e9ecef;
+}
+
+.icon-nav {
+  color: #343a40;
+}
+.icon-menu {
+  color: #228be6;
+}
+
+.icon-profile {
+  color: #495057;
+}
+.text-profile {
+  color: #343a40;
+}
+
+.icon-logout {
+  color: hsl(0, 95%, 40%);
+  position: absolute;
+  top: 11px;
+  left: 7px;
+}
+.text-logout {
+  color: hsl(0, 95%, 40%);
+}
+
+.sidebar {
+  position: fixed;
+  overflow-x: hidden;
+  height: 100%;
+  width: 256px;
+  padding: 24px 0px;
+  background-color: #343a40;
+  color: #e9ecef;
+  transition: 0.45s;
+  z-index: 1000;
+}
+
+/* TODO : To define more styles for mobile devices  */
+@media screen and (max-width: 600px) {
+  .sidebar {
+    left: -256px;
+  }
+}
+
+/* SCROLLBAR STYLES FOR WEBKIT BROWSERS */
+.scrollbar::-webkit-scrollbar {
+  width: 0.4rem;
+  height: auto;
+}
+.scrollbar::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #228be6, #495057);
+  border-radius: 0.8rem;
+}
+.scrollbar::-webkit-scrollbar-track {
+  background: #212529;
+}
+
+/* SCROLLBAR STYLES FOR FIREFOX */
+.scrollbar::-moz-scrollbar {
+  width: 0.4rem;
+  height: auto;
+}
+.scrollbar::-moz-scrollbar-thumb {
+  background: linear-gradient(to bottom, #228be6, #495057);
+  border-radius: 0.8rem;
+}
+.scrollbar::-moz-scrollbar-track {
+  background: #212529;
+}
+
+/* SCROLLBAR STYLES FOR INTERNET EXPLORER */
+.ie ::-ms-thumb {
+  background: linear-gradient(to bottom, #228be6, #495057);
+  border-radius: 0.8rem;
+}
+.ie ::-ms-track {
+  background: #212529;
 }

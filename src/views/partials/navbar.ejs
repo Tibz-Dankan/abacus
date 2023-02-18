@@ -33,7 +33,7 @@
       >Contact</a
     >
     <a
-      href="apply"
+      href="start-applying"
       class="px-4 pb-3 py-2 font-semibold rounded bg-primary text-greyLight1 hover:bg-primaryDark hover:text-greyLight1 delay-100 ease-in-out"
       >Apply Now</a
     >
@@ -49,65 +49,82 @@
     >
   </nav>
   <!-- HANG BURG MENU -->
-  <img
-    src="../assets/icons/nav/icon-menu.svg"
-    alt="icon-menu"
-    class="w-10 text-greyDark4 md:hidden"
-  />
+  <div class="realtive flex justify-end items-center md:hidden">
+    <svg
+      class="icon-menu text-4xl inline-block w-9 h-9"
+      id="mobile-menu"
+      onclick="showMobileNav()"
+    >
+      <use href="../assets/icons/nav/icon-menu.svg#menu"></use>
+    </svg>
+  </div>
 </div>
+
+<!--MARGIN BOTTOM SPACE -->
+<div class="block width mb-36 md:hidden"></div>
+
 <!-- MOBILE NAV  -->
 <nav
   id="mobile-nav"
-  class="md:hidden bg-greyLight2 text-greyDark4 flex flex-col justify-center p-4 mx-8 sm:mx-16 mt-32 space-y-3 shadow-md border-l-8 border-primaryLight rounded"
+  class="hidden md:hidden bg-greyLight2 text-greyDark3 flex-col justify-center p-4 mx-8 sm:mx-16 mt-32 mb-16 shadow-md border-l-8 border-primaryLight rounded"
 >
-  <a href="home" class="flex justify-start items-center">
-    <img
-      src="../assets/icons/nav/icon-home.svg"
-      alt="icon-home"
-      class="w-8 text-greyDark4"
-    />
-    <span class="font-semibold ml-3 text-lg">Home</span>
+  <a href="home" class="flex justify-start items-center py-2 pb-3 relative">
+    <svg
+      class="icon-nav text-2xl inline-block w-6 h-6 mb-2 mr-2 absolute top-2 left-1"
+    >
+      <use href="../assets/icons/nav/icon-home.svg#home"></use>
+    </svg>
+    <span class="font-semibold ml-9">Home</span>
   </a>
-  <a href="services" class="flex justify-start items-center"
-    ><img
-      src="../assets/icons/nav/icon-services.svg"
-      alt="icon-services"
-      class="w-8 text-greyDark4"
-    /><span class="font-semibold ml-3 text-lg">Services</span>
+  <a href="services" class="flex justify-start items-center py-2 pb-3 relative">
+    <svg
+      class="icon-nav text-2xl inline-block w-6 h-6 mb-2 mr-2 absolute top-2 left-1"
+    >
+      <use href="../assets/icons/nav/icon-services.svg#services"></use>
+    </svg>
+    <span class="font-semibold ml-9">Services</span>
   </a>
-  <a href="about" class="flex justify-start items-center"
-    ><img
-      src="../assets/icons/nav/icon-about.svg"
-      alt="icon-about"
-      class="w-8 text-greyDark4"
-    /><span class="font-semibold ml-3 text-lg">About</span>
+  <a href="about" class="flex justify-start items-center py-2 pb-3 relative">
+    <svg
+      class="icon-nav text-2xl inline-block w-6 h-6 mb-2 mr-2 absolute top-2 left-1"
+    >
+      <use href="../assets/icons/nav/icon-about.svg#about"></use>
+    </svg>
+    <span class="font-semibold ml-9">About</span>
   </a>
-  <a href="contact" class="flex justify-start items-center">
-    <img
-      src="../assets/icons/nav/icon-contact.svg"
-      alt="icon-contact"
-      class="w-8 text-greyDark4"
-    /><span class="font-semibold ml-3 text-lg">Contact</span>
+  <a href="contact" class="flex justify-start items-center py-2 pb-3 relative">
+    <svg
+      class="icon-nav text-2xl inline-block w-6 h-6 mb-2 mr-2 absolute top-2 left-1"
+    >
+      <use href="../assets/icons/nav/icon-email.svg#email" class=""></use>
+    </svg>
+    <span class="font-semibold ml-9">Contact</span>
   </a>
-  <a href="apply" class="flex justify-start items-center">
-    <img
-      src="../assets/icons/nav/icon-money.svg"
-      alt="icon-money"
-      class="w-8 text-greyDark4"
-    /><span class="font-semibold ml-3 text-lg">Apply now</span>
+  <a
+    href="start-applying"
+    class="flex justify-start items-center py-2 pb-3 relative"
+  >
+    <svg
+      class="icon-nav text-2xl inline-block w-6 h-6 mb-2 mr-2 absolute top-2 left-1"
+    >
+      <use href="../assets/icons/nav/icon-money.svg#money"></use>
+    </svg>
+    <span class="font-semibold ml-9">Apply now</span>
   </a>
-  <a href="signin" class="flex justify-start items-center">
-    <img
-      src="../assets/icons/nav/icon-login.svg"
-      alt="icon-login"
-      class="w-8 text-greyDark4"
-    /><span class="font-semibold ml-3 text-lg">Login</span>
+  <a href="signin" class="flex justify-start items-center py-2 pb-3 relative">
+    <svg
+      class="icon-nav text-2xl inline-block w-6 h-6 mb-2 mr-2 absolute top-2 left-1"
+    >
+      <use href="../assets/icons/nav/icon-login.svg#login"></use>
+    </svg>
+    <span class="font-semibold ml-9">Login</span>
   </a>
-  <a href="signup" class="flex justify-start items-center">
-    <img
-      src="../assets/icons/nav/icon-register.svg"
-      alt="icon-register"
-      class="w-8 text-greyDark4"
-    /><span class="font-semibold ml-3 text-lg">Signup</span>
+  <a href="signup" class="flex justify-start items-center py-2 pb-3 relative">
+    <svg
+      class="icon-nav text-2xl inline-block w-6 h-6 mb-2 mr-2 absolute top-2 left-1"
+    >
+      <use href="../assets/icons/nav/icon-register.svg#register"></use>
+    </svg>
+    <span class="font-semibold ml-9">Signup</span>
   </a>
 </nav>

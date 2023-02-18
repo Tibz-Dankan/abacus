@@ -11,9 +11,13 @@
     <!-- HEADER SECTION START -->
     <header><%- include('./partials/navbar'); %></header>
     <!-- HEADER SECTION END -->
+  <body class="relative bg-greyLight1 text-base">
+    <!-- HEADER SECTION START -->
+    <header><%- include('./partials/navbar'); %></header>
+    <!-- HEADER SECTION END -->
 
     <!-- MAIN CONTENT START -->
-    <main class="mt-16 md:mt-32 mb-8">
+    <main class="md:mt-32 mb-8">
       <!-- CONTACT FORM START -->
       <div
         class="mx-8 sm:mx-16 lg:my-16 flex flex-col justify-between lg:flex-row lg:gap-32 lg:justify-between"
@@ -62,6 +66,10 @@
         <div class="mt-10 lg:mt-14">
           <div class="flex items-start mb-6">
             <span class="mr-4">icon</span>
+            <!-- <span class="mr-4">icon</span> -->
+            <svg class="text-3xl text-greyDark2 inline-block w-14 h-14">
+              <use href="../assets/icons/nav/icon-home.svg#home"></use>
+            </svg>
             <div>
               <p class="font-semibold">Kampala, Uganda.</p>
               <p class="text-greyDark2">4th floor, The Acacia Mall</p>
@@ -71,6 +79,10 @@
           </div>
           <div class="flex items-start mb-6">
             <span class="mr-4">icon</span>
+            <!-- <span class="mr-4">icon</span> -->
+            <svg class="text-3xl text-greyDark2 inline-block w-14 h-14">
+              <use href="../assets/icons/nav/icon-phone.svg#phone"></use>
+            </svg>
             <div>
               <p class="font-semibold">0800113213 | +256 759938344</p>
               <p class="text-greyDark2">Mon to Fri 9am to 6pm</p>
@@ -78,6 +90,10 @@
           </div>
           <div class="flex items-start mb-6">
             <span class="mr-4">icon</span>
+            <!-- <span class="mr-4">icon</span> -->
+            <svg class="text-3xl text-greyDark2 inline-block w-14 h-14">
+              <use href="../assets/icons/nav/icon-email.svg#email"></use>
+            </svg>
             <div>
               <p class="font-semibold">abacusuganda20@gmail.com</p>
               <p class="text-greyDark2">Send us your query anytime!</p>
@@ -93,5 +109,7 @@
     <!-- FOOTER SECTION START -->
     <%- include('./partials/footer'); %>
     <!-- FOOTER SECTION END -->
+
+    <script src="./partials/navbar.js"></script>
   </body>
 </html>

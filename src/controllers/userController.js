@@ -25,10 +25,10 @@ const signUpPage = (req) => {
 const assignToken = (userId, userName, userRole) => {
   return jwt.sign(
     { userId, userName, userRole },
-    process.env.JWT_SECRETE_TOKEN,
-    {
-      expiresIn: "15m",
-    }
+    process.env.JWT_SECRETE_TOKEN
+    // {
+    //   expiresIn: "15m",
+    // }
   );
 };
 

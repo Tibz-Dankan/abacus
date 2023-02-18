@@ -13,8 +13,8 @@
     <header class="">
       <%- include('./partials/navbar'); %>
 
-      <div class="flex items-center z-10 md:mt-16 lg:mt-20">
-        <div class="flex flex-col space-y-8 p-8 sm:p-16">
+      <div class="flex items-center z-10 md:mt-32">
+        <div class="flex flex-col space-y-8 px-8 pb-8 sm:px-16 sm:pb-16">
           <p class="font-bold text-secondary text-lg">
             Achieve your financial goal
           </p>
@@ -42,16 +42,22 @@
         class="hidden bg-primary sm:grid grid-cols-3 items-center gap-4 text-xl mx-16 py-6 pt-4 px-4 text-greyLight1 rounded"
       >
         <div class="flex flex-col items-center md:flex-row justify-center">
-          <span>Icon</span>
-          <span>Quick</span>
+          <svg class="text-6xl inline-block w-14 h-14">
+            <use href="../assets/icons/nav/icon-clock.svg#clock"></use>
+          </svg>
+          <span class="md:ml-2">Quick</span>
         </div>
         <div class="flex flex-col items-center md:flex-row justify-center">
-          <span>Icon</span>
-          <span>Easy</span>
+          <svg class="text-6xl inline-block w-14 h-14">
+            <use href="../assets/icons/nav/icon-thumb.svg#thumb"></use>
+          </svg>
+          <span class="md:ml-2">Easy</span>
         </div>
         <div class="flex flex-col items-center md:flex-row justify-center">
-          <span>Icon</span>
-          <span class="text-center">Loan approvals</span>
+          <svg class="text-6xl inline-block w-14 h-14">
+            <use href="../assets/icons/nav/icon-dollar.svg#dollar"></use>
+          </svg>
+          <span class="text-center md:ml-2">Loan approvals</span>
         </div>
       </section>
 
@@ -359,13 +365,6 @@
     <%- include('./partials/footer'); %>
     <!-- FOOTER SECTION END-->
 
-    <script
-      type="module"
-      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
-    ></script>
-    <script
-      nomodule
-      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
-    ></script>
+    <script src="./partials/navbar.js"></script>
   </body>
 </html>
