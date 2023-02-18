@@ -48,6 +48,15 @@
   background-color: #1864ab;
 }
 
+.apply-form {
+  width: 100%;
+}
+@media screen and (min-width: 976px) {
+  .apply-form {
+    width: 576px;
+  }
+}
+
 .link-btn {
   font-size: 16px;
   background-color: #2b8a3e;
