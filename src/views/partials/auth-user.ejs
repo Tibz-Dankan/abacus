@@ -4,50 +4,47 @@
   class="authenticated-user hidden lg:flex items-center gap-4"
   id="auth-user"
 >
-  <a href="user-profile" class="flex items-center text-greyDark3">
-    <img
-      src="../assets/icons/nav/icon-profile.svg"
-      alt="icon-profile"
-      class="icon-profile w-7 mr-1 mmd:mr-2"
-    />
-    <span class="font-semibold text-profile"><%= signedInUser.name %></span>
+  <a href="user-profile" class="flex items-center relative">
+    <svg class="icon-profile text-3xl inline-block w-8 h-8">
+      <use href="../assets/icons/nav/icon-profile.svg#profile"></use>
+    </svg>
+    <span class="text-profile ml-2"><%= signedInUser.name %></span>
   </a>
   <a
     href="signout"
-    class="bg-gray-100 hover:bg-greyLight2 flex justify-center items-center text-greyDark3 px-3 py-2 pb-3 shadow-md rounded-full"
+    class="relative bg-gray-100 hover:bg-greyLight2 flex justify-center items-center text-greyDark3 px-3 py-2 pb-3 shadow-md rounded-full"
   >
-    <img
-      src="../assets/icons/nav/icon-logout.svg"
-      alt="icon-logout"
-      class="icon-logout w-5 mr-2"
-    />
-    <span class="font-semibold text-logout">Logout</span>
+    <svg class="icon-logout text-xl inline-block w-9 h-9">
+      <use href="../assets/icons/nav/icon-logout.svg#logout"></use>
+    </svg>
+    <span class="text-logout ml-5">Logout</span>
   </a>
 </div>
 
 <!-- show username on click -->
-<div class="lg:hidden cursor-pointer" onclick="showUser()">
-  <img
-    src="../assets/icons/nav/icon-profile.svg"
-    alt="icon-profile"
-    class="icon-profile w-7 mr-2 icon"
-  />
+<div
+  class="lg:hidden cursor-pointer flex justify-center items-center"
+  onclick="showUser()"
+>
+  <svg class="icon-profile text-3xl inline-block w-8 h-8">
+    <use href="../assets/icons/nav/icon-profile.svg#profile"></use>
+  </svg>
 </div>
 
 <!-- show and hide sidebar on mobile screens -->
-<div class="flex justify-center items-center mmd:hidden">
-  <img
-    src="../assets/icons/nav/icon-menu.svg"
-    alt="icon-menu"
-    class="w-8 border-2 border-greyDark3 rounded px-1"
+<div class="flex justify-center items-center mmd:hidden mx-1">
+  <svg
+    class="icon-profile border-2 border-greyDark3 rounded text-2xl w-7 h-7"
     id="open-sidebar"
     onclick="showSidebar()"
-  />
-  <img
-    src="../assets/icons/nav/icon-close.svg"
-    alt="icon-menu"
-    class="hidden w-8 border-2 border-greyDark3 rounded px-1"
+  >
+    <use href="../assets/icons/nav/icon-menu.svg#menu"></use>
+  </svg>
+  <svg
+    class="icon-profile hidden border-2 border-greyDark3 rounded text-2xl w-7 h-7"
     id="close-sidebar"
     onclick="showSidebar()"
-  />
+  >
+    <use href="../assets/icons/nav/icon-close.svg#close"></use>
+  </svg>
 </div>
