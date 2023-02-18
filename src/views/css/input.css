@@ -35,7 +35,8 @@
   background-color: #228be6;
   padding: 0.6rem 2.4rem;
   font-weight: bold;
-  color: #f8f9fa;
+  /* color: #f8f9fa; */
+  color: #dee2e6;
   border-radius: 4px;
   text-transform: uppercase;
   text-align: center;
@@ -44,6 +45,25 @@
 
 .submit-btn:hover,
 .submit-btn:focus {
+  background-color: #1864ab;
+}
+
+.link-btn {
+  font-size: 16px;
+  background-color: #2b8a3e;
+  padding: 1rem 2rem;
+  color: #f8f9fa;
+  border-radius: 4px;
+  text-transform: uppercase;
+  text-align: center;
+  outline: none;
+}
+
+.link-btn:hover,
+.link-btn:focus {
+  /* background-color: #495057;
+  background-color: hsl(240, 30%, 50%);
+  background-color: #40c057; */
   background-color: #1864ab;
 }
 

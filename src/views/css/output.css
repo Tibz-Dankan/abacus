@@ -883,10 +883,6 @@ video {
   height: 2.25rem;
 }
 
-.h-96 {
-  height: 24rem;
-}
-
 .h-full {
   height: 100%;
 }
@@ -1021,6 +1017,10 @@ video {
 
 .justify-between {
   justify-content: space-between;
+}
+
+.gap-2 {
+  gap: 0.5rem;
 }
 
 .gap-3 {
@@ -1174,6 +1174,10 @@ video {
   padding: 1.5rem;
 }
 
+.p-8 {
+  padding: 2rem;
+}
+
 .px-16 {
   padding-left: 4rem;
   padding-right: 4rem;
@@ -1251,6 +1255,10 @@ video {
 
 .pb-8 {
   padding-bottom: 2rem;
+}
+
+.pb-9 {
+  padding-bottom: 2.25rem;
 }
 
 .pl-2 {
@@ -1385,6 +1393,11 @@ video {
   color: rgb(233 236 239 / var(--tw-text-opacity));
 }
 
+.text-greyLight3 {
+  --tw-text-opacity: 1;
+  color: rgb(222 226 230 / var(--tw-text-opacity));
+}
+
 .text-primary {
   --tw-text-opacity: 1;
   color: rgb(34 139 230 / var(--tw-text-opacity));
@@ -1477,6 +1490,10 @@ video {
   _: =><%#@;
 }
 
+/* .main-section {
+  min-height: 60vh;
+} */
+
 .footer-bg-image {
   background-image: url("../assets/img/gallery/footer_bg.jpg");
   background-size: cover;
@@ -1510,7 +1527,8 @@ video {
   background-color: #228be6;
   padding: 0.6rem 2.4rem;
   font-weight: bold;
-  color: #f8f9fa;
+  /* color: #f8f9fa; */
+  color: #dee2e6;
   border-radius: 4px;
   text-transform: uppercase;
   text-align: center;
@@ -1519,6 +1537,25 @@ video {
 
 .submit-btn:hover,
 .submit-btn:focus {
+  background-color: #1864ab;
+}
+
+.link-btn {
+  font-size: 16px;
+  background-color: #2b8a3e;
+  padding: 1rem 2rem;
+  color: #f8f9fa;
+  border-radius: 4px;
+  text-transform: uppercase;
+  text-align: center;
+  outline: none;
+}
+
+.link-btn:hover,
+.link-btn:focus {
+  /* background-color: #495057;
+  background-color: hsl(240, 30%, 50%);
+  background-color: #40c057; */
   background-color: #1864ab;
 }
 
@@ -1667,6 +1704,14 @@ video {
     margin-right: 1.5rem;
   }
 
+  .sm\:mb-8 {
+    margin-bottom: 2rem;
+  }
+
+  .sm\:mb-0 {
+    margin-bottom: 0px;
+  }
+
   .sm\:grid {
     display: grid;
   }
@@ -1677,6 +1722,18 @@ video {
 
   .sm\:w-40 {
     width: 10rem;
+  }
+
+  .sm\:w-auto {
+    width: auto;
+  }
+
+  .sm\:flex-row {
+    flex-direction: row;
+  }
+
+  .sm\:p-8 {
+    padding: 2rem;
   }
 
   .sm\:px-16 {
@@ -1730,6 +1787,11 @@ video {
   .mmd\:px-16 {
     padding-left: 4rem;
     padding-right: 4rem;
+  }
+
+  .mmd\:px-2 {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
   }
 
   .mmd\:px-20 {
@@ -1794,9 +1856,18 @@ video {
     padding-right: 4rem;
   }
 
+  .md\:px-4 {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
   .md\:px-8 {
     padding-left: 2rem;
     padding-right: 2rem;
+  }
+
+  .md\:pb-9 {
+    padding-bottom: 2.25rem;
   }
 }
 
