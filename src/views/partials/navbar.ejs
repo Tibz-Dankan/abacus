@@ -49,21 +49,24 @@
     >
   </nav>
   <!-- HANG BURG MENU -->
-  <div class="realtive flex justify-end items-center">
-    <!-- <img
-      src="../assets/icons/nav/icon-menu.svg"
-      alt="icon-menu"
-      class="w-10 text-greyDark4 md:hidden"
-    /> -->
-    <svg class="icon-menu text-4xl inline-block w-9 h-9">
+  <div class="realtive flex justify-end items-center md:hidden">
+    <svg
+      class="icon-menu text-4xl inline-block w-9 h-9"
+      id="mobile-menu"
+      onclick="showMobileNav()"
+    >
       <use href="../assets/icons/nav/icon-menu.svg#menu"></use>
     </svg>
   </div>
 </div>
+
+<!--MARGIN BOTTOM SPACE -->
+<div class="block width mb-36 md:hidden"></div>
+
 <!-- MOBILE NAV  -->
 <nav
   id="mobile-nav"
-  class="md:hidden bg-greyLight2 text-greyDark3 flex flex-col justify-center p-4 mx-8 sm:mx-16 mt-32 shadow-md border-l-8 border-primaryLight rounded"
+  class="hidden md:hidden bg-greyLight2 text-greyDark3 flex-col justify-center p-4 mx-8 sm:mx-16 mt-32 mb-16 shadow-md border-l-8 border-primaryLight rounded"
 >
   <a href="home" class="flex justify-start items-center py-2 pb-3 relative">
     <svg
