@@ -70,22 +70,32 @@
   margin-bottom: 16px;
 }
 
-/* .icon {
-  filter: opacity(0.5) drop-shadow(0 0 0 hsl(0, 0%, 100%));
-} */
+.icon {
+  color: #e9ecef;
+}
+
+.icon-nav {
+  color: #343a40;
+}
+.icon-menu {
+  color: #228be6;
+}
 
 .icon-profile {
-  filter: opacity(0.45) grayscale(0.8) drop-shadow(0 0 0 #212529);
+  color: #495057;
 }
 .text-profile {
-  color: #495057;
+  color: #343a40;
 }
 
 .icon-logout {
-  filter: opacity(0.4) drop-shadow(0 0 0 hsl(0, 100%, 50%));
+  color: hsl(0, 95%, 40%);
+  position: absolute;
+  top: 11px;
+  left: 7px;
 }
 .text-logout {
-  color: hsl(0, 60%, 30%);
+  color: hsl(0, 95%, 40%);
 }
 
 .sidebar {
