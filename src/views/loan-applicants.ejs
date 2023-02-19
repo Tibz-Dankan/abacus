@@ -32,76 +32,78 @@
       <!-- HEADER SECTION END -->
 
       <!-- MAIN CONTENT START -->
-      <main class="flex justify-center items-center my-12">
+      <main class="flex justify-center items-center my-28">
         <div
           class="mx-8 sm:mx-16 rounded w-full flex flex-col justify-center items-center"
         >
           <% if(message){ %>
           <p class="error"><%= message%></p>
           <% } %>
-          <p class="font-semibold text-lg mb-4 uppercase text-greyDark2">
+          <p class="font-semibold pl-4 text-lg mb-4 uppercase text-greyDark2">
             Loan applicants
           </p>
           <!-- table of loan applicants -->
-          <table class="table-element shadow-md">
-            <thead>
-              <tr class="">
-                <th>#</th>
-                <th>FirstName</th>
-                <th>LastName</th>
-                <th>Date</th>
-                <th>Approval</th>
-                <th>Details</th>
-              </tr>
-            </thead>
-            <tbody>
-              <% loanApplicants.map((applicant, index)=>{ %> <%
-              if(applicant.is_read){ %>
-              <!-- Application read -->
-              <tr class="bg-greyLight2">
-                <td class=""><%= index+1 %></td>
-                <td><%= applicant.first_name %></td>
-                <td class=""><%= applicant.last_name %></td>
-                <td>Date</td>
-                <td>pending</td>
-                <td>
-                  <form action="/single-loan-application" method="get">
-                    <button
-                      name="loanId"
-                      value="<%= applicant.loan_id%>"
-                      type="submit"
-                      class="bg-green-700 hover:bg-green-600 rounded text-greyLight2 px-2 pb-1"
-                    >
-                      More
-                    </button>
-                  </form>
-                </td>
-              </tr>
-              <%}else{ %>
+          <div class="px-4 lg:px-6 w-full scrollbar-x overflow-x-auto">
+            <table class="table-element shadow-md">
+              <thead>
+                <tr class="">
+                  <th>#</th>
+                  <th>FirstName</th>
+                  <th>LastName</th>
+                  <th>Date</th>
+                  <th>Approval</th>
+                  <th>Details</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% loanApplicants.map((applicant, index)=>{ %> <%
+                if(applicant.is_read){ %>
+                <!-- Application read -->
+                <tr class="bg-greyLight2">
+                  <td class=""><%= index+1 %></td>
+                  <td><%= applicant.first_name %></td>
+                  <td class=""><%= applicant.last_name %></td>
+                  <td>Date</td>
+                  <td>pending</td>
+                  <td>
+                    <form action="/single-loan-application" method="get">
+                      <button
+                        name="loanId"
+                        value="<%= applicant.loan_id%>"
+                        type="submit"
+                        class="bg-green-700 hover:bg-green-600 rounded text-greyLight2 px-2 pb-1"
+                      >
+                        More
+                      </button>
+                    </form>
+                  </td>
+                </tr>
+                <%}else{ %>
 
-              <!-- Application not read -->
-              <tr class="bg-greyLight4 font-bold">
-                <td class=""><%= index+1 %></td>
-                <td><%= applicant.first_name %></td>
-                <td class=""><%= applicant.last_name %></td>
-                <td>Date</td>
-                <td>pending</td>
-                <td>
-                  <form action="/single-loan-application" method="get">
-                    <button
-                      name="loanId"
-                      value="<%= applicant.loan_id%>"
-                      type="submit"
-                      class="bg-green-700 hover:bg-green-600 rounded text-greyLight2 px-2 pb-1"
-                    >
-                      More
-                    </button>
-                  </form>
-                </td>
-              </tr>
-              <% }%> <%}) %>
-            </tbody>
-          </table>
+                <!-- Application not read -->
+                <tr class="bg-greyLight4 font-bold">
+                  <td class=""><%= index+1 %></td>
+                  <td><%= applicant.first_name %></td>
+                  <td class=""><%= applicant.last_name %></td>
+                  <td>Date</td>
+                  <td>pending</td>
+                  <td>
+                    <form action="/single-loan-application" method="get">
+                      <button
+                        name="loanId"
+                        value="<%= applicant.loan_id%>"
+                        type="submit"
+                        class="bg-green-700 hover:bg-green-600 rounded text-greyLight2 px-2 pb-1"
+                      >
+                        More
+                      </button>
+                    </form>
+                  </td>
+                </tr>
+                <% }%> <%}) %>
+              </tbody>
+            </table>
+          </div>
         </div>
       </main>
       <!-- MAIN CONTENT END -->

@@ -32,59 +32,61 @@
       <!-- HEADER SECTION END -->
 
       <!-- MAIN CONTENT START -->
-      <main class="flex justify-center items-center my-12">
+      <main class="flex justify-center items-center my-20">
         <div
           class="mx-8 sm:mx-16 rounded w-full flex flex-col justify-center items-center"
         >
           <% if(message){ %>
           <p class="error"><%= message%></p>
           <% } %>
-          <p class="font-semibold text-lg mb-4 uppercase text-greyDark2">
+          <p class="font-semibold text-lg pl-4 mb-4 uppercase text-greyDark2">
             <%= saccoApplication?.first_name %>'s sacco application
           </p>
           <!-- table of single loan application -->
-          <table class="table-element shadow-md">
-            <thead>
-              <tr class="">
-                <th scope="col">Label</th>
-                <th scope="col">Value</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr class="bg-greyLight2">
-                <td>First name</td>
-                <td><%= saccoApplication.first_name %></td>
-              </tr>
-              <tr class="bg-greyLight2">
-                <td>Last name</td>
-                <td><%= saccoApplication.last_name %></td>
-              </tr>
-              <tr class="bg-greyLight2">
-                <td>Gender</td>
-                <td><%= saccoApplication.gender %></td>
-              </tr>
-              <tr class="bg-greyLight2">
-                <td>Job</td>
-                <td><%= saccoApplication.job %></td>
-              </tr>
-              <tr class="bg-greyLight2">
-                <td>City/Town</td>
-                <td><%= saccoApplication.city %></td>
-              </tr>
-              <tr class="bg-greyLight2">
-                <td>Phone number</td>
-                <td><%= saccoApplication.phone_number %></td>
-              </tr>
-              <!-- <tr class="bg-greyLight2">
+          <div class="px-4 lg:px-6 w-full scrollbar-x overflow-x-auto">
+            <table class="table-element shadow-md">
+              <thead>
+                <tr>
+                  <th>Label</th>
+                  <th>Value</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="bg-greyLight2">
+                  <td>First name</td>
+                  <td><%= saccoApplication.first_name %></td>
+                </tr>
+                <tr class="bg-greyLight2">
+                  <td>Last name</td>
+                  <td><%= saccoApplication.last_name %></td>
+                </tr>
+                <tr class="bg-greyLight2">
+                  <td>Gender</td>
+                  <td><%= saccoApplication.gender %></td>
+                </tr>
+                <tr class="bg-greyLight2">
+                  <td>Job</td>
+                  <td><%= saccoApplication.job %></td>
+                </tr>
+                <tr class="bg-greyLight2">
+                  <td>City/Town</td>
+                  <td><%= saccoApplication.city %></td>
+                </tr>
+                <tr class="bg-greyLight2">
+                  <td>Phone number</td>
+                  <td><%= saccoApplication.phone_number %></td>
+                </tr>
+                <!-- <tr class="bg-greyLight2">
                 <td>Date</td>
                 <td><%= saccoApplication.phone_number %></td>
               </tr> -->
-              <!-- <tr class="bg-greyLight2">
+                <!-- <tr class="bg-greyLight2">
                 <td>Action</td>
                 <td>form to Approval</td>
               </tr> -->
-            </tbody>
-          </table>
+              </tbody>
+            </table>
+          </div>
         </div>
       </main>
       <!-- MAIN CONTENT END -->

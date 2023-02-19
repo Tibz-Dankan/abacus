@@ -33,48 +33,48 @@
 
       <!-- MAIN CONTENT START -->
       <main class="flex justify-center items-center my-28">
-        <div
-          class="mx-8 sm:mx-16 rounded w-full flex flex-col justify-center items-center overflow-x-auto scrollbar-x"
-        >
+        <div class="mx-8 sm:mx-16 rounded w-full flex flex-col justify-center">
           <% if(message){ %>
           <p class="error"><%= message%></p>
           <% } %>
 
-          <p class="font-semibold text-lg mb-4 uppercase text-greyDark2">
+          <p class="font-semibold text-lg pl-4 mb-4 uppercase text-greyDark2">
             My loan application(s)
           </p>
           <!-- table of loan applicants -->
-          <table class="table-element shadow-md">
-            <thead>
-              <tr class="">
-                <th>#</th>
-                <th>FirstName</th>
-                <th>LastName</th>
-                <th>Gender</th>
-                <th>City/Town</th>
-                <th>Amount</th>
-                <th>Phone</th>
-                <th>Date</th>
-                <th>Settlement</th>
-              </tr>
-            </thead>
-            <tbody>
-              <% myLoanData.map((loanData,index)=>{ %>
-              <tr class="bg-greyLight2">
-                <th><%= index+1 %></th>
-                <td><%= loanData.first_name %></td>
-                <td><%= loanData.last_name %></td>
-                <td><%= loanData.gender %></td>
-                <td><%= loanData.city %></td>
-                <td><%= loanData.loan_amount %></td>
-                <td><%= loanData.phone_number %></td>
-                <td>Date</td>
-                <!-- Settlement to be changed to approval -->
-                <td><%= loanData.is_settled? "Settled" : "Pending" %></td>
-              </tr>
-              <%}) %>
-            </tbody>
-          </table>
+          <div class="px-4 lg:px-6 w-full scrollbar-x overflow-x-auto">
+            <table class="table-element shadow-md">
+              <thead>
+                <tr class="">
+                  <th>#</th>
+                  <th>FirstName</th>
+                  <th>LastName</th>
+                  <th>Gender</th>
+                  <th>City/Town</th>
+                  <th>Amount</th>
+                  <th>Phone</th>
+                  <th>Date</th>
+                  <th>Settlement</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% myLoanData.map((loanData,index)=>{ %>
+                <tr class="bg-greyLight2">
+                  <th><%= index+1 %></th>
+                  <td><%= loanData.first_name %></td>
+                  <td><%= loanData.last_name %></td>
+                  <td><%= loanData.gender %></td>
+                  <td><%= loanData.city %></td>
+                  <td><%= loanData.loan_amount %></td>
+                  <td><%= loanData.phone_number %></td>
+                  <td>Date</td>
+                  <!-- Settlement to be changed to approval -->
+                  <td><%= loanData.is_settled? "Settled" : "Pending" %></td>
+                </tr>
+                <%}) %>
+              </tbody>
+            </table>
+          </div>
         </div>
       </main>
       <!-- MAIN CONTENT END -->

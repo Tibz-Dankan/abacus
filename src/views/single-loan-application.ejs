@@ -32,63 +32,65 @@
       <!-- HEADER SECTION END -->
 
       <!-- MAIN CONTENT START -->
-      <main class="flex justify-center items-center my-12">
+      <main class="flex justify-center items-center my-20">
         <div
-          class="mx-8 sm:mx-16 rounded w-full flex flex-col justify-center items-center"
+          class="mx-8 sm:mx-16 rounded w-full flex flex-col justify-center items-cente"
         >
           <% if(message){ %>
           <p class="error"><%= message%></p>
           <% } %>
-          <p class="font-semibold text-lg mb-4 uppercase text-greyDark2">
+          <p class="font-semibold pl-4 text-lg mb-4 uppercase text-greyDark2">
             <%= loanApplication?.first_name %>'s loan application
           </p>
           <!-- table of single loan application -->
-          <table class="table-element shadow-md">
-            <thead>
-              <tr class="">
-                <th scope="col">Label</th>
-                <th scope="col">Value</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr class="bg-greyLight2">
-                <td>First name</td>
-                <td><%= loanApplication.first_name %></td>
-              </tr>
-              <tr class="bg-greyLight2">
-                <td>Last name</td>
-                <td><%= loanApplication.last_name %></td>
-              </tr>
-              <tr class="bg-greyLight2">
-                <td>Gender</td>
-                <td><%= loanApplication.gender %></td>
-              </tr>
-              <tr class="bg-greyLight2">
-                <td>Job</td>
-                <td><%= loanApplication.job %></td>
-              </tr>
-              <tr class="bg-greyLight2">
-                <td>City/Town</td>
-                <td><%= loanApplication.city %></td>
-              </tr>
-              <tr class="bg-greyLight2">
-                <td>Loan amount</td>
-                <td><%= loanApplication.loan_amount %></td>
-              </tr>
-              <tr class="bg-greyLight2">
-                <td>Phone number</td>
-                <td><%= loanApplication.phone_number %></td>
-              </tr>
-              <!-- <tr class="bg-greyLight2">
+          <div class="px-4 lg:px-6 w-full scrollbar-x overflow-x-auto">
+            <table class="table-element shadow-md">
+              <thead>
+                <tr class="">
+                  <th scope="col">Label</th>
+                  <th scope="col">Value</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="bg-greyLight2">
+                  <td>First name</td>
+                  <td><%= loanApplication.first_name %></td>
+                </tr>
+                <tr class="bg-greyLight2">
+                  <td>Last name</td>
+                  <td><%= loanApplication.last_name %></td>
+                </tr>
+                <tr class="bg-greyLight2">
+                  <td>Gender</td>
+                  <td><%= loanApplication.gender %></td>
+                </tr>
+                <tr class="bg-greyLight2">
+                  <td>Job</td>
+                  <td><%= loanApplication.job %></td>
+                </tr>
+                <tr class="bg-greyLight2">
+                  <td>City/Town</td>
+                  <td><%= loanApplication.city %></td>
+                </tr>
+                <tr class="bg-greyLight2">
+                  <td>Loan amount</td>
+                  <td><%= loanApplication.loan_amount %></td>
+                </tr>
+                <tr class="bg-greyLight2">
+                  <td>Phone number</td>
+                  <td><%= loanApplication.phone_number %></td>
+                </tr>
+                <!-- <tr class="bg-greyLight2">
                 <td>Date</td>
                 <td><%= loanApplication.phone_number %></td>
               </tr> -->
-              <!-- <tr class="bg-greyLight2">
+                <!-- <tr class="bg-greyLight2">
                 <td>Action</td>
                 <td>form to Approval</td>
               </tr> -->
-            </tbody>
-          </table>
+              </tbody>
+            </table>
+          </div>
         </div>
       </main>
       <!-- MAIN CONTENT END -->

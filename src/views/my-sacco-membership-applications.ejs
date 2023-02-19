@@ -32,7 +32,7 @@
       <!-- HEADER SECTION END -->
 
       <!-- MAIN CONTENT START -->
-      <main class="flex justify-center items-center my-12">
+      <main class="flex justify-center items-center my-28">
         <div
           class="mx-8 sm:mx-16 rounded w-full flex flex-col justify-center items-center"
         >
@@ -40,40 +40,42 @@
           <p class="error"><%= message%></p>
           <% } %>
 
-          <p class="font-semibold text-lg mb-4 uppercase text-greyDark2">
+          <p class="font-semibold text-lg pl-4 mb-4 uppercase text-greyDark2">
             My Sacco application
           </p>
           <!-- table of loan applicants -->
-          <table class="table-element shadow-md">
-            <thead>
-              <tr></tr>
-              <tr>
-                <th>#</th>
-                <th>FirstName</th>
-                <th>LastName</th>
-                <th>Gender</th>
-                <th>City/Town</th>
-                <th>PhoneNumber</th>
-                <th>Date</th>
-                <th>Acceptance</th>
-              </tr>
-            </thead>
-            <tbody>
-              <% mySaccoData.map((saccoData,index)=>{ %>
-              <tr class="bg-greyLight2">
-                <th scope="row"><%= index+1 %></th>
-                <td><%= saccoData.first_name %></td>
-                <td><%= saccoData.last_name %></td>
-                <td><%= saccoData.gender %></td>
-                <td><%= saccoData.city %></td>
-                <td><%= saccoData.phone_number %></td>
-                <td>Date</td>
-                <!-- To be changed from acceptance to approval -->
-                <td><%= saccoData.is_accepted? "Accepted" : "Pending" %></td>
-              </tr>
-              <%}) %>
-            </tbody>
-          </table>
+          <div class="px-4 lg:px-6 w-full scrollbar-x overflow-x-auto">
+            <table class="table-element shadow-md">
+              <thead>
+                <tr></tr>
+                <tr>
+                  <th>#</th>
+                  <th>FirstName</th>
+                  <th>LastName</th>
+                  <th>Gender</th>
+                  <th>City/Town</th>
+                  <th>PhoneNumber</th>
+                  <th>Date</th>
+                  <th>Acceptance</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% mySaccoData.map((saccoData,index)=>{ %>
+                <tr class="bg-greyLight2">
+                  <th scope="row"><%= index+1 %></th>
+                  <td><%= saccoData.first_name %></td>
+                  <td><%= saccoData.last_name %></td>
+                  <td><%= saccoData.gender %></td>
+                  <td><%= saccoData.city %></td>
+                  <td><%= saccoData.phone_number %></td>
+                  <td>Date</td>
+                  <!-- To be changed from acceptance to approval -->
+                  <td><%= saccoData.is_accepted? "Accepted" : "Pending" %></td>
+                </tr>
+                <%}) %>
+              </tbody>
+            </table>
+          </div>
         </div>
       </main>
       <!-- MAIN CONTENT END -->
