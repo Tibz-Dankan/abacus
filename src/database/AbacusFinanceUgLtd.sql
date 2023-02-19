@@ -55,6 +55,8 @@ CREATE TABLE sacco_membership (
 );
 
 -- ALTER TABLE users ADD user_role VARCHAR(20) NOT NULL DEFAULT 'client'; 
--- ALTER TABLE loan_applications RENAME loan_mount TO loan_amount; -- To be done colleagues computer 
+-- ALTER TABLE loan_applications RENAME loan_mount TO loan_amount; -- To be done colleagues computer
+-- ALTER TABLE loan_applications DROP COLUMN loan_category; -- To be run against production database
+
 
 
