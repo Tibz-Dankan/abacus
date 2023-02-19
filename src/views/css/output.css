@@ -680,6 +680,16 @@ video {
   margin-bottom: 2rem;
 }
 
+.my-20 {
+  margin-top: 5rem;
+  margin-bottom: 5rem;
+}
+
+.my-28 {
+  margin-top: 7rem;
+  margin-bottom: 7rem;
+}
+
 .mb-0 {
   margin-bottom: 0px;
 }
@@ -1064,6 +1074,10 @@ video {
   --tw-space-y-reverse: 0;
   margin-top: calc(2rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(2rem * var(--tw-space-y-reverse));
+}
+
+.overflow-x-auto {
+  overflow-x: auto;
 }
 
 .overflow-x-hidden {
@@ -1720,13 +1734,58 @@ video {
 
 /* SCROLLBAR STYLES FOR INTERNET EXPLORER */
 
-.ie ::-ms-thumb {
+.scrollbar ::-ms-thumb {
   background: linear-gradient(to bottom, #228be6, #495057);
   border-radius: 0.8rem;
 }
 
-.ie ::-ms-track {
+.scrollbar ::-ms-track {
   background: #212529;
+}
+
+/* HORIZONTAL SCROLLBAR */
+
+/* SCROLLBAR STYLES FOR WEBKIT BROWSERS */
+
+.scrollbar-x::-webkit-scrollbar {
+  width: auto;
+  height: 0.4rem;
+}
+
+.scrollbar-x::-webkit-scrollbar-thumb {
+  background: linear-gradient(to right, #228be6, #495057);
+  border-radius: 0.8rem;
+}
+
+.scrollbar-x::-webkit-scrollbar-track {
+  background: #e9ecef;
+}
+
+/* SCROLLBAR STYLES FOR FIREFOX */
+
+.scrollbar-x::-moz-scrollbar {
+  width: auto;
+  height: 0.4rem;
+}
+
+.scrollbar-x::-moz-scrollbar-thumb {
+  background: linear-gradient(to right, #228be6, #495057);
+  border-radius: 0.8rem;
+}
+
+.scrollbar-x::-moz-scrollbar-track {
+  background: #e9ecef;
+}
+
+/* SCROLLBAR STYLES FOR INTERNET EXPLORER */
+
+.scrollbar-x::-ms-thumb {
+  background: linear-gradient(to right, #228be6, #495057);
+  border-radius: 0.8rem;
+}
+
+.scrollbar-x::-ms-track {
+  background: #e9ecef;
 }
 
 .hover\:bg-green-600:hover {

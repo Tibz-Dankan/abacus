@@ -208,10 +208,47 @@
 }
 
 /* SCROLLBAR STYLES FOR INTERNET EXPLORER */
-.ie ::-ms-thumb {
+.scrollbar ::-ms-thumb {
   background: linear-gradient(to bottom, #228be6, #495057);
   border-radius: 0.8rem;
 }
-.ie ::-ms-track {
+.scrollbar ::-ms-track {
   background: #212529;
+}
+
+/* HORIZONTAL SCROLLBAR */
+
+/* SCROLLBAR STYLES FOR WEBKIT BROWSERS */
+.scrollbar-x::-webkit-scrollbar {
+  width: auto;
+  height: 0.4rem;
+}
+.scrollbar-x::-webkit-scrollbar-thumb {
+  background: linear-gradient(to right, #228be6, #495057);
+  border-radius: 0.8rem;
+}
+.scrollbar-x::-webkit-scrollbar-track {
+  background: #e9ecef;
+}
+
+/* SCROLLBAR STYLES FOR FIREFOX */
+.scrollbar-x::-moz-scrollbar {
+  width: auto;
+  height: 0.4rem;
+}
+.scrollbar-x::-moz-scrollbar-thumb {
+  background: linear-gradient(to right, #228be6, #495057);
+  border-radius: 0.8rem;
+}
+.scrollbar-x::-moz-scrollbar-track {
+  background: #e9ecef;
+}
+
+/* SCROLLBAR STYLES FOR INTERNET EXPLORER */
+.scrollbar-x::-ms-thumb {
+  background: linear-gradient(to right, #228be6, #495057);
+  border-radius: 0.8rem;
+}
+.scrollbar-x::-ms-track {
+  background: #e9ecef;
 }
