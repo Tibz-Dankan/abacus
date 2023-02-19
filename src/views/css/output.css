@@ -1115,6 +1115,11 @@ video {
   border-color: rgb(116 192 252 / var(--tw-border-opacity));
 }
 
+.bg-blue-400 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(96 165 250 / var(--tw-bg-opacity));
+}
+
 .bg-blueDark1 {
   --tw-bg-opacity: 1;
   background-color: hsl(240 80% 30% / var(--tw-bg-opacity));
@@ -1153,6 +1158,31 @@ video {
 .bg-primaryDark {
   --tw-bg-opacity: 1;
   background-color: rgb(24 100 171 / var(--tw-bg-opacity));
+}
+
+.bg-purple-400 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(192 132 252 / var(--tw-bg-opacity));
+}
+
+.bg-green-700 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(21 128 61 / var(--tw-bg-opacity));
+}
+
+.bg-blue-700 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(29 78 216 / var(--tw-bg-opacity));
+}
+
+.bg-greyLight3 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(222 226 230 / var(--tw-bg-opacity));
+}
+
+.bg-greyLight4 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(206 212 218 / var(--tw-bg-opacity));
 }
 
 .p-0 {
@@ -1230,6 +1260,11 @@ video {
   padding-bottom: 1.5rem;
 }
 
+.px-1 {
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+}
+
 .pb-16 {
   padding-bottom: 4rem;
 }
@@ -1264,6 +1299,14 @@ video {
 
 .pt-4 {
   padding-top: 1rem;
+}
+
+.pt-1 {
+  padding-top: 0.25rem;
+}
+
+.pb-1 {
+  padding-bottom: 0.25rem;
 }
 
 .text-center {
@@ -1635,6 +1678,43 @@ video {
   }
 }
 
+.table-element {
+  width: 100%;
+}
+
+.table-element thead tr th {
+  padding: 16px 24px;
+  padding-bottom: 20px;
+  text-align: start;
+  background-color: #1864ab;
+  color: #e9ecef;
+}
+
+.table-element thead tr th:first-child {
+  border-top-left-radius: 4px;
+}
+
+.table-element thead tr th:last-child {
+  border-top-right-radius: 4px;
+}
+
+.table-element tbody tr td {
+  color: #343a40;
+  padding: 12px 24px;
+  padding-bottom: 16px;
+}
+
+.table-element tbody tr:not(:last-child) {
+  border-bottom: 2px solid #74c0fc;
+}
+
+/* 
+@media screen and (max-width: 600px) {
+  .table-element {
+    overflow-x: auto;
+  }
+} */
+
 /* SCROLLBAR STYLES FOR WEBKIT BROWSERS */
 
 .scrollbar::-webkit-scrollbar {
@@ -1686,6 +1766,11 @@ video {
 .hover\:bg-primaryDark:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(24 100 171 / var(--tw-bg-opacity));
+}
+
+.hover\:bg-green-600:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(22 163 74 / var(--tw-bg-opacity));
 }
 
 .hover\:text-greyLight1:hover {
