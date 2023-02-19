@@ -772,14 +772,6 @@ video {
   margin-top: 1.5rem;
 }
 
-.mt-2 {
-  margin-top: 0.5rem;
-}
-
-.mt-4 {
-  margin-top: 1rem;
-}
-
 .block {
   display: block;
 }
@@ -1133,11 +1125,6 @@ video {
   background-color: rgb(243 244 246 / var(--tw-bg-opacity));
 }
 
-.bg-green-600 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(22 163 74 / var(--tw-bg-opacity));
-}
-
 .bg-greyDark1 {
   --tw-bg-opacity: 1;
   background-color: rgb(134 142 150 / var(--tw-bg-opacity));
@@ -1166,11 +1153,6 @@ video {
 .bg-primaryDark {
   --tw-bg-opacity: 1;
   background-color: rgb(24 100 171 / var(--tw-bg-opacity));
-}
-
-.bg-purple-600 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(147 51 234 / var(--tw-bg-opacity));
 }
 
 .p-0 {
@@ -1506,6 +1488,10 @@ video {
   background-size: cover;
   background-repeat: no-repeat;
 }
+
+/* TODO */
+
+/* hsl(229.7,57.3%,49.6%) TO BE used as a bg under ceo on the home page*/
 
 .form {
   display: flex;
@@ -1930,10 +1916,6 @@ video {
 
   .lg\:w-1\/2 {
     width: 50%;
-  }
-
-  .lg\:max-w-3xl {
-    max-width: 48rem;
   }
 
   .lg\:max-w-none {
