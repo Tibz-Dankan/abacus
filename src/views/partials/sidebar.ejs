@@ -19,6 +19,21 @@
     <span>Achieve your financial goal</span>
   </div>
   <ul class="">
+    <% if (signedInUser.role === "admin"){%>
+    <li class="pl-2">
+      <a
+        href="applications"
+        class="px-4 pt-2 pb-3 text-start w-full block relative"
+      >
+        <svg
+          class="icon text-2xl inline-block w-6 h-6 mb-2 mr-2 absolute top-2 left-4"
+        >
+          <use href="../assets/icons/nav/icon-home.svg#home"></use>
+        </svg>
+        <span class="ml-9">Home</span>
+      </a>
+    </li>
+    <%} else{ %>
     <li class="pl-2">
       <a
         href="start-applying"
@@ -27,16 +42,17 @@
         <svg
           class="icon text-2xl inline-block w-6 h-6 mb-2 mr-2 absolute top-2 left-4"
         >
-          <use href="../assets/icons/nav/icon-home.svg#home" class=""></use>
+          <use href="../assets/icons/nav/icon-home.svg#home"></use>
         </svg>
         <span class="ml-9">Home</span>
       </a>
     </li>
+    <% }%>
 
     <!-- LOAN -->
     <h3 class="bg-greyDark4 px-4 pt-2 pb-3 border-l-4 border-primary relative">
       <svg
-        class="icon text-2xl inline-block w-8 h-6 mb-2 mr-2 absolute top-2 left-4"
+        class="icon text-xl inline-block w-8 h-6 mb-2 mr-2 absolute top-2 left-4"
       >
         <use href="../assets/icons/nav/icon-loan.svg#loan"></use>
       </svg>
@@ -68,6 +84,7 @@
         <span class="ml-9">My application</span>
       </a>
     </li>
+    <% if (signedInUser.role === "admin"){%>
     <li class="pl-2">
       <a
         href="loan-applicants"
@@ -81,6 +98,7 @@
         <span class="ml-9">Applicants</span>
       </a>
     </li>
+    <%} %>
 
     <!-- SACCO -->
     <h3 class="bg-greyDark4 px-4 pt-2 pb-3 border-l-4 border-primary relative">
@@ -117,6 +135,7 @@
         <span class="ml-9">My application</span>
       </a>
     </li>
+    <% if (signedInUser.role === "admin"){%>
     <li class="pl-2">
       <a
         href="sacco-applicants"
@@ -130,6 +149,7 @@
         <span class="ml-9"> Applicants</span>
       </a>
     </li>
+    <%} %>
 
     <!-- SETTINGS -->
     <h3 class="bg-greyDark4 px-4 pt-2 pb-3 border-l-4 border-primary relative">
@@ -166,6 +186,8 @@
         <span class="ml-9">Update password</span>
       </a>
     </li>
+
+    <% if (signedInUser.role === "admin"){%>
     <li class="pl-2">
       <a
         href="get-admin-codes"
@@ -179,5 +201,6 @@
         <span class="ml-9"> Admin signup codes</span>
       </a>
     </li>
+    <%} %>
   </ul>
 </aside>
