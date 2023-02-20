@@ -1887,6 +1887,11 @@ video {
     margin-right: 4rem;
   }
 
+  .sm\:my-28 {
+    margin-top: 7rem;
+    margin-bottom: 7rem;
+  }
+
   .sm\:mb-0 {
     margin-bottom: 0px;
   }
