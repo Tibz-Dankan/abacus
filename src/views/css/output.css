@@ -1122,12 +1122,20 @@ video {
   border-width: 2px;
 }
 
+.border-8 {
+  border-width: 8px;
+}
+
 .border-l-4 {
   border-left-width: 4px;
 }
 
 .border-l-8 {
   border-left-width: 8px;
+}
+
+.border-t-8 {
+  border-top-width: 8px;
 }
 
 .border-greyDark1 {
@@ -1148,6 +1156,11 @@ video {
 .border-primaryLight {
   --tw-border-opacity: 1;
   border-color: rgb(116 192 252 / var(--tw-border-opacity));
+}
+
+.border-primaryDark {
+  --tw-border-opacity: 1;
+  border-color: rgb(24 100 171 / var(--tw-border-opacity));
 }
 
 .bg-blueDark1 {
