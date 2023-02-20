@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+
+<div class="flex flex-col items-center space-y-2" id="myProfile">
+  <span class="uppercase text-lg font-semibold">Basic info</span>
+  <div class="inline-block text-center">
+    <div>
+      <i class="fas fa-user-circle text-greyDark2" style="font-size: 56px"></i>
+    </div>
+    <div class="font-bold">
+      <span><%= user.user_name %></span>
+    </div>
+    <div class="text-greyDark2 uppercase">
+      <span><%= user.user_role %></span>
+    </div>
+    <div class="text-greyDark2">
+      <span><%= user.email %></span>
+    </div>
+    <!--TODO: <span>date of registration</span> -->
+    <!-- <div>
+      <span>Since 9 Dec 2022</span>
+    </div> -->
+    <button
+      class="bg-greyDark4 px-10 pt-2 pb-3 mt-4 text-greyLight2 hover:bg-primaryDark rounded text-center"
+      onclick="showEditForm()"
+      class="show-edit-form"
+    >
+      Edit Profile
+    </button>
+  </div>
+</div>
+
+<div class="edit-profile hidden w-full relative" id="editMyProfile">
+  <!-- Icon to hide profile form -->
+  <a
+    href="javascript:void(0)"
+    class="absolute top-1 right-1 hover:text-red-600"
+    onclick="hideEditForm()"
+    ><i class="fa fa-times text-lg" aria-hidden="true"></i
+  ></a>
+
+  <% if(message){ %>
+  <p class="error"><%= message%></p>
+  <% } %>
+
+  <h2 class="mb-4 text-lg font-semibold text-greyDark3">Update profile</h2>
+
+  <form
+    action="<%= baseUrl %>/user-profile"
+    method="POST"
+    class="form space-y-4 w-full"
+  >
+    <div>
+      <i class="fas fa-user-circle text-greyDark2" style="font-size: 56px"></i>
+    </div>
+    <div class="flex flex-col justify-center">
+      <label for="html" class="uppercase mb-2">Username</label>
+      <input
+        type="text"
+        name="userName"
+        value="<%= user.user_name %>"
+        required
+        class="input-field"
+      />
+    </div>
+    <div class="flex flex-col justify-center">
+      <label for="html" class="uppercase mb-2">Email address</label>
+      <input
+        type="email"
+        name="email"
+        value="<%= user.email %>"
+        required
+        class="input-field"
+      />
+    </div>
+    <button type="submit" class="submit-btn">Update profile</button>
+  </form>
+</div>
