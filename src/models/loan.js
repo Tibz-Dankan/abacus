@@ -17,7 +17,7 @@ Loan.saveLoanApplicationData = (
   isApproved
 ) => {
   return db.query(
-    "INSERT INTO loan_applications(user_id, first_name, last_name, gender, job, phone_number, city, loan_amount, is_settled, is_read, loan_date, ia_approved) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)  RETURNING *",
+    "INSERT INTO loan_applications(user_id, first_name, last_name, gender, job, phone_number, city, loan_amount, is_settled, is_read, loan_date, is_approved) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)  RETURNING *",
     [
       userId,
       firstName,
