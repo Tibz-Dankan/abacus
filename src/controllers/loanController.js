@@ -62,7 +62,6 @@ const applyForLoan = async (req, res) => {
     console.log(req.body);
     const userId = decodeJwtGetUserId(req.cookies);
     const loanAmount = req.body.loanAmount;
-    const loanCategory = req.body.loanCategory;
     const firstName = req.body.firstName;
     const lastName = req.body.lastName;
     const gender = req.body.gender;
@@ -75,7 +74,6 @@ const applyForLoan = async (req, res) => {
 
     const loanObject = {};
     loanObject.loanAmount = loanAmount;
-    loanObject.loanCategory = loanCategory;
     loanObject.firstName = firstName;
     loanObject.lastName = lastName;
     loanObject.gender = gender;
@@ -84,7 +82,6 @@ const applyForLoan = async (req, res) => {
 
     if (
       !loanAmount ||
-      !loanCategory ||
       !firstName ||
       !lastName ||
       !gender ||
@@ -109,7 +106,6 @@ const applyForLoan = async (req, res) => {
       phoneNumber,
       cityOrTown,
       loanAmount,
-      loanCategory,
       isSettled,
       isRead
     );

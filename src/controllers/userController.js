@@ -550,6 +550,7 @@ const resetPassword = async (req, res) => {
     await User.updatePassword(userId, hashedPassword);
     await User.updateResetTokenExpires(token);
 
+    // TODO: authenticate a user upon successful password reset
     res.redirect("signin");
   } catch (error) {
     console.log(error);

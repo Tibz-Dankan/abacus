@@ -1,277 +1,103 @@
 <!DOCTYPE html>
-<html class="no-js" lang="en-US">
+<html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>Sacco Application</title>
-    <meta name="description" content="" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="manifest" href="site.webmanifest" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
       rel="shortcut icon"
       type="image/x-icon"
       href="assets/img/logo/logo.jpeg"
     />
-
-    <!-- Icon Font Stylesheet -->
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css"
-      rel="stylesheet"
-    />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"
-      rel="stylesheet"
-    />
-
-    <!-- CSS here -->
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="assets/css/owl.carousel.min.css" />
-    <link rel="stylesheet" href="assets/css/slicknav.css" />
-    <link rel="stylesheet" href="assets/css/flaticon.css" />
-    <link rel="stylesheet" href="assets/css/animate.min.css" />
-    <link rel="stylesheet" href="assets/css/magnific-popup.css" />
-    <link rel="stylesheet" href="assets/css/fontawesome-all.min.css" />
-    <link rel="stylesheet" href="assets/css/themify-icons.css" />
-    <link rel="stylesheet" href="assets/css/slick.css" />
-    <link rel="stylesheet" href="assets/css/nice-select.css" />
-    <link rel="stylesheet" href="assets/css/style.css" />
-
-    <!-- SIDEBAR CSS -->
-    <link rel="stylesheet" href="partials/sidebar/sidebar.css" />
+    <link rel="stylesheet" href="css/output.css" />
+    <title><%= saccoApplication?.first_name %>'s sacco application</title>
   </head>
+  <body
+    class="relative bg-greyLight1 text-base transition-all overflow-x-hidden"
+  >
+    <!-- SIDEBAR SECTION START -->
+    <%- include("./partials/sidebar");%>
+    <!-- SIDEBAR SECTION END -->
 
-  <body>
-    <header style="position: relative">
-      <%- include('./partials/sidebar/sidebar'); %>
-    </header>
-    <main>
-      <!-- Hero Start-->
-      <div
-        class="hero-area2 slider-height2 hero-overly2 d-flex align-items-center"
+    <div class="mmd:ml-64">
+      <!-- HEADER SECTION START -->
+      <header
+        class="bg-greyLight1 z-20 sticky top-0 flex items-center justify-between shadow pb-5 pt-4 px-4 sm:px-8 md:px-16"
       >
-        <div class="container">
-          <div class="row">
-            <div class="col-xl-12">
-              <div class="hero-cap text-center pt-50">
-                <h2>
-                  <%= saccoApplication.last_name %>'s sacco membership
-                  application
-                </h2>
-              </div>
-            </div>
+        <span>Sacco Application</span>
+        <div class="flex items-center relative">
+          <%- include("./partials/auth-user");%>
+        </div>
+      </header>
+      <!-- HEADER SECTION END -->
+
+      <!-- MAIN CONTENT START -->
+      <main class="flex justify-center items-center my-20">
+        <div
+          class="mx-8 sm:mx-16 rounded w-full flex flex-col justify-center items-center"
+        >
+          <% if(message){ %>
+          <p class="error"><%= message%></p>
+          <% } %>
+          <p class="font-semibold text-lg pl-4 mb-4 uppercase text-greyDark2">
+            <%= saccoApplication?.first_name %>'s sacco application
+          </p>
+          <!-- table of single loan application -->
+          <div class="px-4 lg:px-6 w-full scrollbar-x overflow-x-auto">
+            <table class="table-element shadow-md">
+              <thead>
+                <tr>
+                  <th>Label</th>
+                  <th>Value</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="bg-greyLight2">
+                  <td>First name</td>
+                  <td><%= saccoApplication.first_name %></td>
+                </tr>
+                <tr class="bg-greyLight2">
+                  <td>Last name</td>
+                  <td><%= saccoApplication.last_name %></td>
+                </tr>
+                <tr class="bg-greyLight2">
+                  <td>Gender</td>
+                  <td><%= saccoApplication.gender %></td>
+                </tr>
+                <tr class="bg-greyLight2">
+                  <td>Job</td>
+                  <td><%= saccoApplication.job %></td>
+                </tr>
+                <tr class="bg-greyLight2">
+                  <td>City/Town</td>
+                  <td><%= saccoApplication.city %></td>
+                </tr>
+                <tr class="bg-greyLight2">
+                  <td>Phone number</td>
+                  <td><%= saccoApplication.phone_number %></td>
+                </tr>
+                <!-- <tr class="bg-greyLight2">
+                <td>Date</td>
+                <td><%= saccoApplication.phone_number %></td>
+              </tr> -->
+                <!-- <tr class="bg-greyLight2">
+                <td>Action</td>
+                <td>form to Approval</td>
+              </tr> -->
+              </tbody>
+            </table>
           </div>
         </div>
-      </div>
-      <!--Hero End -->
-      <!-- Apply Area Start -->
-      <div class="apply-area pt-150 pb-150">
-        <div class="container">
-          <div class="row justify-content-center">
-            <div class="col-lg-8">
-              <div class="apply-wrapper">
-                <!-- Form -->
-                <div>
-                  <div>
-                    <span><%= message %></span>
-                  </div>
-                  <table class="table">
-                    <thead class="thead-dark">
-                      <tr>
-                        <th scope="col">Label</th>
-                        <th scope="col">Value</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>First name</td>
-                        <td><%= saccoApplication.first_name %></td>
-                      </tr>
-                      <tr>
-                        <td>Last name</td>
-                        <td><%= saccoApplication.last_name %></td>
-                      </tr>
-                      <tr>
-                        <td>Gender</td>
-                        <td><%= saccoApplication.gender %></td>
-                      </tr>
-                      <tr>
-                        <td>Job</td>
-                        <td><%= saccoApplication.job %></td>
-                      </tr>
-                      <tr>
-                        <td>City/Town</td>
-                        <td><%= saccoApplication.city %></td>
-                      </tr>
-                      <tr>
-                        <td>Phone number</td>
-                        <td><%= saccoApplication.phone_number %></td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Apply Area End -->
-    </main>
-    <footer>
-      <!-- Footer Start-->
-      <div class="footer-area">
-        <div class="container">
-          <div class="footer-top footer-padding">
-            <div class="row justify-content-between">
-              <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6">
-                <div class="single-footer-caption mb-50">
-                  <h4 class="footer-tittle">
-                    <span
-                      style="
-                        color: #fff;
-                        font-weight: 500;
-                        font-family: Rubik, sans-serif;
-                        font-size: 20px;
-                      "
-                      >Get In Touch</span
-                    >
-                  </h4>
-                  <p class="mb-4">
-                    Our offices are open and our professionals continue to serve
-                    you.
-                  </p>
-                  <p class="mb-2">
-                    <span>
-                      <i
-                        class="fa fa-map-marker-alt class-icon me-3"
-                        style="color: #13c5dd"
-                      ></i></span
-                    >&nbsp Kampala, Uganda
-                  </p>
-                  <p class="mb-2">
-                    <i
-                      class="fa fa-envelope class-icon me-3"
-                      aria-hidden="true"
-                      style="color: #13c5dd"
-                    ></i
-                    >&nbsp abucausfinance@gmail.com
-                  </p>
-                  <p class="mb-0">
-                    <i
-                      class="fa fa-phone-alt class-icon me-3"
-                      style="color: #13c5dd"
-                    ></i
-                    >&nbsp +256 759938344
-                    <br />
-                    &nbsp &nbsp &nbsp &nbsp 0800113213
-                  </p>
-                </div>
-              </div>
-              <div class="col-xl-2 col-lg-2 col-md-4 col-sm-6">
-                <div class="single-footer-caption mb-50">
-                  <div class="footer-tittle">
-                    <h4>Quick Link</h4>
-                    <ul>
-                      <li><a href="#">About</a></li>
-                      <li><a href="#">Offers & Discounts</a></li>
-                      <li><a href="#">Get Coupon</a></li>
-                      <li><a href="#"> Contact Us</a></li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-              <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
-                <div class="single-footer-caption mb-50">
-                  <div class="footer-tittle">
-                    <h4>Support</h4>
-                    <ul>
-                      <li><a href="#">Frequently Asked Questions</a></li>
-                      <li><a href="#">Terms & Conditions</a></li>
-                      <li><a href="#"> Privacy Policy</a></li>
-                      <li><a href="#">Report a Payment Issue</a></li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="footer-bottom">
-            <div class="row d-flex justify-content-between align-items-center">
-              <div class="col-xl-9 col-lg-8">
-                <div class="footer-copy-right">
-                  <p>
-                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                    Copyright &copy;
-                    <script>
-                      document.write(new Date().getFullYear());
-                    </script>
-                    <a class="text-primary" href="#">
-                      <span style="color: #13c5dd"
-                        >Abacus Finance Uganda Limited</span
-                      ></a
-                    >. All Rights Reserved.
-                  </p>
-                </div>
-              </div>
-              <div class="col-xl-3 col-lg-4">
-                <!-- Footer Social -->
-                <div class="footer-social f-right">
-                  <a href="#"><i class="fab fa-twitter"></i></a>
-                  <a href="#"><i class="fab fa-facebook-f"></i></a>
-                  <a href="#"><i class="fas fa-globe"></i></a>
-                  <a href="#"><i class="fab fa-instagram"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Footer End-->
-    </footer>
-    <!-- Scroll Up -->
-    <div id="back-top">
-      <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
+      </main>
+      <!-- MAIN CONTENT END -->
+
+      <!-- FOOTER SECTION START -->
+      <%- include("./partials/footer")%>
+
+      <!-- FOOTER SECTION END -->
     </div>
 
-    <!-- JS here -->
-    <!-- All JS Custom Plugins Link Here here -->
-    <script src="./assets/js/vendor/modernizr-3.5.0.min.js"></script>
-    <!-- Jquery, Popper, Bootstrap -->
-    <script src="./assets/js/vendor/jquery-1.12.4.min.js"></script>
-    <script src="./assets/js/popper.min.js"></script>
-    <script src="./assets/js/bootstrap.min.js"></script>
-    <!-- Jquery Mobile Menu -->
-    <script src="./assets/js/jquery.slicknav.min.js"></script>
-
-    <!-- Jquery Slick , Owl-Carousel Plugins -->
-    <script src="./assets/js/owl.carousel.min.js"></script>
-    <script src="./assets/js/slick.min.js"></script>
-    <!-- One Page, Animated-HeadLin -->
-    <script src="./assets/js/wow.min.js"></script>
-    <script src="./assets/js/animated.headline.js"></script>
-    <script src="./assets/js/jquery.magnific-popup.js"></script>
-
-    <!-- Nice-select, sticky -->
-    <script src="./assets/js/jquery.nice-select.min.js"></script>
-    <script src="./assets/js/jquery.sticky.js"></script>
-
-    <!-- contact js -->
-    <script src="./assets/js/contact.js"></script>
-    <script src="./assets/js/jquery.form.js"></script>
-    <script src="./assets/js/jquery.validate.min.js"></script>
-    <script src="./assets/js/mail-script.js"></script>
-    <script src="./assets/js/jquery.ajaxchimp.min.js"></script>
-
-    <!-- Jquery Plugins, main Jquery -->
-    <script src="./assets/js/plugins.js"></script>
-    <script src="./assets/js/main.js"></script>
-
-    <!-- SIDEBAR JAVASCRIPT -->
-    <script src="./partials/sidebar/sidebar.js"></script>
-
-    <!-- FONTAWESOME  FOR ICONS -->
-    <script
-      src="https://kit.fontawesome.com/a076d05399.js"
-      crossorigin="anonymous"
-    ></script>
+    <script src="./partials/sidebar.js"></script>
+    <script src="./partials/auth-user.js"></script>
   </body>
 </html>
