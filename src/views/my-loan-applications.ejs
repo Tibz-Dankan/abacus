@@ -33,7 +33,9 @@
 
       <!-- MAIN CONTENT START -->
       <main class="flex justify-center items-center my-28">
-        <div class="mx-8 sm:mx-16 rounded w-full flex flex-col justify-center">
+        <div
+          class="mx-8 sm:mx-16 px-4 lg:px-16 rounded w-full flex flex-col justify-center items-center"
+        >
           <% if(message){ %>
           <p class="error"><%= message%></p>
           <% } %>
@@ -45,7 +47,7 @@
           <div class="px-4 lg:px-6 w-full scrollbar-x overflow-x-auto">
             <table class="table-element shadow-md">
               <thead>
-                <tr class="">
+                <tr>
                   <th>#</th>
                   <th>FirstName</th>
                   <th>LastName</th>
