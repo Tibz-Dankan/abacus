@@ -8,6 +8,7 @@ const {
   mySaccoData,
   saccoApplicants,
   singleSaccoApplication,
+  approveSacco,
 } = require("../controllers/saccoController");
 
 const router = express.Router();
@@ -26,5 +27,7 @@ router.get(
   verifyAdminToken,
   singleSaccoApplication
 );
+
+router.get("/approve-sacco", verifyAdminToken, approveSacco);
 
 module.exports = router;

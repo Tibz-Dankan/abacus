@@ -12,10 +12,12 @@ Loan.saveLoanApplicationData = (
   city,
   loanAmount,
   isSettled,
-  isRead
+  isRead,
+  loanDate,
+  isApproved
 ) => {
   return db.query(
-    "INSERT INTO loan_applications(user_id, first_name, last_name, gender, job, phone_number, city, loan_amount, is_settled, is_read) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)  RETURNING *",
+    "INSERT INTO loan_applications(user_id, first_name, last_name, gender, job, phone_number, city, loan_amount, is_settled, is_read, loan_date, ia_approved) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)  RETURNING *",
     [
       userId,
       firstName,
@@ -27,6 +29,8 @@ Loan.saveLoanApplicationData = (
       loanAmount,
       isSettled,
       isRead,
+      loanDate,
+      isApproved,
     ]
   );
 };
@@ -57,6 +61,13 @@ Loan.applicationSettled = (loanId) => {
 Loan.applicationRead = (loanId) => {
   return db.query(
     "UPDATE loan_applications SET is_read = true WHERE loan_id = $1",
+    [loanId]
+  );
+};
+
+Loan.approved = (loanId) => {
+  return db.query(
+    "UPDATE loan_applications SET is_approved = true WHERE loan_id = $1",
     [loanId]
   );
 };

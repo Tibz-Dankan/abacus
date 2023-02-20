@@ -32,6 +32,26 @@ const noLoanIdMessage = (req, res) => {
   });
 };
 
+const invalidLoanIdMessage = (req, res) => {
+  return res.render("approve-loan", {
+    message: "Invalid loan Id",
+    isSuccess: false,
+    loanApplication: {},
+    signedInUser: signedInUser(req.cookies),
+    baseUrl: baseUrl(),
+  });
+};
+
+const loanAlreadyMessage = (req, res) => {
+  return res.render("approve-loan", {
+    message: "Loan already approved",
+    isSuccess: false,
+    loanApplication: {},
+    signedInUser: signedInUser(req.cookies),
+    baseUrl: baseUrl(),
+  });
+};
+
 const startApplying = async (req, res) => {
   try {
     res.render("start-applying", {
@@ -69,8 +89,10 @@ const applyForLoan = async (req, res) => {
     const phoneNumber = req.body.phoneNumber;
     const cityOrTown = req.body.cityOrTown;
     const isSettled = false;
+    const isApproved = false;
     const isRead = false;
-    // TODO : capture loan application date
+    const loanDate = new Date(Date.now()).toISOString();
+    console.log(loanDate);
 
     const loanObject = {};
     loanObject.loanAmount = loanAmount;
@@ -107,7 +129,9 @@ const applyForLoan = async (req, res) => {
       cityOrTown,
       loanAmount,
       isSettled,
-      isRead
+      isRead,
+      loanDate,
+      isApproved
     );
 
     res.redirect("/my-loan-data");
@@ -169,6 +193,33 @@ const singleLoanApplication = async (req, res) => {
   }
 };
 
+const approveLoan = async (req, res) => {
+  try {
+    const loanId = req.query.loanId;
+    if (!loanId) return noLoanIdMessage(req, res);
+
+    const application = await Loan.getLoanApplicationByLoanId(loanId);
+    if (!application.rows[0]) {
+      return invalidLoanIdMessage(req, res);
+    }
+    if (application.rows[0].is_approved) {
+      return loanAlreadyMessage(req, res);
+    }
+    await Loan.approved(loanId);
+
+    res.render("approve-loan", {
+      message: "Loan approved successfully",
+      isSuccess: true,
+      loanApplication: application.rows[0],
+      signedInUser: signedInUser(req.cookies),
+      baseUrl: baseUrl(),
+    });
+  } catch (error) {
+    console.log(error);
+    if (error) return catchError(req, res, "approve-loan");
+  }
+};
+
 module.exports = {
   startApplying,
   getLoanForm,
@@ -176,4 +227,5 @@ module.exports = {
   myLoanData,
   loanApplicants,
   singleLoanApplication,
+  approveLoan,
 };

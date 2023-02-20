@@ -25,8 +25,27 @@ const appliedForSaccoMessage = (req, res, saccoObject) => {
 
 const noSaccoIdMessage = (req, res) => {
   return res.render("single-sacco-membership-application", {
-    message:
-      "You no sacco id is provided, contact the developers to fix the issue",
+    message: "No sacco id is provided, contact the developers to fix the issue",
+    saccoApplication: {},
+    signedInUser: signedInUser(req.cookies),
+    baseUrl: baseUrl(),
+  });
+};
+
+const invalidSaccoIdMessage = (req, res) => {
+  return res.render("approve-sacco", {
+    message: "Invalid sacco Id",
+    isSuccess: false,
+    saccoApplication: {},
+    signedInUser: signedInUser(req.cookies),
+    baseUrl: baseUrl(),
+  });
+};
+
+const saccoAlreadyMessage = (req, res) => {
+  return res.render("approve-sacco", {
+    message: "Sacco already approved",
+    isSuccess: false,
     saccoApplication: {},
     signedInUser: signedInUser(req.cookies),
     baseUrl: baseUrl(),
@@ -57,8 +76,9 @@ const applyForSaccoMembership = async (req, res) => {
     const phoneNumber = req.body.phoneNumber;
     const cityOrTown = req.body.cityOrTown;
     const isAccepted = false;
+    const isApproved = false;
     const isRead = false;
-    // TODO : capture sacco membership application date
+    const saccoDate = new Date(Date.now()).toISOString();
 
     const saccoObject = {};
     saccoObject.firstName = firstName;
@@ -92,7 +112,9 @@ const applyForSaccoMembership = async (req, res) => {
       phoneNumber,
       cityOrTown,
       isAccepted,
-      isRead
+      isRead,
+      saccoDate,
+      isApproved
     );
 
     res.redirect("my-sacco-data");
@@ -155,10 +177,39 @@ const singleSaccoApplication = async (req, res) => {
   }
 };
 
+const approveSacco = async (req, res) => {
+  try {
+    const saccoId = req.query.saccoId;
+
+    if (!saccoId) return noSaccoIdMessage(req, res);
+    const application = await Sacco.getSaccoApplicationBySaccoId(saccoId);
+
+    if (!application.rows[0]) {
+      return invalidSaccoIdMessage(req, res);
+    }
+    if (application.rows[0].is_approved) {
+      return saccoAlreadyMessage(req, res);
+    }
+    await Sacco.approved(saccoId);
+
+    res.render("approve-sacco", {
+      message: "Sacco membership approved successfully",
+      isSuccess: true,
+      saccoApplication: application.rows[0],
+      signedInUser: signedInUser(req.cookies),
+      baseUrl: baseUrl(),
+    });
+  } catch (error) {
+    console.log(error);
+    if (error) return catchError(req, res, "approve-sacco");
+  }
+};
+
 module.exports = {
   getSaccoMembershipForm,
   applyForSaccoMembership,
   mySaccoData,
   saccoApplicants,
   singleSaccoApplication,
+  approveSacco,
 };

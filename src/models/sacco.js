@@ -11,10 +11,12 @@ Sacco.saveSaccoMembershipApplication = (
   phoneNumber,
   city,
   isAccepted,
-  isRead
+  isRead,
+  saccoDate,
+  isApproved
 ) => {
   return db.query(
-    "INSERT INTO sacco_membership(user_id, first_name, last_name, gender, job, phone_number, city, is_accepted, is_read) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9)  RETURNING *",
+    "INSERT INTO sacco_membership(user_id, first_name, last_name, gender, job, phone_number, city, is_accepted, is_read, sacco_date, is_approved) VALUES($1,$2,$3,$4,$5,$6,$7,$8,$9, $10, $11)  RETURNING *",
     [
       userId,
       firstName,
@@ -25,6 +27,8 @@ Sacco.saveSaccoMembershipApplication = (
       city,
       isAccepted,
       isRead,
+      saccoDate,
+      isApproved,
     ]
   );
 };
@@ -55,6 +59,13 @@ Sacco.applicationRead = (saccoId) => {
 Sacco.applicationAccepted = (saccoId) => {
   return db.query(
     "UPDATE sacco_membership SET is_accepted = true WHERE sacco_id = $1",
+    [saccoId]
+  );
+};
+
+Sacco.approved = (saccoId) => {
+  return db.query(
+    "UPDATE sacco_membership SET is_approved = true WHERE sacco_id = $1",
     [saccoId]
   );
 };
