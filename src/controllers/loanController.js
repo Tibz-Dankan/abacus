@@ -3,6 +3,7 @@ const { catchError } = require("../utils/catchError");
 const { decodeJwtGetUserId } = require("../utils/decodeJwt");
 const { signedInUser } = require("../utils/signedInUser");
 const { baseUrl } = require("../utils/constants");
+const { dateOne } = require("../utils/date");
 
 const noEmptyFieldMessage = (req, res, loanObject) => {
   return res.render("apply-for-loan", {
@@ -177,13 +178,18 @@ const singleLoanApplication = async (req, res) => {
     const loanId = req.query.loanId;
     if (!loanId) return noLoanIdMessage(req, res);
 
-    const application = await Loan.getLoanApplicationByLoanId(loanId);
-    if (application.rows[0].is_read === false) {
+    const loan = await Loan.getLoanApplicationByLoanId(loanId);
+    let application = loan.rows[0];
+
+    if (application.is_read === false) {
       await Loan.applicationRead(loanId);
     }
+
+    application.dateOne = dateOne(application.loan_date);
+
     res.render("single-loan-application", {
       message: "",
-      loanApplication: application.rows[0],
+      loanApplication: application,
       signedInUser: signedInUser(req.cookies),
       baseUrl: baseUrl(),
     });
@@ -198,19 +204,24 @@ const approveLoan = async (req, res) => {
     const loanId = req.query.loanId;
     if (!loanId) return noLoanIdMessage(req, res);
 
-    const application = await Loan.getLoanApplicationByLoanId(loanId);
-    if (!application.rows[0]) {
+    const loan = await Loan.getLoanApplicationByLoanId(loanId);
+
+    let application = loan.rows[0];
+
+    if (!application) {
       return invalidLoanIdMessage(req, res);
     }
-    if (application.rows[0].is_approved) {
+    if (application.is_approved) {
       return loanAlreadyMessage(req, res);
     }
     await Loan.approved(loanId);
 
+    application.dateOne = dateOne(application.loan_date);
+
     res.render("approve-loan", {
       message: "Loan approved successfully",
       isSuccess: true,
-      loanApplication: application.rows[0],
+      loanApplication: application,
       signedInUser: signedInUser(req.cookies),
       baseUrl: baseUrl(),
     });

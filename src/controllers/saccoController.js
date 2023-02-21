@@ -3,6 +3,7 @@ const { catchError } = require("../utils/catchError");
 const { decodeJwtGetUserId } = require("../utils/decodeJwt");
 const { signedInUser } = require("../utils/signedInUser");
 const { baseUrl } = require("../utils/constants");
+const { dateOne } = require("../utils/date");
 
 const noEmptyFieldMessage = (req, res, saccoObject) => {
   return res.render("apply-for-sacco-membership", {
@@ -159,14 +160,19 @@ const singleSaccoApplication = async (req, res) => {
   try {
     const saccoId = req.query.saccoId;
     if (!saccoId) return noSaccoIdMessage(req, res);
-    const application = await Sacco.getSaccoApplicationBySaccoId(saccoId);
+    const sacco = await Sacco.getSaccoApplicationBySaccoId(saccoId);
 
-    if (application.rows[0].is_read === false) {
+    let application = sacco.rows[0];
+
+    if (application.is_read === false) {
       await Sacco.applicationRead(saccoId);
     }
+
+    application.dateOne = dateOne(application.sacco_date);
+
     res.render("single-sacco-membership-application", {
       message: "",
-      saccoApplication: application.rows[0],
+      saccoApplication: application,
       signedInUser: signedInUser(req.cookies),
       baseUrl: baseUrl(),
     });
@@ -182,20 +188,24 @@ const approveSacco = async (req, res) => {
     const saccoId = req.query.saccoId;
 
     if (!saccoId) return noSaccoIdMessage(req, res);
-    const application = await Sacco.getSaccoApplicationBySaccoId(saccoId);
+    const sacco = await Sacco.getSaccoApplicationBySaccoId(saccoId);
 
-    if (!application.rows[0]) {
+    let application = sacco.rows[0];
+
+    if (!application) {
       return invalidSaccoIdMessage(req, res);
     }
-    if (application.rows[0].is_approved) {
+    if (application.is_approved) {
       return saccoAlreadyMessage(req, res);
     }
     await Sacco.approved(saccoId);
 
+    application.dateOne = dateOne(application.sacco_date);
+
     res.render("approve-sacco", {
       message: "Sacco membership approved successfully",
       isSuccess: true,
-      saccoApplication: application.rows[0],
+      saccoApplication: application,
       signedInUser: signedInUser(req.cookies),
       baseUrl: baseUrl(),
     });
