@@ -19,6 +19,7 @@ const catchError = async (req, res, pageName) => {
   return res.render(pageName, {
     message: "Sorry something went wrong, try again",
     // user: userObject,
+    isSuccess: false,
     signedInUser: signInUser,
     baseUrl: baseUrl(),
   });
