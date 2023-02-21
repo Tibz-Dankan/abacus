@@ -50,7 +50,7 @@
                   <th>#</th>
                   <th>FirstName</th>
                   <th>LastName</th>
-                  <th>Date</th>
+                  <th>Applied</th>
                   <th>Approval</th>
                   <th>Details</th>
                 </tr>
@@ -63,8 +63,14 @@
                   <td class=""><%= index+1 %></td>
                   <td><%= applicant.first_name %></td>
                   <td class=""><%= applicant.last_name %></td>
-                  <td>Date</td>
-                  <td>pending</td>
+                  <td><%= applicant.elapsedTime%></td>
+
+                  <% if(applicant.is_approved){%>
+                  <td class="bg-green-200 rounded">Approved</td>
+                  <% }else{ %>
+                  <td class="bg-yellow-200 rounded">Pending</td>
+                  <% } %>
+
                   <td>
                     <form
                       action="/single-sacco-membership-application"
@@ -88,8 +94,14 @@
                   <td class=""><%= index+1 %></td>
                   <td><%= applicant.first_name %></td>
                   <td class=""><%= applicant.last_name %></td>
-                  <td>Date</td>
-                  <td>pending</td>
+                  <td><%= applicant.elapsedTime%></td>
+
+                  <% if(applicant.is_approved){%>
+                  <td class="bg-green-200 rounded">Approved</td>
+                  <% }else{ %>
+                  <td class="bg-yellow-200 rounded">Pending</td>
+                  <% } %>
+
                   <td>
                     <form
                       action="/single-sacco-membership-application"

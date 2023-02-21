@@ -5,7 +5,7 @@ const { catchError } = require("../utils/catchError");
 const { decodeJwtGetUserId } = require("../utils/decodeJwt");
 const { signedInUser } = require("../utils/signedInUser");
 const { baseUrl } = require("../utils/constants");
-const { dateOne } = require("../utils/date");
+const { dateOne, elapsedTime } = require("../utils/date");
 
 const noEmptyFieldMessage = (req, res, saccoObject) => {
   return res.render("apply-for-sacco-membership", {
@@ -159,12 +159,28 @@ const mySaccoData = async (req, res) => {
   }
 };
 
+const computeElapsedTime = (saccoArr) => {
+  let saccos = [];
+  if (!saccoArr[0]) return saccos;
+
+  saccoArr.map((sacco, index) => {
+    if (index < saccoArr.length) {
+      sacco.elapsedTime = elapsedTime(sacco.sacco_date);
+      saccos.push(sacco);
+    }
+  });
+  return saccos;
+};
+
 const saccoApplicants = async (req, res) => {
   try {
-    const applicants = await Sacco.getAllSaccoApplications();
+    const sacco = await Sacco.getAllSaccoApplications();
+
+    const applicants = computeElapsedTime(sacco.rows);
+
     res.render("sacco-applicants", {
       message: "",
-      saccoApplicants: applicants.rows,
+      saccoApplicants: applicants,
       signedInUser: signedInUser(req.cookies),
       baseUrl: baseUrl(),
     });

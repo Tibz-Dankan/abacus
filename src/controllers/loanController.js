@@ -3,7 +3,7 @@ const { catchError } = require("../utils/catchError");
 const { decodeJwtGetUserId } = require("../utils/decodeJwt");
 const { signedInUser } = require("../utils/signedInUser");
 const { baseUrl } = require("../utils/constants");
-const { dateOne } = require("../utils/date");
+const { dateOne, elapsedTime } = require("../utils/date");
 
 const noEmptyFieldMessage = (req, res, loanObject) => {
   return res.render("apply-for-loan", {
@@ -174,12 +174,28 @@ const myLoanData = async (req, res) => {
   }
 };
 
+const computeElapsedTime = (loanArr) => {
+  let loans = [];
+  if (!loanArr[0]) return loans;
+
+  loanArr.map((loan, index) => {
+    if (index < loanArr.length) {
+      loan.elapsedTime = elapsedTime(loan.loan_date);
+      loans.push(loan);
+    }
+  });
+  return loans;
+};
+
 const loanApplicants = async (req, res) => {
   try {
-    const applicants = await Loan.getAllLoanApplications();
+    const loans = await Loan.getAllLoanApplications();
+
+    const applicants = computeElapsedTime(loans.rows);
+
     res.render("loan-applicants", {
       message: "",
-      loanApplicants: applicants.rows,
+      loanApplicants: applicants,
       signedInUser: signedInUser(req.cookies),
       baseUrl: baseUrl(),
     });
