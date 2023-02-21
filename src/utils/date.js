@@ -1,12 +1,12 @@
 const format = (date) => {
-  const time = date.toLocaleTimeString("en-Us", {
-    hour: "numeric",
-    minute: "numeric",
-    hour12: true,
-  });
+  // const time = date.toLocaleTimeString("en-Us", {
+  //   hour: "numeric",
+  //   minute: "numeric",
+  //   hour12: true,
+  // });
   const day = date.toLocaleDateString();
 
-  return `${day}  ${time}`;
+  return `${day}`;
 };
 
 const dateOne = (dateStr) => {
