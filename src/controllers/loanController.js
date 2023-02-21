@@ -142,13 +142,29 @@ const applyForLoan = async (req, res) => {
   }
 };
 
+const formatLoanDate = (loanArr) => {
+  let loans = [];
+  if (!loanArr[0]) return loans;
+
+  loanArr.map((loan, index) => {
+    if (index < loanArr.length) {
+      loan.dateMany = dateOne(loan.loan_date);
+      loans.push(loan);
+    }
+  });
+  return loans;
+};
+
 const myLoanData = async (req, res) => {
   try {
     const userId = decodeJwtGetUserId(req.cookies);
-    const myApplicationData = await Loan.getLoanApplicationByUserId(userId);
+    const loan = await Loan.getLoanApplicationByUserId(userId);
+
+    const applications = formatLoanDate(loan.rows);
+
     res.render("my-loan-applications", {
       message: "",
-      myLoanData: myApplicationData.rows,
+      myLoanData: applications,
       signedInUser: signedInUser(req.cookies),
       baseUrl: baseUrl(),
     });

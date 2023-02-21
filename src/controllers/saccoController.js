@@ -1,3 +1,5 @@
+"use strict";
+
 const Sacco = require("../models/sacco");
 const { catchError } = require("../utils/catchError");
 const { decodeJwtGetUserId } = require("../utils/decodeJwt");
@@ -125,13 +127,29 @@ const applyForSaccoMembership = async (req, res) => {
   }
 };
 
+const formatSaccoDate = (saccoArr) => {
+  let sacco = [];
+  if (!saccoArr[0]) return sacco;
+
+  saccoArr.map((loan, index) => {
+    if (index < saccoArr.length) {
+      loan.dateMany = dateOne(loan.sacco_date);
+      sacco.push(loan);
+    }
+  });
+  return sacco;
+};
+
 const mySaccoData = async (req, res) => {
   try {
     const userId = decodeJwtGetUserId(req.cookies);
-    const myApplicationData = await Sacco.getSaccoApplicationByUserId(userId);
+    const sacco = await Sacco.getSaccoApplicationByUserId(userId);
+
+    const applications = formatSaccoDate(sacco.rows);
+
     res.render("my-sacco-membership-applications", {
       message: "",
-      mySaccoData: myApplicationData.rows,
+      mySaccoData: applications,
       signedInUser: signedInUser(req.cookies),
       baseUrl: baseUrl(),
     });

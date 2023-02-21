@@ -56,7 +56,7 @@
                   <th>City/Town</th>
                   <th>PhoneNumber</th>
                   <th>Date</th>
-                  <th>Acceptance</th>
+                  <th>Approval</th>
                 </tr>
               </thead>
               <tbody>
@@ -68,10 +68,14 @@
                   <td><%= saccoData.gender %></td>
                   <td><%= saccoData.city %></td>
                   <td><%= saccoData.phone_number %></td>
-                  <td>Date</td>
-                  <!-- To be changed from acceptance to approval -->
-                  <td><%= saccoData.is_accepted? "Accepted" : "Pending" %></td>
+                  <td><%= saccoData.dateMany %></td>
+                  <% if(saccoData.is_approved){%>
+                  <td class="bg-green-200 rounded">Approved</td>
+                  <% }else{ %>
+                  <td class="bg-yellow-200 rounded">Pending</td>
+                  <% } %>
                 </tr>
+
                 <%}) %>
               </tbody>
             </table>

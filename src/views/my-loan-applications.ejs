@@ -56,7 +56,7 @@
                   <th>Amount</th>
                   <th>Phone</th>
                   <th>Date</th>
-                  <th>Settlement</th>
+                  <th>Approval</th>
                 </tr>
               </thead>
               <tbody>
@@ -69,9 +69,12 @@
                   <td><%= loanData.city %></td>
                   <td><%= loanData.loan_amount %></td>
                   <td><%= loanData.phone_number %></td>
-                  <td>Date</td>
-                  <!-- Settlement to be changed to approval -->
-                  <td><%= loanData.is_settled? "Settled" : "Pending" %></td>
+                  <td><%= loanData?.dateMany%></td>
+                  <% if(loanData.is_approved){%>
+                  <td class="bg-green-200 rounded">Approved</td>
+                  <% }else{ %>
+                  <td class="bg-yellow-200 rounded">Pending</td>
+                  <% } %>
                 </tr>
                 <%}) %>
               </tbody>
