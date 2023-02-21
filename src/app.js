@@ -4,6 +4,7 @@ const userRoutes = require("./routes/userRoutes");
 const generalRoutes = require("./routes/generalRoutes");
 const loanRoutes = require("./routes/loanRoutes");
 const saccoRoutes = require("./routes/saccoRoutes");
+const fileRoutes = require("./routes/fileRoutes");
 const contactRoutes = require("./routes/contactRoutes");
 const path = require("path");
 const cookieParser = require("cookie-parser");
@@ -32,6 +33,8 @@ app.use("/", loanRoutes);
 app.use("/", userRoutes);
 
 app.use("/", saccoRoutes);
+
+app.use("/", fileRoutes);
 
 app.use("/", contactRoutes);
 
