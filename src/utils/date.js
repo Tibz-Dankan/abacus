@@ -39,6 +39,11 @@ const hours = (millSecs) => {
   return Math.floor(hrs);
 };
 
+const days = (millSecs) => {
+  const dys = millSecs / oneDayMillSec;
+  return Math.floor(dys);
+};
+
 const weeks = (millSecs) => {
   const wks = millSecs / oneWeekMillSec;
   return Math.floor(wks);
