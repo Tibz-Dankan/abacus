@@ -54,6 +54,28 @@ CREATE TABLE sacco_membership (
    is_read BOOLEAN NOT NULL
 );
 
+CREATE TABLE user_files (
+   file_id SERIAL PRIMARY KEY ,
+   user_id INTEGER NOT NULL ,
+   category VARCHAR(50) NOT NULL,
+   file_name VARCHAR(100) NOT NULL,
+   url VARCHAR(300) NOT NULL,
+   file_date VARCHAR(50) NOT NULL,
+   is_read BOOLEAN NOT NULL DEFAULT false,
+   is_approved BOOLEAN NOT NULL
+);
+
+CREATE TABLE application_files (
+   file_id SERIAL PRIMARY KEY ,
+   user_id INTEGER NOT NULL ,
+   category VARCHAR(50) NOT NULL,
+   file_name VARCHAR(100) NOT NULL,
+   url VARCHAR(300) NOT NULL,
+   file_date VARCHAR(50) NOT NULL
+);
+
+
+
 -- ALTER TABLE users ADD user_role VARCHAR(20) NOT NULL DEFAULT 'client'; --(DONE)
 -- ALTER TABLE loan_applications RENAME loan_mount TO loan_amount; -- To be done colleagues computer(DONE)
 -- ALTER TABLE loan_applications DROP COLUMN loan_category; -- To be run against production database(DONE)

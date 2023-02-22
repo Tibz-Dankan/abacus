@@ -17,6 +17,7 @@ const catchError = async (req, res, pageName) => {
     signInUser = signedInUser(req.cookies);
   }
   return res.render(pageName, {
+    urls: {},
     message: "Sorry something went wrong, try again",
     // user: userObject,
     isSuccess: false,

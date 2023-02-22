@@ -3,19 +3,19 @@ const express = require("express");
 const { verifyToken } = require("../utils/verifyToken");
 
 const {
-  getLoanFile,
-  uploadLoanFile,
+  getUserFile,
+  uploadUserFile,
   upload,
 } = require("../controllers/fileController");
 
 const router = express.Router();
 
-router.get("/upload-loan-file/", verifyToken, getLoanFile);
+router.get("/upload-application-file", verifyToken, getUserFile);
 router.post(
-  "/upload-loan-file/",
+  "/upload-application-file",
   verifyToken,
   upload.single("loanFile"),
-  uploadLoanFile
+  uploadUserFile
 );
 
 module.exports = router;
