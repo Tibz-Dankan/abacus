@@ -127,6 +127,11 @@
   color: hsl(0, 95%, 40%);
 }
 
+
+.icon-footer-1 {
+  color: #74c0fc;
+}
+
 .sidebar {
   position: fixed;
   overflow-x: hidden;

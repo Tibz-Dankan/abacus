@@ -1498,6 +1498,11 @@ video {
   color: rgb(24 100 171 / var(--tw-text-opacity));
 }
 
+.text-primaryLight {
+  --tw-text-opacity: 1;
+  color: rgb(116 192 252 / var(--tw-text-opacity));
+}
+
 .text-secondary {
   --tw-text-opacity: 1;
   color: rgb(43 138 62 / var(--tw-text-opacity));
@@ -1710,6 +1715,10 @@ video {
 
 .text-logout {
   color: hsl(0, 95%, 40%);
+}
+
+.icon-footer-1 {
+  color: #74c0fc;
 }
 
 .sidebar {
