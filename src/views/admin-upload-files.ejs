@@ -33,12 +33,14 @@
 
       <!-- MAIN CONTENT START -->
       <main class="flex flex-col justify-center items-center my-28">
-        <div
-          class="mx-8 sm:mx-16 p-6 rounded w-full md:w-96 shadow bg-greyLight2 mb-16 border-t-4 border-primaryLight"
-        >
-          As the Admin you can upload(add), update(change) application files
-          which can downloaded, filled and uploaded by applicants(loan and
-          sacco).
+        <div class="mx-8 sm:mx-16 mb-16">
+          <p
+            class="rounded w-full md:w-96 p-6 shadow bg-greyLight2 border-t-4 border-primaryLight"
+          >
+            As the Admin you can upload(add), update(change) application files
+            which can downloaded, filled and uploaded by applicants(loan and
+            sacco).
+          </p>
         </div>
 
         <% if(urls.loan && urls.sacco){ %>
@@ -46,15 +48,15 @@
           class="mx-8 sm:mx-16 p-6 mb-16 flex flex-col justify-center items-center gap-2 sm:flex-row sm:justify-between w-auto"
         >
           <a href="<%= urls?.loan%>" class="submit-btn hover:underline"
-            >Download loan application</a
+            >loan application form</a
           >
           <a href="<%= urls?.sacco%>" class="submit-btn hover:underline"
-            >Download sacco application</a
+            >sacco application form</a
           >
         </div>
         <% } %>
 
-        <div class="mx-8 sm:mx-16 p-6 rounded w-full md:w-96 shadow">
+        <div class="mx-8 sm:mx-16 p-6 rounded w-11/12 md:w-96 shadow">
           <!-- success message-->
           <% if(message && isSuccess){ %>
           <p class="success"><%= message%></p>

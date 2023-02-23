@@ -224,9 +224,9 @@ const AdminUploadFile = async (req, res) => {
     let filename;
 
     if (category == "loan") {
-      filename = `${username}_loan_${Date.now()}${extension}`;
+      filename = `Abacus_loan_form_${fileDate.getFullYear()}${extension}`;
     } else {
-      filename = `${username}_sacco_${Date.now()}${extension}`;
+      filename = `Abacus_sacco_form_${fileDate.getFullYear()}${extension}`;
     }
 
     const firebaseStorage = getStorage(firebaseApp);
@@ -273,8 +273,8 @@ const AdminUploadFile = async (req, res) => {
 // upload application files to be done by only admins
 const AdminUpdateFile = async (req, res) => {
   try {
-    const userId = decodeJwtGetUserId(req.cookies);
-    const username = decodeJwtGetUserName(req.cookies);
+    // const userId = decodeJwtGetUserId(req.cookies);
+    // const username = decodeJwtGetUserName(req.cookies);
     const fileBuffer = req.file.buffer;
     const category = req.body.category;
     const fileId = req.body.fileId;
@@ -287,9 +287,9 @@ const AdminUpdateFile = async (req, res) => {
     let filename;
 
     if (category == "loan") {
-      filename = `${username}_loan_${Date.now()}${extension}`;
+      filename = `Abacus_loan_form_${fileDate.getFullYear()}${extension}`;
     } else {
-      filename = `${username}_sacco_${Date.now()}${extension}`;
+      filename = `Abacus_sacco_form_${fileDate.getFullYear()}${extension}`;
     }
 
     const findingFile = await File.findByFileId(fileId);
