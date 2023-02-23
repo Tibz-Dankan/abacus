@@ -127,9 +127,12 @@
   color: hsl(0, 95%, 40%);
 }
 
-
 .icon-footer-1 {
   color: #74c0fc;
+}
+
+.icon-services {
+  color: #228be6;
 }
 
 .sidebar {

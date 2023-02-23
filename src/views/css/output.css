@@ -910,6 +910,10 @@ video {
   height: 100%;
 }
 
+.h-16 {
+  height: 4rem;
+}
+
 .w-11\/12 {
   width: 91.666667%;
 }
@@ -956,6 +960,14 @@ video {
 
 .w-full {
   width: 100%;
+}
+
+.w-20 {
+  width: 5rem;
+}
+
+.w-16 {
+  width: 4rem;
 }
 
 .max-w-xs {
@@ -1234,6 +1246,11 @@ video {
   background-color: rgb(254 240 138 / var(--tw-bg-opacity));
 }
 
+.bg-green-400 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(74 222 128 / var(--tw-bg-opacity));
+}
+
 .p-0 {
   padding: 0px;
 }
@@ -1414,6 +1431,11 @@ video {
   line-height: 1.75rem;
 }
 
+.text-7xl {
+  font-size: 4.5rem;
+  line-height: 1;
+}
+
 .font-bold {
   font-weight: 700;
 }
@@ -1496,11 +1518,6 @@ video {
 .text-primaryDark {
   --tw-text-opacity: 1;
   color: rgb(24 100 171 / var(--tw-text-opacity));
-}
-
-.text-primaryLight {
-  --tw-text-opacity: 1;
-  color: rgb(116 192 252 / var(--tw-text-opacity));
 }
 
 .text-secondary {
@@ -1719,6 +1736,10 @@ video {
 
 .icon-footer-1 {
   color: #74c0fc;
+}
+
+.icon-services {
+  color: #228be6;
 }
 
 .sidebar {
