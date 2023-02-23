@@ -184,12 +184,12 @@ const getUserFile = async (req, res) => {
   }
 };
 
-const AdminGetFile = async () => {
+const AdminGetFile = async (req, res) => {
   try {
     const file = await File.findAllApplications();
     const urls = applicationURL(file.rows);
 
-    res.render("admin-application-files", {
+    res.render("admin-upload-files", {
       urls: {
         loan: urls.loan,
         sacco: urls.sacco,
@@ -200,7 +200,8 @@ const AdminGetFile = async () => {
       baseUrl: baseUrl(),
     });
   } catch (error) {
-    if (error) return catchError(req, res, "admin-application-files");
+    console.log(error);
+    if (error) return catchError(req, res, "admin-upload-files");
   }
 };
 
@@ -216,7 +217,7 @@ const AdminUploadFile = async (req, res) => {
     console.log("req.file");
     console.log(req.file);
 
-    if (!fileBuffer) return noFileMessage(req, res, "admin-application-files");
+    if (!fileBuffer) return noFileMessage(req, res, "admin-upload-files");
 
     const fileBase64 = bufferToBase64(fileBuffer);
     const extension = path.extname(req.file.originalname);
@@ -253,7 +254,7 @@ const AdminUploadFile = async (req, res) => {
     const file = await File.findAllApplications();
     const urls = applicationURL(file.rows);
 
-    res.render("admin-application-files", {
+    res.render("admin-upload-files", {
       urls: {
         loan: urls.loan,
         sacco: urls.sacco,
@@ -264,7 +265,8 @@ const AdminUploadFile = async (req, res) => {
       baseUrl: baseUrl(),
     });
   } catch (error) {
-    if (error) return catchError(req, res, "admin-application-files");
+    console.log(error);
+    if (error) return catchError(req, res, "admin-upload-files");
   }
 };
 
@@ -278,7 +280,7 @@ const AdminUpdateFile = async (req, res) => {
     const fileId = req.body.fileId;
     const fileDate = new Date(Date.now());
 
-    if (!fileBuffer) return noFileMessage(req, res, "admin-application-files");
+    if (!fileBuffer) return noFileMessage(req, res, "admin-upload-files");
 
     const fileBase64 = bufferToBase64(fileBuffer);
     const extension = path.extname(req.file.originalname);
@@ -315,13 +317,7 @@ const AdminUpdateFile = async (req, res) => {
     console.log("downloadURL from firebase");
     console.log(downloadURL);
 
-    await File.saveApplication(
-      userId,
-      category,
-      filename,
-      downloadURL,
-      fileDate
-    );
+    await File.updateApplication(fileId, filename, downloadURL, fileDate);
 
     if (file.url) {
       await deleteObject(delFileRef);
@@ -330,7 +326,7 @@ const AdminUpdateFile = async (req, res) => {
     const applicationFiles = await File.findAllApplications();
     const urls = applicationURL(applicationFiles.rows);
 
-    res.render("admin-application-files", {
+    res.render("admin-upload-files", {
       urls: {
         loan: urls.loan,
         sacco: urls.sacco,
@@ -341,7 +337,8 @@ const AdminUpdateFile = async (req, res) => {
       baseUrl: baseUrl(),
     });
   } catch (error) {
-    if (error) return catchError(req, res, "admin-application-files");
+    console.log(error);
+    if (error) return catchError(req, res, "admin-upload-files");
   }
 };
 
@@ -384,6 +381,9 @@ module.exports = {
   uploadUserFile,
   upload,
   getUploadedFiles,
+  AdminGetFile,
+  AdminUploadFile,
+  AdminUpdateFile,
 };
 
 // user file (loan file or sacco file)

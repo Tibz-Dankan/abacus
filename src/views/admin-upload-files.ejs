@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="assets/img/logo/logo.jpeg"
+    />
+    <link rel="stylesheet" href="css/output.css" />
+    <title>Upload Application form</title>
+  </head>
+  <body
+    class="relative bg-greyLight1 text-base transition-all overflow-x-hidden"
+  >
+    <!-- SIDEBAR SECTION START -->
+    <%- include("./partials/sidebar");%>
+    <!-- SIDEBAR SECTION END -->
+
+    <div class="mmd:ml-64">
+      <!-- HEADER SECTION START -->
+      <header
+        class="bg-greyLight1 z-20 sticky top-0 flex items-center justify-between shadow pb-5 pt-4 px-4 sm:px-8 md:px-16"
+      >
+        <span>Admin Upload</span>
+        <div class="flex items-center relative">
+          <%- include("./partials/auth-user");%>
+        </div>
+      </header>
+      <!-- HEADER SECTION END -->
+
+      <!-- MAIN CONTENT START -->
+      <main class="flex flex-col justify-center items-center my-28">
+        <div
+          class="mx-8 sm:mx-16 p-6 rounded w-full md:w-96 shadow bg-greyLight2 mb-16 border-t-4 border-primaryLight"
+        >
+          As the Admin you can upload(add), update(change) application files
+          which can downloaded, filled and uploaded by applicants(loan and
+          sacco).
+        </div>
+
+        <% if(urls.loan && urls.sacco){ %>
+        <div
+          class="mx-8 sm:mx-16 p-6 mb-16 flex flex-col justify-center items-center gap-2 sm:flex-row sm:justify-between w-auto"
+        >
+          <a href="<%= urls?.loan%>" class="submit-btn hover:underline"
+            >Download loan application</a
+          >
+          <a href="<%= urls?.sacco%>" class="submit-btn hover:underline"
+            >Download sacco application</a
+          >
+        </div>
+        <% } %>
+
+        <div class="mx-8 sm:mx-16 p-6 rounded w-full md:w-96 shadow">
+          <!-- success message-->
+          <% if(message && isSuccess){ %>
+          <p class="success"><%= message%></p>
+          <% } %>
+
+          <!-- fail message-->
+          <% if(message && !isSuccess ){ %>
+          <p class="error"><%= message%></p>
+          <% } %>
+
+          <!-- application file add/change -->
+          <% if(urls.loan && urls.sacco){ %>
+
+          <!-- update application files-->
+          <h2 class="mb-4 text-lg font-semibold text-greyDark3">
+            Update(change) application form for clients to download
+          </h2>
+          <form
+            action="<%= baseUrl %>/admin-upload-files"
+            method="PUT"
+            enctype="multipart/form-data"
+            class="form w-full"
+          >
+            <div class="flex flex-col justify-center mb-4">
+              <label for="html" class="uppercase mb-2"
+                >Select file category</label
+              >
+              <select name="category" class="input-field">
+                <option value="loan">Loan application</option>
+                <option value="sacco">Sacco application</option>
+              </select>
+            </div>
+            <div class="flex flex-col justify-center mb-4">
+              <label for="html" class="uppercase mb-2">Select file</label>
+              <input
+                type="file"
+                name="uploadFile"
+                placeholder="select filled loan file"
+                required
+                class="input-field"
+              />
+            </div>
+            <button type="submit" class="submit-btn">Upload file</button>
+          </form>
+          <% }else{%>
+
+          <!-- upload/add application files-->
+          <h2 class="mb-4 text-lg font-semibold text-greyDark3">
+            Upload application form for clients to download
+          </h2>
+          <form
+            action="<%= baseUrl %>/admin-upload-files"
+            method="POST"
+            enctype="multipart/form-data"
+            class="form w-full"
+          >
+            <div class="flex flex-col justify-center mb-4">
+              <label for="html" class="uppercase mb-2"
+                >Select file category</label
+              >
+              <select name="category" class="input-field">
+                <option value="loan">Loan application</option>
+                <option value="sacco">Sacco application</option>
+              </select>
+            </div>
+            <div class="flex flex-col justify-center mb-4">
+              <label for="html" class="uppercase mb-2">Select file</label>
+              <input
+                type="file"
+                name="uploadFile"
+                placeholder="select filled loan file"
+                required
+                class="input-field"
+              />
+            </div>
+            <button type="submit" class="submit-btn">Upload file</button>
+          </form>
+          <% }%>
+        </div>
+      </main>
+      <!-- MAIN CONTENT END -->
+
+      <!-- FOOTER SECTION START -->
+      <%- include("./partials/footer")%>
+
+      <!-- FOOTER SECTION END -->
+    </div>
+
+    <script src="./partials/sidebar.js"></script>
+    <script src="./partials/auth-user.js"></script>
+  </body>
+</html>

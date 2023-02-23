@@ -8,6 +8,9 @@ const {
   uploadUserFile,
   upload,
   getUploadedFiles,
+  AdminGetFile,
+  AdminUploadFile,
+  AdminUpdateFile,
 } = require("../controllers/fileController");
 
 const router = express.Router();
@@ -20,5 +23,18 @@ router.post(
   uploadUserFile
 );
 router.get("/application-files-uploaded", verifyAdminToken, getUploadedFiles);
+router.get("/admin-upload-files", verifyAdminToken, AdminGetFile);
+router.post(
+  "/admin-upload-files",
+  verifyAdminToken,
+  upload.single("uploadFile"),
+  AdminUploadFile
+);
+router.put(
+  "/admin-upload-files",
+  verifyAdminToken,
+  upload.single("uploadFile"),
+  AdminUpdateFile
+);
 
 module.exports = router;

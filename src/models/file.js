@@ -50,10 +50,10 @@ File.saveApplication = (userId, category, fileName, url, fileDate) => {
   );
 };
 
-File.updateApplication = (fileId, fileName, url) => {
+File.updateApplication = (fileId, fileName, url, fileDate) => {
   return db.query(
-    "UPDATE application_files SET file_name = $1, url = $2 WHERE file_id = $3",
-    [fileName, url, fileId]
+    "UPDATE application_files SET file_name = $1, url = $2, file_date =$3 WHERE file_id = $4",
+    [fileName, url, fileDate, fileId]
   );
 };
 
