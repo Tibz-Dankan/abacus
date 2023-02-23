@@ -345,10 +345,45 @@ const AdminUpdateFile = async (req, res) => {
   }
 };
 
+const computeElapseTime = (uploadArr) => {
+  let uploads = [];
+  if (!uploadArr[0]) return uploads;
+
+  uploadArr.map((upload, index) => {
+    if (index < uploadArr.length) {
+      upload.elapsedTime = elapsedTime(upload.file_date);
+      uploads.push(upload);
+    }
+  });
+  return uploads;
+};
+
+const getUploadedFiles = async (req, res) => {
+  try {
+    const fileUploads = await File.findAll();
+    console.log(fileUploads.rows);
+
+    const uploads = computeElapseTime(fileUploads.rows);
+    console.log(uploads);
+
+    res.render("application-files-uploaded", {
+      uploads: uploads,
+      message: "",
+      isSuccess: true,
+      signedInUser: signedInUser(req.cookies),
+      baseUrl: baseUrl(),
+    });
+  } catch (error) {
+    console.log(error);
+    if (error) return catchError(req, res, "application-files-uploaded");
+  }
+};
+
 module.exports = {
   getUserFile,
   uploadUserFile,
   upload,
+  getUploadedFiles,
 };
 
 // user file (loan file or sacco file)

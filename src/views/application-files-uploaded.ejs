@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="assets/img/logo/logo.jpeg"
+    />
+    <link rel="stylesheet" href="css/output.css" />
+    <title>Applications Uploaded</title>
+  </head>
+  <body
+    class="relative bg-greyLight1 text-base transition-all overflow-x-hidden"
+  >
+    <!-- SIDEBAR SECTION START -->
+    <%- include("./partials/sidebar");%>
+    <!-- SIDEBAR SECTION END -->
+
+    <div class="mmd:ml-64">
+      <!-- HEADER SECTION START -->
+      <header
+        class="bg-greyLight1 z-20 sticky top-0 flex items-center justify-between shadow pb-5 pt-4 px-4 sm:px-8 md:px-16"
+      >
+        <span>Applications Uploaded</span>
+        <div class="flex items-center relative">
+          <%- include("./partials/auth-user");%>
+        </div>
+      </header>
+      <!-- HEADER SECTION END -->
+
+      <!-- MAIN CONTENT START -->
+      <main class="flex justify-center items-center my-28">
+        <div
+          class="mx-8 sm:mx-16 rounded w-full flex flex-col justify-center items-center"
+        >
+          <!-- success message -->
+          <% if(message && isSuccess){ %>
+          <p class="success"><%= message%></p>
+          <% } %>
+
+          <!-- fail message -->
+          <% if(message && !isSuccess){ %>
+          <p class="error"><%= message%></p>
+          <% } %>
+          <p class="font-semibold pl-4 text-lg mb-4 uppercase text-greyDark2">
+            Upload Applications
+          </p>
+          <!-- table of  uploads -->
+          <div class="px-4 lg:px-6 w-full scrollbar-x overflow-x-auto">
+            <table class="table-element shadow-md">
+              <thead>
+                <tr class="">
+                  <th>#</th>
+                  <th>Username</th>
+                  <th>File</th>
+                  <th>Category</th>
+                  <th>Uploaded</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% uploads.map((upload, index)=>{ %> <% if(upload.is_read){ %>
+                <!-- Application read -->
+                <tr class="bg-greyLight2">
+                  <td><%= index+1 %></td>
+                  <td><%= upload.user_name %></td>
+                  <td>
+                    <a
+                      href="<%= upload.url%> "
+                      class="text-blue-700 hover:underline"
+                    >
+                      <%= upload.file_name %>
+                    </a>
+                  </td>
+                  <td><%= upload.category %></td>
+                  <td><%= upload.elapsedTime %></td>
+                </tr>
+                <%}else{ %>
+
+                <!-- Application not read -->
+                <!-- <tr class="bg-greyLight4 font-bold"> To be fixed later -->
+                <tr class="bg-greyLight2">
+                  <td><%= index+1 %></td>
+                  <td><%= upload.user_name %></td>
+                  <td>
+                    <a
+                      href="<%= upload.url%> "
+                      class="text-blue-700 hover:underline"
+                    >
+                      <%= upload.file_name %>
+                    </a>
+                  </td>
+                  <td><%= upload.category %></td>
+                  <td><%= upload.elapsedTime %></td>
+                </tr>
+                <% }%> <%}) %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </main>
+      <!-- MAIN CONTENT END -->
+
+      <!-- FOOTER SECTION START -->
+      <%- include("./partials/footer")%>
+
+      <!-- FOOTER SECTION END -->
+    </div>
+
+    <script src="./partials/sidebar.js"></script>
+    <script src="./partials/auth-user.js"></script>
+  </body>
+</html>

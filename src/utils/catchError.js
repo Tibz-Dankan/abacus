@@ -18,6 +18,7 @@ const catchError = async (req, res, pageName) => {
   }
   return res.render(pageName, {
     urls: {},
+    uploads: [],
     message: "Sorry something went wrong, try again",
     // user: userObject,
     isSuccess: false,

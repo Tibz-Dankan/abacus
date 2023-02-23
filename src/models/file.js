@@ -18,11 +18,28 @@ File.update = (fileId, fileName, url) => {
 };
 
 File.findByUserId = (userId) => {
-  return db.query("SELECT * FROM user_files WHERE user_id =$1", [userId]);
+  return db.query(
+    "SELECT * FROM user_files WHERE user_id =$1 ORDER BY file_id DESC",
+    [userId]
+  );
 };
 
 File.findByFileId = (fileId) => {
   return db.query("SELECT * FROM user_files WHERE file_id =$1", [fileId]);
+};
+
+// find all files
+{
+  /* <th>Username</th>
+<th>File</th>
+<th>Category</th>
+<th>Uploaded</th> */
+}
+
+File.findAll = () => {
+  const query =
+    "SELECT fl.*, usr.user_name FROM user_files AS fl, users AS usr WHERE fl.user_id = usr.user_id ORDER BY fl.file_id DESC";
+  return db.query(query);
 };
 
 // save application form
