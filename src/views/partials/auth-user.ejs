@@ -4,6 +4,10 @@
   class="authenticated-user hidden lg:flex items-center gap-4"
   id="auth-user"
 >
+  <% if (signedInUser.role === "admin"){%>
+  <span class="role-admin hidden lg:inline">Admin</span>
+  <% }%>
+
   <a href="user-profile" class="flex items-center relative">
     <svg class="icon-profile text-3xl inline-block w-8 h-8">
       <use href="../assets/icons/nav/icon-profile.svg#profile"></use>
@@ -26,6 +30,10 @@
   class="lg:hidden cursor-pointer flex justify-center items-center"
   onclick="showUser()"
 >
+  <% if (signedInUser.role === "admin"){%>
+  <span class="role-admin mr-2">Admin</span>
+  <% }%>
+
   <svg class="icon-profile text-3xl inline-block w-8 h-8">
     <use href="../assets/icons/nav/icon-profile.svg#profile"></use>
   </svg>

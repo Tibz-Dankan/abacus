@@ -99,6 +99,16 @@
   margin-bottom: 16px;
 }
 
+.role-admin {
+  text-align: center;
+  padding: 4px 8px 5px 8px;
+  background: linear-gradient(to right, #40c057, #2b8a3e, #2b8a3e, #40c057);
+  color: #e9ecef;
+  text-transform: uppercase;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
 .icon {
   color: #e9ecef;
 }
