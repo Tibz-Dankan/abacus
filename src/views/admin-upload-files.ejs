@@ -35,7 +35,7 @@
       <main class="flex flex-col justify-center items-center my-28">
         <div class="mx-8 sm:mx-16 mb-16">
           <p
-            class="rounded w-full md:w-96 p-6 shadow bg-greyLight2 border-t-4 border-primaryLight"
+            class="rounded w-full md:w-96 p-4 pt-2 shadow bg-greyLight2 border-t-8 border-primary"
           >
             As the Admin you can upload(add), update(change) application files
             which can downloaded, filled and uploaded by applicants(loan and
@@ -49,13 +49,13 @@
         >
           <a
             href="<%= urls?.loan%>"
-            class="submit-btn text-primaryDark hover:underline"
+            class="bg-primaryDark px-4 pt-2 pb-3 rounded uppercase text-center text-greyLight2 hover:underline"
             >loan application form</a
           >
           <a
             href="<%= urls?.sacco%>"
-            class="submit-btn text-primaryDark hover:underline"
-            >sacco application form</a
+            class="bg-primaryDark px-4 pt-2 pb-3 rounded uppercase text-center text-greyLight2 hover:underline"
+            >account opening form</a
           >
         </div>
         <% } %>
@@ -89,8 +89,8 @@
                 >Select file category</label
               >
               <select name="category" class="input-field">
-                <option value="loan">Loan application</option>
-                <option value="sacco">Sacco application</option>
+                <option value="loan">Loan form</option>
+                <option value="sacco">Account opening form</option>
               </select>
             </div>
             <div class="flex flex-col justify-center mb-4">
@@ -122,8 +122,8 @@
                 >Select file category</label
               >
               <select name="category" class="input-field">
-                <option value="loan">Loan application</option>
-                <option value="sacco">Sacco application</option>
+                <option value="loan">Loan form</option>
+                <option value="sacco">Account opening form</option>
               </select>
             </div>
             <div class="flex flex-col justify-center mb-4">

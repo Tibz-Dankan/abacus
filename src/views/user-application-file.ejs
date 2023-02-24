@@ -37,11 +37,15 @@
         <div
           class="mx-8 sm:mx-16 p-6 mb-16 flex flex-col justify-center items-center gap-2 sm:flex-row sm:justify-between w-auto"
         >
-          <a href="<%= urls?.loan%>" class="submit-btn hover:underline"
+          <a
+            href="<%= urls?.loan%>"
+            class="bg-primaryDark px-4 pt-2 pb-3 rounded uppercase text-center text-greyLight2 hover:underline"
             >Download loan application form</a
           >
-          <a href="<%= urls?.sacco%>" class="submit-btn hover:underline"
-            >Download sacco application form</a
+          <a
+            href="<%= urls?.sacco%>"
+            class="bg-primaryDark px-4 pt-2 pb-3 rounded uppercase text-center text-greyLight2 hover:underline"
+            >Download account opening form</a
           >
         </div>
         <% } %>
@@ -93,8 +97,8 @@
                 >Select file category</label
               >
               <select name="category" class="input-field">
-                <option value="loan">Loan application</option>
-                <option value="sacco">Sacco application</option>
+                <option value="loan">Loan form</option>
+                <option value="sacco">Account opening form</option>
               </select>
             </div>
             <div class="flex flex-col justify-center mb-4">
