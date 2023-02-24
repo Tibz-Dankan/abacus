@@ -205,6 +205,19 @@ const AdminGetFile = async (req, res) => {
   }
 };
 
+const randomNumber = () => {
+  let randomCode;
+  randomCode = Math.floor(Math.random() * 10000);
+
+  if (!(randomCode.toString().length === 6)) {
+    randomCode = Math.floor(Math.random() * 10000);
+  }
+  if (!(randomCode.toString().length === 6)) {
+    randomCode = Math.floor(Math.random() * 10000);
+  }
+  return randomCode;
+};
+
 // upload application files to be done by only admins
 const AdminUploadFile = async (req, res) => {
   try {
@@ -223,9 +236,9 @@ const AdminUploadFile = async (req, res) => {
     let filename;
 
     if (category == "loan") {
-      filename = `Abacus_loan_form_${fileDate.getFullYear()}${extension}`;
+      filename = `Abacus_loan_form_${fileDate.getFullYear()}_${randomNumber()}${extension}`;
     } else {
-      filename = `Abacus_open_account_form_${fileDate.getFullYear()}${extension}`;
+      filename = `Abacus_open_account_form_${fileDate.getFullYear()}_${randomNumber()}${extension}`;
     }
 
     const firebaseStorage = getStorage(firebaseApp);
@@ -287,9 +300,9 @@ const AdminUpdateFile = async (req, res) => {
     let filename;
 
     if (category == "loan") {
-      filename = `Abacus_loan_form_${fileDate.getFullYear()}${extension}`;
+      filename = `Abacus_loan_form_${fileDate.getFullYear()}_${randomNumber()}${extension}`;
     } else {
-      filename = `Abacus_open_account_form_${fileDate.getFullYear()}${extension}`;
+      filename = `Abacus_open_account_form_${fileDate.getFullYear()}_${randomNumber()}${extension}`;
     }
 
     const findingFile = await File.findApplicationByCategory(category);

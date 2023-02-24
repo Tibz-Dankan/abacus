@@ -58,13 +58,14 @@ File.saveApplication = (userId, category, fileName, url, fileDate) => {
 // };
 
 File.updateApplication = (userId, category, fileName, url, fileDate) => {
-  if (category !== "sacco" || category !== "loan") {
+  if (category === "sacco" || category === "loan") {
+    return db.query(
+      "UPDATE application_files SET user_id =$1, file_name = $2, url = $3, file_date =$4 WHERE category = $5",
+      [userId, fileName, url, fileDate, category]
+    );
+  } else {
     throw new Error(`Wrong  file category: ${category}`);
   }
-  return db.query(
-    "UPDATE application_files SET user_id =$1, file_name = $2, url = $3, file_date =$4 WHERE category = $5",
-    [userId, fileName, url, fileDate, category]
-  );
 };
 
 File.findApplicationById = (id) => {
