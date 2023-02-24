@@ -75,7 +75,7 @@ const uploadUserFile = async (req, res) => {
     if (category == "loan") {
       filename = `${username}_loan_${Date.now()}${extension}`;
     } else {
-      filename = `${username}_sacco_${Date.now()}${extension}`;
+      filename = `${username}_open_account_${Date.now()}${extension}`;
     }
 
     const file = await File.findByUserId(userId);
