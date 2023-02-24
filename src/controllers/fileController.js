@@ -225,7 +225,7 @@ const AdminUploadFile = async (req, res) => {
     if (category == "loan") {
       filename = `Abacus_loan_form_${fileDate.getFullYear()}${extension}`;
     } else {
-      filename = `Abacus_sacco_form_${fileDate.getFullYear()}${extension}`;
+      filename = `Abacus_open_account_form_${fileDate.getFullYear()}${extension}`;
     }
 
     const firebaseStorage = getStorage(firebaseApp);
@@ -289,7 +289,7 @@ const AdminUpdateFile = async (req, res) => {
     if (category == "loan") {
       filename = `Abacus_loan_form_${fileDate.getFullYear()}${extension}`;
     } else {
-      filename = `Abacus_sacco_form_${fileDate.getFullYear()}${extension}`;
+      filename = `Abacus_open_account_form_${fileDate.getFullYear()}${extension}`;
     }
 
     const findingFile = await File.findApplicationByCategory(category);
@@ -357,6 +357,9 @@ const computeElapseTime = (uploadArr) => {
   uploadArr.map((upload, index) => {
     if (index < uploadArr.length) {
       upload.elapsedTime = elapsedTime(upload.file_date);
+      if (upload.category == "sacco") {
+        upload.category = "open account";
+      }
       uploads.push(upload);
     }
   });
