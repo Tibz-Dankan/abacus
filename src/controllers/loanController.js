@@ -4,9 +4,12 @@ const { decodeJwtGetUserId } = require("../utils/decodeJwt");
 const { signedInUser } = require("../utils/signedInUser");
 const { baseUrl } = require("../utils/constants");
 const { dateOne, elapsedTime } = require("../utils/date");
+const { applicationURL } = require("./fileController");
+const File = require("../models/file");
 
 const noEmptyFieldMessage = (req, res, loanObject) => {
   return res.render("apply-for-loan", {
+    urls: {},
     message: "please fill out all fields",
     user: loanObject,
     signedInUser: signedInUser(req.cookies),
@@ -16,6 +19,7 @@ const noEmptyFieldMessage = (req, res, loanObject) => {
 
 const alreadyHaveLoanMessage = (req, res, loanObject) => {
   return res.render("apply-for-loan", {
+    urls: {},
     message: "You already applied for a loan whose approval is pending",
     user: loanObject,
     signedInUser: signedInUser(req.cookies),
@@ -67,7 +71,14 @@ const startApplying = async (req, res) => {
 
 const getLoanForm = async (req, res) => {
   try {
+    const file = await File.findAllApplications();
+    const urls = applicationURL(file.rows);
+
     res.render("apply-for-loan", {
+      urls: {
+        loan: urls.loan,
+        sacco: urls.sacco,
+      },
       message: "",
       signedInUser: signedInUser(req.cookies),
       baseUrl: baseUrl(),

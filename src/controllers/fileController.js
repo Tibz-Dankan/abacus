@@ -392,6 +392,7 @@ module.exports = {
   AdminGetFile,
   AdminUploadFile,
   AdminUpdateFile,
+  applicationURL,
 };
 
 // user file (loan file or sacco file)

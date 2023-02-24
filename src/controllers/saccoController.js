@@ -6,9 +6,12 @@ const { decodeJwtGetUserId } = require("../utils/decodeJwt");
 const { signedInUser } = require("../utils/signedInUser");
 const { baseUrl } = require("../utils/constants");
 const { dateOne, elapsedTime } = require("../utils/date");
+const { applicationURL } = require("./fileController");
+const File = require("../models/file");
 
 const noEmptyFieldMessage = (req, res, saccoObject) => {
   return res.render("apply-for-sacco-membership", {
+    urls: {},
     message: "please fill out all fields",
     user: saccoObject,
     signedInUser: signedInUser(req.cookies),
@@ -18,6 +21,7 @@ const noEmptyFieldMessage = (req, res, saccoObject) => {
 
 const appliedForSaccoMessage = (req, res, saccoObject) => {
   return res.render("apply-for-sacco-membership", {
+    urls: {},
     message:
       "You already applied for sacco membership whose approval is pending",
     user: saccoObject,
@@ -57,7 +61,14 @@ const saccoAlreadyMessage = (req, res) => {
 
 const getSaccoMembershipForm = async (req, res) => {
   try {
+    const file = await File.findAllApplications();
+    const urls = applicationURL(file.rows);
+
     res.render("apply-for-sacco-membership", {
+      urls: {
+        loan: urls.loan,
+        sacco: urls.sacco,
+      },
       message: "",
       signedInUser: signedInUser(req.cookies),
       baseUrl: baseUrl(),

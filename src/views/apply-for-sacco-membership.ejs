@@ -32,98 +32,127 @@
       <!-- HEADER SECTION END -->
 
       <!-- MAIN CONTENT START -->
-      <main class="flex justify-center items-center my-28">
-        <div class="apply-form mx-8 sm:mx-16 p-6 rounded apply-form shadow">
-          <% if(message){ %>
-          <p class="error"><%= message%></p>
+      <main class="justify-center items-center my-28">
+        <!-- download loan application form -->
+        <div class="flex justify-center items-center">
+          <% if(urls.sacco){ %>
+          <div class="p-6 mb-16 bg-greyLight2 w-11/12 md:w-96 rounded shadow">
+            <p class="mb-4 w-full">
+              <span
+                >Dear <%= signedInUser.name %>, you can apply for an account by
+                downloading the form and uploading it when it's filled.
+              </span>
+              <span>
+                <a
+                  href="upload-application-file"
+                  class="text-primary hover:underline"
+                  >Upload filled form here</a
+                >
+              </span>
+              <span>Another way is by filling the form below </span>
+            </p>
+            <a
+              href="<%= urls?.sacco%>"
+              class="px-4 pt-2 pb-3 w-full bg-primaryDark hover:underline uppercase text-greyLight2 rounded"
+              >Download form</a
+            >
+          </div>
           <% } %>
+        </div>
 
-          <h2 class="mb-4 text-lg font-semibold text-greyDark3">
-            Apply for sacco membership
-          </h2>
-          <form
-            action="<%= baseUrl %>/apply-for-sacco-membership"
-            method="POST"
-            class="form space-y-4 w-full"
-          >
-            <!-- First name and Lastname -->
-            <div class="lg:flex justify-between items-center lg:gap-4">
-              <div
-                class="flex flex-col justify-center items-start mb-4 lg:mb-0 w-full"
-              >
-                <label for="html" class="uppercase mb-2">first name </label>
-                <input
-                  type="text"
-                  name="firstName"
-                  placeholder="Enter name"
-                  required
-                  class="input-field w-full"
-                />
-              </div>
-              <div class="flex flex-col justify-center items-start w-full">
-                <label for="html" class="uppercase mb-2">last name</label>
-                <input
-                  type="text"
-                  name="lastName"
-                  placeholder="Enter name"
-                  required
-                  class="input-field w-full"
-                />
-              </div>
-            </div>
-            <!-- Gender and Job description -->
-            <div class="lg:flex justify-between items-center lg:gap-4">
-              <div
-                class="flex flex-col justify-center items-start mb-4 lg:mb-0 w-full"
-              >
-                <label for="html" class="uppercase mb-2">gender </label>
-                <div class="w-full">
-                  <select name="gender" class="input-field w-full">
-                    <option value="male" class="w-full">Male</option>
-                    <option value="female" class="w-full">Female</option>
-                  </select>
+        <div class="flex justify-center items-center">
+          <div class="apply-form mx-8 sm:mx-16 p-6 rounded apply-form shadow">
+            <% if(message){ %>
+            <p class="error"><%= message%></p>
+            <% } %>
+
+            <h2 class="mb-4 text-lg font-semibold text-greyDark3">
+              Apply for an account
+            </h2>
+            <form
+              action="<%= baseUrl %>/apply-for-sacco-membership"
+              method="POST"
+              class="form space-y-4 w-full"
+            >
+              <!-- First name and Lastname -->
+              <div class="lg:flex justify-between items-center lg:gap-4">
+                <div
+                  class="flex flex-col justify-center items-start mb-4 lg:mb-0 w-full"
+                >
+                  <label for="html" class="uppercase mb-2">first name </label>
+                  <input
+                    type="text"
+                    name="firstName"
+                    placeholder="Enter name"
+                    required
+                    class="input-field w-full"
+                  />
+                </div>
+                <div class="flex flex-col justify-center items-start w-full">
+                  <label for="html" class="uppercase mb-2">last name</label>
+                  <input
+                    type="text"
+                    name="lastName"
+                    placeholder="Enter name"
+                    required
+                    class="input-field w-full"
+                  />
                 </div>
               </div>
-              <div class="flex flex-col justify-center items-start w-full">
-                <label for="html" class="uppercase mb-2">
-                  job description
-                </label>
-                <input
-                  type="text"
-                  name="jobDescription"
-                  placeholder="Enter job description"
-                  required
-                  class="input-field w-full"
-                />
+              <!-- Gender and Job description -->
+              <div class="lg:flex justify-between items-center lg:gap-4">
+                <div
+                  class="flex flex-col justify-center items-start mb-4 lg:mb-0 w-full"
+                >
+                  <label for="html" class="uppercase mb-2">gender </label>
+                  <div class="w-full">
+                    <select name="gender" class="input-field w-full">
+                      <option value="male" class="w-full">Male</option>
+                      <option value="female" class="w-full">Female</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="flex flex-col justify-center items-start w-full">
+                  <label for="html" class="uppercase mb-2">
+                    job description
+                  </label>
+                  <input
+                    type="text"
+                    name="jobDescription"
+                    placeholder="Enter job description"
+                    required
+                    class="input-field w-full"
+                  />
+                </div>
               </div>
-            </div>
-            <!-- Tel number and City/town -->
-            <div class="lg:flex justify-between items-center lg:gap-4 mb-2">
-              <div
-                class="flex flex-col justify-center items-start mb-4 lg:mb-0 w-full"
-              >
-                <label for="html" class="uppercase mb-2">phone number </label>
-                <input
-                  type="number"
-                  name="phoneNumber"
-                  placeholder="Enter number"
-                  required
-                  class="input-field w-full"
-                />
+              <!-- Tel number and City/town -->
+              <div class="lg:flex justify-between items-center lg:gap-4 mb-2">
+                <div
+                  class="flex flex-col justify-center items-start mb-4 lg:mb-0 w-full"
+                >
+                  <label for="html" class="uppercase mb-2">phone number </label>
+                  <input
+                    type="number"
+                    name="phoneNumber"
+                    placeholder="Enter number"
+                    required
+                    class="input-field w-full"
+                  />
+                </div>
+                <div class="flex flex-col justify-center items-start w-full">
+                  <label for="html" class="uppercase mb-2">town/city </label>
+                  <input
+                    type="text"
+                    name="cityOrTown"
+                    placeholder="Enter city"
+                    required
+                    class="input-field w-full"
+                  />
+                </div>
               </div>
-              <div class="flex flex-col justify-center items-start w-full">
-                <label for="html" class="uppercase mb-2">town/city </label>
-                <input
-                  type="text"
-                  name="cityOrTown"
-                  placeholder="Enter city"
-                  required
-                  class="input-field w-full"
-                />
-              </div>
-            </div>
-            <button type="submit" class="submit-btn">apply</button>
-          </form>
+              <button type="submit" class="submit-btn">apply</button>
+            </form>
+          </div>
         </div>
       </main>
       <!-- MAIN CONTENT END -->
