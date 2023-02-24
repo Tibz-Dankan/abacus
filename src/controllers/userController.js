@@ -215,8 +215,7 @@ const signUpClient = async (req, res) => {
   }
 };
 
-const convertToDate = (stringifiedDate) => {
-  const date = JSON.parse(stringifiedDate).date;
+const convertToDate = (date) => {
   return new Date(date);
 };
 
@@ -664,7 +663,8 @@ const generateAdminCode = async (req, res) => {
     const associatedEmail = req.body.associatedEmail;
     const used = "no";
     const codeStatus = "valid";
-    let generatedAt = JSON.stringify({ date: new Date(Date.now()) });
+    // let generatedAt = JSON.stringify({ date: new Date(Date.now()) });
+    const generatedAt = new Date(Date.now()).toISOString();
 
     const user = await User.getUserById(createdByUserId);
 
