@@ -47,10 +47,14 @@
         <div
           class="mx-8 sm:mx-16 p-6 mb-16 flex flex-col justify-center items-center gap-2 sm:flex-row sm:justify-between w-auto"
         >
-          <a href="<%= urls?.loan%>" class="submit-btn hover:underline"
+          <a
+            href="<%= urls?.loan%>"
+            class="submit-btn text-primaryDark hover:underline"
             >loan application form</a
           >
-          <a href="<%= urls?.sacco%>" class="submit-btn hover:underline"
+          <a
+            href="<%= urls?.sacco%>"
+            class="submit-btn text-primaryDark hover:underline"
             >sacco application form</a
           >
         </div>
@@ -75,8 +79,8 @@
             Update(change) application form for clients to download
           </h2>
           <form
-            action="<%= baseUrl %>/admin-upload-files"
-            method="PUT"
+            action="<% baseUrl%>/admin-update-files"
+            method="POST"
             enctype="multipart/form-data"
             class="form w-full"
           >

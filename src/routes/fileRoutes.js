@@ -30,8 +30,8 @@ router.post(
   upload.single("uploadFile"),
   AdminUploadFile
 );
-router.put(
-  "/admin-upload-files",
+router.post(
+  "/admin-update-files",
   verifyAdminToken,
   upload.single("uploadFile"),
   AdminUpdateFile

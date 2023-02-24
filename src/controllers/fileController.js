@@ -209,7 +209,6 @@ const AdminGetFile = async (req, res) => {
 const AdminUploadFile = async (req, res) => {
   try {
     const userId = decodeJwtGetUserId(req.cookies);
-    const username = decodeJwtGetUserName(req.cookies);
     const fileBuffer = req.file.buffer;
     const category = req.body.category;
     const fileDate = new Date(Date.now());
@@ -273,12 +272,13 @@ const AdminUploadFile = async (req, res) => {
 // upload application files to be done by only admins
 const AdminUpdateFile = async (req, res) => {
   try {
-    // const userId = decodeJwtGetUserId(req.cookies);
-    // const username = decodeJwtGetUserName(req.cookies);
+    const userId = decodeJwtGetUserId(req.cookies);
     const fileBuffer = req.file.buffer;
     const category = req.body.category;
-    const fileId = req.body.fileId;
     const fileDate = new Date(Date.now());
+
+    console.log("req.file");
+    console.log(req.file);
 
     if (!fileBuffer) return noFileMessage(req, res, "admin-upload-files");
 
@@ -292,8 +292,10 @@ const AdminUpdateFile = async (req, res) => {
       filename = `Abacus_sacco_form_${fileDate.getFullYear()}${extension}`;
     }
 
-    const findingFile = await File.findByFileId(fileId);
+    const findingFile = await File.findApplicationByCategory(category);
     const file = findingFile.rows[0];
+    console.log("file");
+    console.log(file);
 
     const firebaseStorage = getStorage(firebaseApp);
     let fileRef, delFileRef;
@@ -317,7 +319,13 @@ const AdminUpdateFile = async (req, res) => {
     console.log("downloadURL from firebase");
     console.log(downloadURL);
 
-    await File.updateApplication(fileId, filename, downloadURL, fileDate);
+    await File.updateApplication(
+      userId,
+      category,
+      filename,
+      downloadURL,
+      fileDate
+    );
 
     if (file.url) {
       await deleteObject(delFileRef);
@@ -331,7 +339,7 @@ const AdminUpdateFile = async (req, res) => {
         loan: urls.loan,
         sacco: urls.sacco,
       },
-      message: "File uploaded successfully",
+      message: "File updated successfully",
       isSuccess: true,
       signedInUser: signedInUser(req.cookies),
       baseUrl: baseUrl(),
