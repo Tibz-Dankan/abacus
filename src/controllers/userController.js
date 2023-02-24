@@ -479,9 +479,12 @@ const forgotPassword = async (req, res) => {
     const resetToken = randomBytes(32).toString("hex");
     const hashedToken = createHash("sha256").update(resetToken).digest("hex");
     const userId = user.rows[0].user_id;
-    const tokenExpires = JSON.stringify({
-      date: new Date(Date.now() + 1000 * 60 * 20),
-    });
+    // const tokenExpires = JSON.stringify({
+    //   date: new Date(Date.now() + 1000 * 60 * 20),
+    // });
+    const tokenExpires = new Date(Date.now() + 1000 * 60 * 20).toISOString();
+    console.log("tokenExpires");
+    console.log(tokenExpires);
 
     await User.savePasswordResetToken(userId, hashedToken, tokenExpires);
 
