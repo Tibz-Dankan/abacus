@@ -1754,6 +1754,13 @@ video {
   }
 }
 
+.sidebar-link-hover-focus:hover,
+.sidebar-link-hover-focus:focus {
+  background-color: #868e96;
+  transition: 0.35s;
+  outline: none;
+}
+
 .admin-link {
   background-color: hsl(70, 100%, 80%);
   color: #343a40;
