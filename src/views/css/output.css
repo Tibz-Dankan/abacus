@@ -1134,10 +1134,6 @@ video {
   border-left-width: 8px;
 }
 
-.border-t-4 {
-  border-top-width: 4px;
-}
-
 .border-t-8 {
   border-top-width: 8px;
 }
@@ -1240,11 +1236,6 @@ video {
 .bg-yellow-200 {
   --tw-bg-opacity: 1;
   background-color: rgb(254 240 138 / var(--tw-bg-opacity));
-}
-
-.bg-green-400 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(74 222 128 / var(--tw-bg-opacity));
 }
 
 .p-0 {
@@ -1369,14 +1360,6 @@ video {
 
 .pt-4 {
   padding-top: 1rem;
-}
-
-.pt-5 {
-  padding-top: 1.25rem;
-}
-
-.pt-3 {
-  padding-top: 0.75rem;
 }
 
 .text-center {
@@ -1769,6 +1752,18 @@ video {
   .sidebar {
     left: -256px;
   }
+}
+
+.admin-link {
+  background-color: hsl(70, 100%, 80%);
+  color: #343a40;
+  font-size: smaller;
+  font-size: 10px;
+  text-transform: uppercase;
+  font-weight: bold;
+  padding: 3px 4px 4px 4px;
+  margin-left: 4px;
+  border-radius: 4px;
 }
 
 .table-element {

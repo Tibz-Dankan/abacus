@@ -58,7 +58,7 @@
         >
           <use href="../assets/icons/nav/icon-upload.svg#upload"></use>
         </svg>
-        <span class="ml-9">Upload application</span>
+        <span class="ml-9">Upload form</span>
       </a>
     </li>
 
@@ -73,7 +73,8 @@
         >
           <use href="../assets/icons/nav/icon-cloudfile.svg#cloudfile"></use>
         </svg>
-        <span class="ml-9">Uploaded applications</span>
+        <span class="ml-9">Uploaded forms</span>
+        <span class="admin-link">Admin</span>
       </a>
     </li>
     <%} %> <% if (signedInUser.role === "admin"){%>
@@ -87,7 +88,8 @@
         >
           <use href="../assets/icons/nav/icon-upload.svg#upload"></use>
         </svg>
-        <span class="ml-9">Admin upload forms</span>
+        <span class="ml-9">Admin upload </span>
+        <span class="admin-link">Admin</span>
       </a>
     </li>
     <%} %>
@@ -139,6 +141,7 @@
           <use href="../assets/icons/nav/icon-group.svg#group"></use>
         </svg>
         <span class="ml-9">Applicants</span>
+        <span class="admin-link">Admin</span>
       </a>
     </li>
     <%} %>
@@ -190,6 +193,7 @@
           <use href="../assets/icons/nav/icon-group.svg#group"></use>
         </svg>
         <span class="ml-9"> Applicants</span>
+        <span class="admin-link">Admin</span>
       </a>
     </li>
     <%} %>
@@ -241,7 +245,8 @@
         >
           <use href="../assets/icons/nav/icon-lock.svg#lock"></use>
         </svg>
-        <span class="ml-9"> Admin signup token</span>
+        <span class="ml-9"> Admin token</span>
+        <span class="admin-link">Admin</span>
       </a>
     </li>
     <%} %>
