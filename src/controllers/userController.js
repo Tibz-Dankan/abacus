@@ -334,6 +334,7 @@ const signOut = async (req, res) => {
 const noResetEmailMessage = (res) => {
   return res.render("forgot-password", {
     message: "Please provide a valid email",
+    isSuccess: false,
     baseUrl: baseUrl(),
   });
 };
@@ -341,6 +342,7 @@ const noResetEmailMessage = (res) => {
 const noUserWithProvidedEmail = (res) => {
   return res.render("forgot-password", {
     message: "No user with provided email  address",
+    isSuccess: false,
     baseUrl: baseUrl(),
   });
 };
@@ -501,6 +503,7 @@ const forgotPassword = async (req, res) => {
 
     res.render("forgot-password", {
       message: "Reset Token sent to email",
+      isSuccess: true,
       baseUrl: baseUrl(),
     });
   } catch (error) {
