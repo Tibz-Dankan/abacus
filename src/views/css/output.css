@@ -1342,6 +1342,10 @@ video {
   padding-bottom: 1.25rem;
 }
 
+.pb-6 {
+  padding-bottom: 1.5rem;
+}
+
 .pb-8 {
   padding-bottom: 2rem;
 }
@@ -1360,14 +1364,6 @@ video {
 
 .pt-4 {
   padding-top: 1rem;
-}
-
-.pb-6 {
-  padding-bottom: 1.5rem;
-}
-
-.pt-3 {
-  padding-top: 0.75rem;
 }
 
 .text-center {
@@ -1623,6 +1619,14 @@ video {
   background-color: #495057;
   border-bottom: 4px solid #228be6;
   transition: 0.3s;
+}
+
+.input-field::-moz-placeholder {
+  color: #868e96;
+}
+
+.input-field::placeholder {
+  color: #868e96;
 }
 
 .submit-btn {
