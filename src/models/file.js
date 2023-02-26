@@ -28,13 +28,11 @@ File.findByFileId = (fileId) => {
   return db.query("SELECT * FROM user_files WHERE file_id =$1", [fileId]);
 };
 
-// find all files
-{
-  /* <th>Username</th>
-<th>File</th>
-<th>Category</th>
-<th>Uploaded</th> */
-}
+File.read = (fileId) => {
+  return db.query("UPDATE user_files SET is_read = true WHERE file_id = $1", [
+    fileId,
+  ]);
+};
 
 File.findAll = () => {
   const query =

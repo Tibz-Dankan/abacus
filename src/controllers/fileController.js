@@ -400,6 +400,37 @@ const getUploadedFiles = async (req, res) => {
   }
 };
 
+const markFileRead = async (req, res) => {
+  try {
+    const fileId = req.body.fileId;
+    const file = await File.findByFileId(fileId);
+
+    if (!fileId) {
+      throw new Error("No fileId is provided");
+    }
+
+    if (!file.rows[0].is_read) {
+      await File.read(fileId);
+    }
+    const fileUploads = await File.findAll();
+    console.log(fileUploads.rows);
+
+    const uploads = computeElapseTime(fileUploads.rows);
+    console.log(uploads);
+
+    res.render("application-files-uploaded", {
+      uploads: uploads,
+      message: "",
+      isSuccess: true,
+      signedInUser: signedInUser(req.cookies),
+      baseUrl: baseUrl(),
+    });
+  } catch (error) {
+    console.log(error);
+    if (error) return catchError(req, res, "application-files-uploaded");
+  }
+};
+
 module.exports = {
   getUserFile,
   uploadUserFile,
@@ -409,6 +440,7 @@ module.exports = {
   AdminUploadFile,
   AdminUpdateFile,
   applicationURL,
+  markFileRead,
 };
 
 // user file (loan file or sacco file)

@@ -11,6 +11,7 @@ const {
   AdminGetFile,
   AdminUploadFile,
   AdminUpdateFile,
+  markFileRead,
 } = require("../controllers/fileController");
 
 const router = express.Router();
@@ -36,5 +37,6 @@ router.post(
   upload.single("uploadFile"),
   AdminUpdateFile
 );
+router.post("/mark-file-read", verifyAdminToken, markFileRead);
 
 module.exports = router;

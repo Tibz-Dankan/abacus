@@ -58,6 +58,7 @@
                   <th>File</th>
                   <th>Category</th>
                   <th>Uploaded</th>
+                  <th>Read</th>
                 </tr>
               </thead>
               <tbody>
@@ -76,12 +77,16 @@
                   </td>
                   <td><%= upload.category %></td>
                   <td><%= upload.elapsedTime %></td>
+                  <td>
+                    <!-- To add check icon here instead of checkbox -->
+                    <input type="checkbox" checked class="bg-primary" />
+                  </td>
                 </tr>
                 <%}else{ %>
 
                 <!-- Application not read -->
                 <!-- <tr class="bg-greyLight4 font-bold"> To be fixed later -->
-                <tr class="bg-greyLight2">
+                <tr class="bg-greyLight4 font-bold">
                   <td><%= index+1 %></td>
                   <td><%= upload.user_name %></td>
                   <td>
@@ -94,6 +99,19 @@
                   </td>
                   <td><%= upload.category %></td>
                   <td><%= upload.elapsedTime %></td>
+                  <td>
+                    <form action="/mark-file-read" method="POST">
+                      <button
+                        name="fileId"
+                        value="<%= upload.file_id%>"
+                        type="submit"
+                        class="bg-green-700 hover:bg-green-600 rounded text-greyLight2 px-2 pb-1"
+                      >
+                        <!-- to unchecked icons here -->
+                        Read
+                      </button>
+                    </form>
+                  </td>
                 </tr>
                 <% }%> <%}) %>
               </tbody>
