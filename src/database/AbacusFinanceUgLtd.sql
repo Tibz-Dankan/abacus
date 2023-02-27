@@ -74,6 +74,18 @@ CREATE TABLE application_files (
    file_date VARCHAR(50) NOT NULL
 );
 
+CREATE TABLE transactions (
+   transaction_id SERIAL PRIMARY KEY ,
+   request_id INTEGER NOT NULL ,
+   response_id INTEGER DEFAULT NULL,
+   category VARCHAR(50) NOT NULL,
+   url VARCHAR(300) DEFAULT NULL,
+   file_name VARCHAR(100) DEFAULT NULL,
+   request_date VARCHAR(50) NOT NULL,
+   response_date VARCHAR(50) DEFAULT NULL,
+   is_responded BOOLEAN DEFAULT false
+);
+
 
 
 -- ALTER TABLE users ADD user_role VARCHAR(20) NOT NULL DEFAULT 'client'; --(DONE)
