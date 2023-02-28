@@ -40,14 +40,11 @@ const computeTransactionElapse = (transactionArr) => {
   if (!transactionArr[0]) return transactions;
 
   transactionArr.map((transaction, index) => {
-    // if (index < transactionArr.length) {
-    transaction.requestElapseTime = elapsedTime(transaction.request_date);
-    transactions.push(transaction);
-    // }
     if (transaction.response_date) {
       transaction.responseElapseTime = elapsedTime(transaction.response_date);
-      transactions.push(transaction);
     }
+    transaction.requestElapseTime = elapsedTime(transaction.request_date);
+    transactions.push(transaction);
   });
   return transactions;
 };
