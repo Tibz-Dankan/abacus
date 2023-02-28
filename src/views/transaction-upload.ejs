@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="assets/img/logo/logo.jpeg"
+    />
+    <link rel="stylesheet" href="css/output.css" />
+    <title><%= transaction?.user_name %> transaction request</title>
+  </head>
+  <body
+    class="relative bg-greyLight1 text-base transition-all overflow-x-hidden"
+  >
+    <!-- SIDEBAR SECTION START -->
+    <%- include("./partials/sidebar");%>
+    <!-- SIDEBAR SECTION END -->
+
+    <div class="mmd:ml-64">
+      <!-- HEADER SECTION START -->
+      <header
+        class="bg-greyLight1 z-20 sticky top-0 flex items-center justify-between shadow pb-5 pt-4 px-4 sm:px-8 md:px-16"
+      >
+        <span>Upload Transaction</span>
+        <div class="flex items-center relative">
+          <%- include("./partials/auth-user");%>
+        </div>
+      </header>
+      <!-- HEADER SECTION END -->
+
+      <!-- MAIN CONTENT START -->
+      <main class="flex flex-col justify-center items-center my-20">
+        <div class="p-6 mb-16 bg-greyLight2 w-11/12 md:w-96 rounded shadow-md">
+          <p>
+            <%= transaction.user_name %> requested for
+            <span class="font-semibold"
+              ><%= transaction.category === "sacco"? 'account' : 'loan' %>
+            </span>
+            transaction document
+            <span class="font-semibold">
+              <%= transaction.requestElapseTime %></span
+            >
+          </p>
+        </div>
+
+        <div class="mx-8 sm:mx-16 p-6 rounded w-11/12 md:w-96 shadow">
+          <!-- success message-->
+          <% if(message && isSuccess){ %>
+          <p class="success"><%= message %></p>
+          <% } %>
+
+          <!-- fail message-->
+          <% if(message && !isSuccess ){ %>
+          <p class="error"><%= message %></p>
+          <% } %>
+
+          <h2 class="mb-4 text-lg font-semibold text-greyDark3">
+            Upload transaction document
+          </h2>
+          <form
+            action="<%= baseUrl %>/transaction-upload"
+            method="POST"
+            enctype="multipart/form-data"
+            class="form w-full"
+          >
+            <div class="flex flex-col justify-center mb-4">
+              <label for="html" class="uppercase mb-2"
+                >Select transaction category</label
+              >
+              <select name="category" class="input-field">
+                <option value="loan">Loan transaction</option>
+                <option value="sacco">Account transaction</option>
+              </select>
+            </div>
+            <div class="flex flex-col justify-center mb-4">
+              <label for="html" class="uppercase mb-2">Select file</label>
+              <input
+                type="file"
+                name="uploadFile"
+                placeholder="select filled loan file"
+                required
+                class="input-field"
+              />
+            </div>
+            <button
+              type="submit"
+              class="submit-btn"
+              name="transactionId"
+              value="<%= transaction.transaction_id %>"
+            >
+              Upload file
+            </button>
+          </form>
+        </div>
+      </main>
+      <!-- MAIN CONTENT END -->
+
+      <!-- FOOTER SECTION START -->
+      <%- include("./partials/footer")%>
+
+      <!-- FOOTER SECTION END -->
+    </div>
+
+    <script src="./partials/sidebar.js"></script>
+    <script src="./partials/auth-user.js"></script>
+    <script src="./scripts/date.js"></script>
+  </body>
+</html>

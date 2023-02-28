@@ -8,6 +8,8 @@ const {
   getTransactionRequest,
   postTransactionRequest,
   getTransactionsRequested,
+  getTransactionUpload,
+  postTransactionUpload,
 } = require("../controllers/transactionController");
 
 const router = express.Router();
@@ -19,11 +21,12 @@ router.get(
   verifyAdminToken,
   getTransactionsRequested
 );
-// router.post(
-//   "/admin-upload-files",
-//   verifyAdminToken,
-//   upload.single("uploadFile"),
-//   AdminUploadFile
-// );
+router.get("/transaction-upload", verifyAdminToken, getTransactionUpload);
+router.post(
+  "/transaction-upload",
+  verifyAdminToken,
+  upload.single("uploadFile"),
+  postTransactionUpload
+);
 
 module.exports = router;

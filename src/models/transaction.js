@@ -43,6 +43,13 @@ Transaction.findByResponseId = (responseId) => {
   );
 };
 
+Transaction.findByTransactionId = (transactionId) => {
+  return db.query(
+    "SELECT trans.*, usr.user_name FROM transactions AS trans, users AS usr WHERE trans.transaction_id =$1",
+    [transactionId]
+  );
+};
+
 Transaction.findByRequestIdCategory = (requestId, category) => {
   return db.query(
     "SELECT * FROM transactions WHERE request_id =$1 and category =$2 ORDER BY transaction_id DESC",

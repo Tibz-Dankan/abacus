@@ -440,6 +440,7 @@ module.exports = {
   AdminUploadFile,
   AdminUpdateFile,
   applicationURL,
+  bufferToBase64,
   markFileRead,
 };
 
