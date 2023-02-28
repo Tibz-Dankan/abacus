@@ -87,7 +87,7 @@ const postTransactionRequest = async (req, res) => {
       category
     );
 
-    if (!transaction.rows[0].is_responded) {
+    if (transaction.rows[0]?.is_responded) {
       return notRespondedToTransaction(req, res);
     }
 
@@ -218,7 +218,7 @@ const postTransactionUpload = async (req, res) => {
     res.render("transaction-upload", {
       transaction: transactions[0],
       message: "File uploaded successfully",
-      isSuccess: false,
+      isSuccess: true,
       signedInUser: signedInUser(req.cookies),
       baseUrl: baseUrl(),
     });
