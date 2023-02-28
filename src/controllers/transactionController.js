@@ -114,4 +114,29 @@ const postTransactionRequest = async (req, res) => {
   }
 };
 
-module.exports = { getTransactionRequest, postTransactionRequest };
+const getTransactionsRequested = async (req, res) => {
+  try {
+    const allTransactions = await Transaction.findAll();
+
+    const transactions = computeTransactionElapse(allTransactions.rows);
+    console.log("transactions");
+    console.log(transactions);
+
+    res.render("transactions-requested", {
+      transactions: transactions,
+      message: "",
+      isSuccess: false,
+      signedInUser: signedInUser(req.cookies),
+      baseUrl: baseUrl(),
+    });
+  } catch (error) {
+    console.log(error);
+    if (error) return catchError(req, res, "transactions-requested");
+  }
+};
+
+module.exports = {
+  getTransactionRequest,
+  postTransactionRequest,
+  getTransactionsRequested,
+};

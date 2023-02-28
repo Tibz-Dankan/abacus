@@ -7,14 +7,18 @@ const { upload } = require("../controllers/fileController");
 const {
   getTransactionRequest,
   postTransactionRequest,
+  getTransactionsRequested,
 } = require("../controllers/transactionController");
 
 const router = express.Router();
 
 router.get("/transaction-request", verifyToken, getTransactionRequest);
 router.post("/transaction-request", verifyToken, postTransactionRequest);
-
-// router.get("/application-files-uploaded", verifyAdminToken, getUploadedFiles);
+router.get(
+  "/transactions-requested",
+  verifyAdminToken,
+  getTransactionsRequested
+);
 // router.post(
 //   "/admin-upload-files",
 //   verifyAdminToken,

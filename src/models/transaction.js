@@ -23,6 +23,12 @@ Transaction.update = (
   );
 };
 
+Transaction.findAll = () => {
+  const query =
+    "SELECT trans.*, usr.user_name FROM transactions AS trans, users AS usr WHERE trans.request_id = usr.user_id ORDER BY trans.transaction_id DESC";
+  return db.query(query);
+};
+
 Transaction.findByRequestId = (requestId) => {
   return db.query(
     "SELECT * FROM transactions WHERE request_id =$1 ORDER BY transaction_id DESC",
