@@ -556,16 +556,13 @@ const resetPassword = async (req, res) => {
     await User.updatePassword(userId, hashedPassword);
     await User.updateResetTokenExpires(token);
 
-    // TODO: authenticate a user upon successful password reset
-    // res.redirect("signin");
-
     const userObject = {};
     const user = await User.getUserById(userId);
 
     userObject.userId = user.rows[0].user_id;
     userObject.userName = user.rows[0].user_name;
     userObject.userRole = user.rows[0].user_role;
-    userObject.userRole = user.rows[0].email;
+    userObject.email = user.rows[0].email;
 
     assignCookieRedirectUser(res, userObject);
   } catch (error) {
