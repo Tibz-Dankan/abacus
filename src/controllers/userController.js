@@ -182,8 +182,8 @@ const signUpClient = async (req, res) => {
 
     userObject.username = userName;
     userObject.email = email;
-    userObject.password = password;
-    userObject.confirmpassword = confirmPassword;
+    // userObject.password = password;
+    // userObject.confirmpassword = confirmPassword;
 
     if (!userName || !email || !password || !confirmPassword) {
       return noEmptyFieldMessage(req, res, userObject);
@@ -234,8 +234,8 @@ const signUpAdmin = async (req, res) => {
 
     userObject.username = userName;
     userObject.email = email;
-    userObject.password = password;
-    userObject.confirmpassword = confirmPassword;
+    // userObject.password = password;
+    // userObject.confirmpassword = confirmPassword;
 
     if (!userName || !email || !password || !confirmPassword) {
       return noEmptyFieldMessage(req, res, userObject);
@@ -304,7 +304,7 @@ const signIn = async (req, res) => {
     const userObject = {};
 
     userObject.email = email;
-    userObject.password = password;
+    // userObject.password = password;
 
     if (!user.rows[0]) return noEmailMessage(res, userObject);
 
@@ -557,7 +557,17 @@ const resetPassword = async (req, res) => {
     await User.updateResetTokenExpires(token);
 
     // TODO: authenticate a user upon successful password reset
-    res.redirect("signin");
+    // res.redirect("signin");
+
+    const userObject = {};
+    const user = await User.getUserById(userId);
+
+    userObject.userId = user.rows[0].user_id;
+    userObject.userName = user.rows[0].user_name;
+    userObject.userRole = user.rows[0].user_role;
+    userObject.userRole = user.rows[0].email;
+
+    assignCookieRedirectUser(res, userObject);
   } catch (error) {
     console.log(error);
     if (error) return catchError(req, res, "reset-password");
