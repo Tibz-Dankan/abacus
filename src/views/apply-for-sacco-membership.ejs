@@ -10,7 +10,7 @@
       href="assets/img/logo/logo.jpeg"
     />
     <link rel="stylesheet" href="css/output.css" />
-    <title>Apply For Loan</title>
+    <title>Apply For Membership Account</title>
   </head>
   <body
     class="relative bg-greyLight1 text-base transition-all overflow-x-hidden"
@@ -24,7 +24,7 @@
       <header
         class="bg-greyLight1 z-20 sticky top-0 flex items-center justify-between shadow pb-5 pt-4 px-4 sm:px-8 md:px-16"
       >
-        <span>ApplyForSacco</span>
+        <span>ApplyForMembership</span>
         <div class="flex items-center relative">
           <%- include("./partials/auth-user");%>
         </div>
@@ -39,8 +39,9 @@
           <div class="p-6 mb-16 bg-greyLight2 w-11/12 md:w-96 rounded shadow">
             <p class="mb-4 w-full">
               <span
-                >Dear <%= signedInUser.name %>, you can apply for an account by
-                downloading the form and uploading it when it's filled.
+                >Dear <%= signedInUser.name %>, you can apply for a membership
+                account by downloading the form and uploading it when it's
+                filled.
               </span>
               <span>
                 <a
@@ -67,7 +68,7 @@
             <% } %>
 
             <h2 class="mb-4 text-lg font-semibold text-greyDark3">
-              Apply for an account
+              Apply for a membership account
             </h2>
             <form
               action="<%= baseUrl %>/apply-for-sacco-membership"

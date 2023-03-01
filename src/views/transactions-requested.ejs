@@ -62,7 +62,13 @@
                 <tr class="bg-greyLight2">
                   <td><%= index+1 %></td>
                   <td><%= transaction?.user_name %></td>
-                  <td><%= transaction.category %></td>
+                  <td>
+                    <% if(transaction.category === "sacco") {%>
+                    <span>membership</span>
+                    <%}else{%>
+                    <span> <%= transaction.category %> </span>
+                    <%} %>
+                  </td>
                   <td><%= transaction.requestElapseTime %></td>
                   <td>
                     <% if(transaction?.url){%>
@@ -73,14 +79,14 @@
                       <%= transaction?.file_name %>
                     </a>
                     <%}else{%>
-                    <span>empty</span>
+                    <span>---</span>
                     <%}%>
                   </td>
                   <td>
                     <% if(transaction?.responseElapseTime) {%>
                     <span><%= transaction?.responseElapseTime %></span>
                     <%}else{%>
-                    <span>empty</span>
+                    <span>---</span>
                     <%}%>
                   </td>
                   <td>No action</td>
@@ -93,7 +99,7 @@
                   <td><%= transaction?.user_name %></td>
                   <td>
                     <% if(transaction.category === "sacco") {%>
-                    <span>account</span>
+                    <span>membership</span>
                     <%}else{%>
                     <span> <%= transaction.category %> </span>
                     <%} %>

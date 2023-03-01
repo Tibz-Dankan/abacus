@@ -58,7 +58,7 @@
                 >
                 <select name="category" class="input-field">
                   <option value="loan">Loan transaction</option>
-                  <option value="sacco">Account transaction</option>
+                  <option value="sacco">Membership transaction</option>
                 </select>
               </div>
               <button
@@ -76,7 +76,7 @@
                 >
                 <select name="category" class="input-field">
                   <option value="loan">Loan transaction</option>
-                  <option value="sacco">Account transaction</option>
+                  <option value="sacco">Membership transaction</option>
                 </select>
               </div>
               <button
@@ -116,36 +116,9 @@
 
                 <tr class="bg-greyLight2">
                   <td><%= index+1 %></td>
-                  <td><%= transaction.category %></td>
-                  <td><%= transaction.requestElapseTime %></td>
-                  <td>
-                    <% if(transaction?.url){%>
-                    <a
-                      href="<%= transaction?.url %> "
-                      class="text-blue-700 hover:underline"
-                    >
-                      <%= transaction?.file_name %>
-                    </a>
-                    <%}else{%>
-                    <span>empty</span>
-                    <%}%>
-                  </td>
-                  <td>
-                    <% if(transaction?.responseElapseTime) {%>
-                    <span><%= transaction?.responseElapseTime %></span>
-                    <%}else{%>
-                    <span>empty</span>
-                    <%}%>
-                  </td>
-                </tr>
-                <%}else{ %>
-
-                <!-- Transaction not responded too -->
-                <tr class="bg-greyLight4 font-bold">
-                  <td><%= index+1 %></td>
                   <td>
                     <% if(transaction.category === "sacco") {%>
-                    <span>account</span>
+                    <span>membership</span>
                     <%}else{%>
                     <span> <%= transaction.category %> </span>
                     <%} %>
@@ -160,14 +133,47 @@
                       <%= transaction?.file_name %>
                     </a>
                     <%}else{%>
-                    <span>empty</span>
+                    <span>---</span>
                     <%}%>
                   </td>
                   <td>
                     <% if(transaction?.responseElapseTime) {%>
                     <span><%= transaction?.responseElapseTime %></span>
                     <%}else{%>
-                    <span>empty</span>
+                    <span>---</span>
+                    <%}%>
+                  </td>
+                </tr>
+                <%}else{ %>
+
+                <!-- Transaction not responded too -->
+                <tr class="bg-greyLight4 font-bold">
+                  <td><%= index+1 %></td>
+                  <td>
+                    <% if(transaction.category === "sacco") {%>
+                    <span>membership</span>
+                    <%}else{%>
+                    <span> <%= transaction.category %> </span>
+                    <%} %>
+                  </td>
+                  <td><%= transaction.requestElapseTime %></td>
+                  <td>
+                    <% if(transaction?.url){%>
+                    <a
+                      href="<%= transaction?.url %> "
+                      class="text-blue-700 hover:underline"
+                    >
+                      <%= transaction?.file_name %>
+                    </a>
+                    <%}else{%>
+                    <span>---</span>
+                    <%}%>
+                  </td>
+                  <td>
+                    <% if(transaction?.responseElapseTime) {%>
+                    <span><%= transaction?.responseElapseTime %></span>
+                    <%}else{%>
+                    <span>---</span>
                     <%}%>
                   </td>
                 </tr>
