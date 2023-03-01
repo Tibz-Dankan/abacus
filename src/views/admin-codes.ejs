@@ -71,8 +71,9 @@
                 <th>#</th>
                 <th>Token</th>
                 <th>AssociatedEmail</th>
+                <th>Used</th>
                 <th>Status</th>
-                <th>Date</th>
+                <th>Generated</th>
               </tr>
             </thead>
             <tbody>
@@ -81,24 +82,31 @@
                 <td><%= index+1 %></td>
                 <td><%= adminCode.code %></td>
                 <td><%= adminCode.associated_email %></td>
-                <td><%= adminCode.code_status %></td>
-                <!-- <td><%= adminCode.generated_at %></td> -->
-                <td>Date</td>
 
-                <!-- TODO: ACTION TO DELETE TOKEN -->
+                <td class="uppercase">
+                  <% if(adminCode.used === "yes"){ %>
+                  <span class="text-green-500 font-semibold">
+                    <%= adminCode.used %>
+                  </span>
+                  <% }else{ %>
+                  <span class="text-red-500 font-semibold">
+                    <%= adminCode.used %>
+                  </span>
+                  <% } %>
+                </td>
 
-                <!-- <td>
-                  <form action="/single-loan-application" method="get">
-                    <button
-                      name="loanId"
-                      value="<%= adminCode.generated_at %>"
-                      type="submit"
-                      class="bg-green-700 hover:bg-green-600 rounded text-greyLight2 px-2 pb-1"
-                    >
-                      More
-                    </button>
-                  </form>
-                </td> -->
+                <td class="uppercase">
+                  <% if(adminCode.code_status === "valid"){ %>
+                  <span class="text-green-500 font-semibold">
+                    <%= adminCode.code_status %>
+                  </span>
+                  <% }else{ %>
+                  <span class="text-red-500 font-semibold">
+                    <%= adminCode.code_status %>
+                  </span>
+                  <% } %>
+                </td>
+                <td><%= adminCode.elapseTime %></td>
               </tr>
               <%}) %>
             </tbody>

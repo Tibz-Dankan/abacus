@@ -78,14 +78,14 @@ User.getAllAdminCodes = () => {
 
 User.getAdminCodesById = (createdByUserId) => {
   return db.query(
-    "SELECT code, associated_email, code_status, generated_at FROM admin_signup_codes WHERE created_by_user_id = $1 ORDER BY code_id DESC",
+    "SELECT code, associated_email, used, code_status, generated_at FROM admin_signup_codes WHERE created_by_user_id = $1 ORDER BY code_id DESC",
     [createdByUserId]
   );
 };
 
 User.InvalidateAdminCodes = (adminCode) => {
   return db.query(
-    "UPDATE admin_signup_codes SET code_status = 'Invalid' WHERE code = $1 ",
+    "UPDATE admin_signup_codes SET code_status = 'invalid', used = 'yes' WHERE code = $1 ",
     [adminCode]
   );
 };

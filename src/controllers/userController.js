@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 const { randomBytes, createHash } = require("crypto");
 const Email = require("../utils/email");
 const { baseUrl } = require("../utils/constants");
+const { elapsedTime } = require("../utils/date");
 
 require("dotenv").config();
 const { decodeJwtGetUserId } = require("../utils/decodeJwt");
@@ -154,7 +155,7 @@ const saveDotEnvAdminCode = async (dotEnvCode) => {
   const associatedEmail = "developer@email.com";
   const used = "yes";
   const codeStatus = "invalid";
-  const generatedAt = '{"date":" 2022-11-24T20:46:08.250Z"}';
+  const generatedAt = "2022-11-24T20:46:08.250Z";
   const createdByUserId = 0;
 
   await User.saveAdminCode(
@@ -663,6 +664,25 @@ const generateCode = () => {
   return randomCode;
 };
 
+const modifyAdminCodeStatus = (adminCodeArr) => {
+  let adminCodes = [];
+
+  if (!adminCodeArr[0]) return adminCodes;
+
+  adminCodeArr.map((adminCode) => {
+    const isExpiredAdminCode =
+      new Date(Date.now()) - convertToDate(adminCode.generated_at) >
+      new Date(1000 * 60 * 60 * 24);
+
+    if (adminCode.code_status === "invalid" || isExpiredAdminCode) {
+      adminCode.code_status = "invalid";
+    }
+    adminCode.elapseTime = elapsedTime(adminCode.generated_at);
+    adminCodes.push(adminCode);
+  });
+  return adminCodes;
+};
+
 const generateAdminCode = async (req, res) => {
   try {
     const createdByUserId = decodeJwtGetUserId(req.cookies);
@@ -694,9 +714,13 @@ const generateAdminCode = async (req, res) => {
       createdByUserId
     );
     const AdminCodes = await User.getAdminCodesById(createdByUserId);
+    const codes = modifyAdminCodeStatus(AdminCodes.rows);
+    console.log("codes");
+    console.log(codes);
+
     res.render("admin-codes", {
       message: "",
-      adminCodes: AdminCodes.rows,
+      adminCodes: codes,
       signedInUser: signedInUser(req.cookies),
       baseUrl: baseUrl(),
     });
@@ -714,9 +738,13 @@ const getAdminCodes = async (req, res) => {
     if (!(user.rows[0].user_role === "admin")) return notAdminMessage(req, res);
 
     const AdminCodes = await User.getAdminCodesById(createdByUserId);
+    const codes = modifyAdminCodeStatus(AdminCodes.rows);
+    console.log("codes");
+    console.log(codes);
+
     res.render("admin-codes", {
       message: "",
-      adminCodes: AdminCodes.rows,
+      adminCodes: codes,
       signedInUser: signedInUser(req.cookies),
       baseUrl: baseUrl(),
     });
