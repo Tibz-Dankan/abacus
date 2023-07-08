@@ -9,7 +9,7 @@ class Email {
   constructor(recipients, subject) {
     SGmail.setApiKey(process.env.SEND_GRID_API_KEY);
 
-    this.from = "abacusug.com@gmail.com";
+    this.from = "cryptopile20@gmail.com";
     this.recipients = recipients;
     this.subject = subject;
   }
