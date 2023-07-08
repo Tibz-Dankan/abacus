@@ -1,11 +1,11 @@
 require("dotenv").config();
-const { Pool } = require("pg");
+const pg = require("pg");
 
-const pool = new Pool({
-  connectionString: process.env.POSTGRES_URL + "?sslmode=require",
+const db = new pg.Client({
+  connectionString: process.env.POSTGRES_URL,
 });
 
-pool.connect((error) => {
+db.connect((error) => {
   if (error) {
     console.log("Failed to connect to the database!");
     console.log("error message: " + error.message);
@@ -15,5 +15,4 @@ pool.connect((error) => {
   }
 });
 
-const db = pool;
 module.exports = db;

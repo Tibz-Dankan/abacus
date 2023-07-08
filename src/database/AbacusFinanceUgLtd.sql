@@ -88,13 +88,12 @@ CREATE TABLE transactions (
 
 
 
--- ALTER TABLE users ADD user_role VARCHAR(20) NOT NULL DEFAULT 'client'; --(DONE)
--- ALTER TABLE loan_applications RENAME loan_mount TO loan_amount; -- To be done colleagues computer(DONE)
--- ALTER TABLE loan_applications DROP COLUMN loan_category; -- To be run against production database(DONE)
--- ALTER TABLE loan_applications ADD COLUMN loan_date VARCHAR(50) NOT NULL DEFAULT 'null'; -- To be run against production database(DONE)
--- ALTER TABLE loan_applications ADD COLUMN is_approved BOOLEAN NOT NULL DEFAULT false; -- To be run against production database(DONE)
--- ALTER TABLE sacco_membership ADD COLUMN sacco_date VARCHAR(50) NOT NULL DEFAULT 'null'; -- To be run against production database(DONE)
--- ALTER TABLE sacco_membership ADD COLUMN is_approved BOOLEAN NOT NULL DEFAULT false; -- To be run against production database(DONE)
+ALTER TABLE users ADD user_role VARCHAR(20) NOT NULL DEFAULT 'client'; --(DONE)
+ALTER TABLE loan_applications DROP COLUMN loan_category; -- To be run against production database(DONE)
+ALTER TABLE loan_applications ADD COLUMN loan_date VARCHAR(50) NOT NULL DEFAULT 'null'; -- To be run against production database(DONE)
+ALTER TABLE loan_applications ADD COLUMN is_approved BOOLEAN NOT NULL DEFAULT false; -- To be run against production database(DONE)
+ALTER TABLE sacco_membership ADD COLUMN sacco_date VARCHAR(50) NOT NULL DEFAULT 'null'; -- To be run against production database(DONE)
+ALTER TABLE sacco_membership ADD COLUMN is_approved BOOLEAN NOT NULL DEFAULT false; -- To be run against production database(DONE)
 
 
 
