@@ -1,4 +1,4 @@
-CREATE DATABASE abacus_finance;
+CREATE DATABASE abacus_ug;
 
 CREATE TABLE users (
    user_id SERIAL PRIMARY KEY ,
