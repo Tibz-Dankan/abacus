@@ -7,6 +7,7 @@ const saccoRoutes = require("./routes/saccoRoutes");
 const fileRoutes = require("./routes/fileRoutes");
 const transactionRoutes = require("./routes/transactionRoutes");
 const contactRoutes = require("./routes/contactRoutes");
+const keepActiveRoutes = require("./routes/keepActiveRoutes");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 // const ejsLint = require("ejs-lint");
@@ -42,6 +43,8 @@ app.use("/", transactionRoutes);
 app.use("/", contactRoutes);
 
 app.use("/", generalRoutes);
+
+app.use("/", keepActiveRoutes);
 
 const http = require("http");
 const server = http.createServer(app);
