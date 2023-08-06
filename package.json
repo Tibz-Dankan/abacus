@@ -28,6 +28,7 @@
     "firebase": "^9.17.1",
     "jsonwebtoken": "^9.0.0",
     "jwt-decode": "^3.1.2",
+    "keep-apps-active": "^1.0.1",
     "multer": "^1.4.5-lts.1",
     "pg": "^8.7.3"
   },
